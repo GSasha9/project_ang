@@ -8,8 +8,8 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "serve:ssr:temp": "node dist/temp/server/server.mjs",
-    "lint": "ng lint",
-    "prepare": "husky"
+    "prepare": "husky",
+    "lint": "ng lint && npx stylelint '**/*.scss'"
   },
   "prettier": {
     "printWidth": 100,
@@ -22,7 +22,8 @@
         }
       }
     ]
-  },
+  }
+,
   "private": true,
   "packageManager": "npm@11.6.2",
   "dependencies": {
@@ -52,6 +53,8 @@
     "jsdom": "^27.1.0",
     "prettier": "^3.7.4",
     "prettier-eslint": "^16.4.2",
+    "stylelint": "^16.26.1",
+    "stylelint-config-standard-scss": "^16.0.0",
     "typescript": "~5.9.2",
     "typescript-eslint": "8.46.4",
     "vitest": "^4.0.8"
