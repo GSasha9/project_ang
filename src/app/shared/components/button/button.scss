@@ -1,4 +1,4 @@
-@use '../../../styles/variables' as *;
+@use '../../../../styles/variables' as *;
 
 .with-arrow {
   &::after {
@@ -6,7 +6,7 @@
     display: inline-block;
     width: 15px;
     height: 15px;
-    background-image: url('../../../../public/right.svg');
+    background-image: url('/right.svg');
     background-size: cover;
     margin-left: 10px;
   }
