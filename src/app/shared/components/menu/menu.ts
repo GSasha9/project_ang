@@ -14,5 +14,10 @@ export class Menu {
   readonly items = input<MenuItems[]>([]);
   readonly isRow = input<boolean>(true);
   readonly gap = input<string>('16');
-  gapValue = this.gap() + 'px';
+
+  classes = (): Record<string, boolean> => {
+    return {
+      column: !this.isRow(),
+    };
+  };
 }

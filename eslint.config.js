@@ -1,14 +1,13 @@
-const eslint = require("@eslint/js");
-const { defineConfig } = require("eslint/config");
-const tseslint = require("typescript-eslint");
-const angular = require("angular-eslint");
+const eslint = require('@eslint/js');
+const { defineConfig } = require('eslint/config');
+const tseslint = require('typescript-eslint');
+const angular = require('angular-eslint');
 
 const eslintPluginPrettierRecommended = require('eslint-plugin-prettier/recommended');
 
-
 module.exports = defineConfig([
   {
-    files: ["**/*.ts"],
+    files: ['**/*.ts'],
     extends: [
       eslint.configs.recommended,
       tseslint.configs.recommended,
@@ -18,20 +17,20 @@ module.exports = defineConfig([
     ],
     processor: angular.processInlineTemplates,
     rules: {
-      "@angular-eslint/directive-selector": [
-        "error",
+      '@angular-eslint/directive-selector': [
+        'error',
         {
-          type: "attribute",
-          prefix: "app",
-          style: "camelCase",
+          type: 'attribute',
+          prefix: 'app',
+          style: 'camelCase',
         },
       ],
-      "@angular-eslint/component-selector": [
-        "error",
+      '@angular-eslint/component-selector': [
+        'error',
         {
-          type: ["attribute", "element"],
-          prefix: "app",
-          style: "kebab-case",
+          type: ['attribute', 'element'],
+          prefix: 'app',
+          style: 'kebab-case',
         },
       ],
       '@angular-eslint/no-empty-lifecycle-method': 'warn',
@@ -40,7 +39,7 @@ module.exports = defineConfig([
       '@angular-eslint/prefer-signals': 'warn',
       '@angular-eslint/prefer-standalone': 'warn',
 
-       '@typescript-eslint/array-type': ['warn'],
+      '@typescript-eslint/array-type': ['warn'],
       '@typescript-eslint/consistent-indexed-object-style': 'off',
       '@typescript-eslint/consistent-type-assertions': 'warn',
       '@typescript-eslint/consistent-type-definitions': ['warn', 'type'],
@@ -102,11 +101,8 @@ module.exports = defineConfig([
     },
   },
   {
-    files: ["**/*.html"],
-    extends: [
-      angular.configs.templateRecommended,
-      angular.configs.templateAccessibility,
-    ],
+    files: ['**/*.html'],
+    extends: [angular.configs.templateRecommended, angular.configs.templateAccessibility],
     rules: {},
-  }
+  },
 ]);

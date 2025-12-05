@@ -1,5 +1,69 @@
+@use '../../../styles/variables' as *;
+
 .header {
-    width: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  overflow: hidden;
+
+  .burger {
+    background-image: url('../../../../public/burger.svg');
+    width: 24px;
+    height: 24px;
+
+    @include respond-m {
+      display: none;
+    }
+
+    @include respond-l {
+    }
+  }
+
+  .header-menu {
     display: flex;
     align-items: center;
+    flex-direction: column;
+    gap: 10px;
+    position: absolute;
+    right: -200%;
+
+    @include respond-m {
+      position: static;
+      right: 0%;
+      flex-direction: row;
+      gap: 23px;
+    }
+
+    @include respond-l {
+    }
+
+    .close {
+      background-image: url('../../../../public/close.svg');
+      width: 24px;
+      height: 24px;
+      position: fixed;
+      right: 17px;
+      margin-bottom: 5px;
+
+      @include respond-m {
+        display: none;
+      }
+
+      @include respond-l {
+      }
+    }
+  }
+
+  .open {
+    right: 0px;
+    top: 0px;
+    background-color: white;
+    align-items: start;
+    position: fixed;
+    padding: 9px 16px;
+    border: 1px solid grey;
+    border-radius: 3px;
+  }
 }

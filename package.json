@@ -9,7 +9,8 @@
     "test": "ng test",
     "serve:ssr:temp": "node dist/temp/server/server.mjs",
     "prepare": "husky",
-    "lint": "ng lint && npx stylelint '**/*.scss'"
+    "lint": "ng lint && npx stylelint '**/*.scss'",
+    "format": "npx prettier --write '**/*.{ts,html,scss,css,json}'"
   },
   "prettier": {
     "printWidth": 100,

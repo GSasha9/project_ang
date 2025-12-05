@@ -1,12 +1,12 @@
 .app-link {
-    text-decoration: none;
-    color: black;
+  text-decoration: none;
+  color: black;
 
-    &:visited {
-        color: inherit,
-    }
+  &:visited {
+    color: inherit;
+  }
 
-    &:hover {
-        color: green;
-    }
+  &:hover {
+    color: green;
+  }
 }

@@ -1,0 +1,25 @@
+$main-button-color: #4caf4f;
+$main-button-color_hover: #a5d6a7;
+$main-button-color_active: #1b5e1f;
+
+$breakpoint-xs: 375px;
+$breakpoint-m: 680px;
+$breakpoint-l: 1280px;
+
+@mixin respond-xs {
+  @media screen and (min-width: $breakpoint-xs) {
+    @content;
+  }
+}
+
+@mixin respond-m {
+  @media screen and (min-width: $breakpoint-m) {
+    @content;
+  }
+}
+
+@mixin respond-l {
+  @media screen and (min-width: $breakpoint-l) {
+    @content;
+  }
+}
