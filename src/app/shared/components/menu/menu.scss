@@ -1,0 +1,17 @@
+@use '../../../../styles/variables' as *;
+
+.menu-list {
+  display: flex;
+  flex-direction: column;
+
+  @include respond-m {
+    flex-direction: row;
+  }
+
+  @include respond-l {
+  }
+}
+
+.column {
+  flex-direction: column;
+}

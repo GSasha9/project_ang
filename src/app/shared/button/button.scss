@@ -1,0 +1,32 @@
+@use '../../../styles/variables' as *;
+
+.with-arrow {
+  &::after {
+    content: '';
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+    background-image: url('../../../../public/right.svg');
+    background-size: cover;
+    margin-left: 10px;
+  }
+}
+
+.app-button {
+  padding: 10px 20px;
+  border-radius: 3px;
+  background-color: $main-button-color;
+  border: none;
+  color: white;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+
+  &:hover {
+    background-color: $main-button-color_hover;
+  }
+
+  &:active {
+    background-color: $main-button-color_active;
+  }
+}
