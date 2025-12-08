@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
 import { Logo } from '../../shared/components/logo/logo';
 import { Menu } from '../../shared/components/menu/menu';
 import { MENU_HEADER } from '../../shared/constants/menu-header';
-import { Button } from '../../shared/button/button';
+import { Button } from '../../shared/components/button/button';
 import { NgClass } from '@angular/common';
 
 @Component({
@@ -20,7 +20,5 @@ export class Header {
 
   handleMenu = (): void => {
     this.isMenuOpen.set(!this.isMenuOpen());
-    console.log('click');
-    console.log(this.isMenuOpen());
   };
 }
