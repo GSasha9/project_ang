@@ -3,6 +3,7 @@
 .menu-list {
   display: flex;
   flex-direction: column;
+  gap: 10px;
 
   @include respond-m {
     flex-direction: row;

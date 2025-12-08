@@ -2,6 +2,27 @@
 @use './styles/button' as *;
 @import 'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap';
 
+html {
+  font-family: Inter, sans-serif;
+}
+
+h2 {
+  font-size: 25px;
+  margin: 0px;
+
+  @include respond-m {
+    font-size: 35px;
+  }
+
+  @include respond-l {
+    font-size: 45px;
+  }
+}
+
+.hightlight {
+  color: $main-button-color;
+}
+
 .container {
   display: flex;
   flex-direction: column;

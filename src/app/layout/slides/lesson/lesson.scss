@@ -1,0 +1,39 @@
+@use '../../../../styles/variables' as *;
+
+.slide_lesson {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  padding: 60px 0px;
+  flex-direction: column;
+
+  @include respond-m {
+    flex-direction: row;
+  }
+
+  .slide_lesson-text {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+
+    @include respond-m {
+      width: 40%;
+      align-items: start;
+    }
+  }
+
+  .slide_lesson-img {
+    width: 30%;
+    background-image: url('../../../../../public/ilustration.png');
+    background-repeat: no-repeat;
+    background-size: contain;
+    max-width: 270px;
+    display: none;
+
+    @include respond-m {
+      display: initial;
+    }
+  }
+}
