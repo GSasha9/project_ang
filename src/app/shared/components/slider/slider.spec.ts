@@ -2,21 +2,31 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { Slider } from './slider';
 
+import { Lesson } from '../../../layout/slides/lesson/lesson';
+
 describe('Slider', () => {
   let component: Slider;
   let fixture: ComponentFixture<Slider>;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
+  beforeEach(() => {
+    TestBed.configureTestingModule({
       imports: [Slider],
     }).compileComponents();
 
     fixture = TestBed.createComponent(Slider);
     component = fixture.componentInstance;
-    await fixture.whenStable();
   });
 
   it('should create', () => {
-    expect(component).toBeTruthy();
+    expect(component).toBeDefined();
+  });
+
+  it('renders all slides', () => {
+    fixture.componentRef.setInput('slides', [Lesson, Lesson, Lesson]);
+    fixture.detectChanges();
+
+    const sliderDots = fixture.nativeElement.querySelectorAll('.dot');
+
+    expect(sliderDots.length).toBe(3);
   });
 });
