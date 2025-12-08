@@ -1,5 +1,6 @@
 export type MenuItems = {
   id: number;
-  title: string;
+  title?: string;
   route: string;
+  img?: string;
 };

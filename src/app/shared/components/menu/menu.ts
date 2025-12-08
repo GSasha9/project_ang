@@ -1,11 +1,11 @@
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { MenuItems } from '../../models/menuItems.model';
-import { NgClass } from '@angular/common';
+import { NgClass, NgStyle } from '@angular/common';
 import { Link } from '../link/link';
 
 @Component({
   selector: 'app-menu',
-  imports: [NgClass, Link],
+  imports: [NgClass, Link, NgStyle],
   templateUrl: './menu.html',
   styleUrl: './menu.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
