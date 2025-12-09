@@ -1,5 +1,5 @@
 <nav class="nav">
-  <ul class="menu-list" [ngClass]="classes()" [style.gap.px]="gap()">
+  <ul [class]="customClass()" [ngClass]="classes()" [style.gap.px]="gap()">
     @for (item of items(); track item.id) {
       @if (item.title) {
         <app-link [linkRoute]="item.route">{{ item.title }}</app-link>

@@ -1,10 +1,82 @@
+@use '../../../styles/variables' as *;
+
 :host {
   color: white;
   padding: 44px 0px;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  gap: 30px;
+  width: 70%;
+  align-self: center;
+  align-items: center;
+
+  @include respond-m {
+    flex-direction: row;
+    width: 100%;
+  }
 
   .about {
     display: flex;
     flex-direction: column;
     gap: 30px;
+
+    @include respond-m {
+      justify-content: space-between;
+    }
+  }
+
+  .footer_menu {
+    display: flex;
+    gap: 20px;
+    flex-direction: column;
+
+    @include respond-m {
+      flex-direction: row;
+      flex-wrap: wrap;
+      width: 45%;
+      gap: 30px;
+    }
+
+    @include respond-l {
+      flex-wrap: nowrap;
+    }
+
+    .footer_menu-company,
+    .footer_menu-support,
+    .subscribe {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      width: 100%;
+
+      @include respond-m {
+        width: 40%;
+      }
+    }
+  }
+
+  .subscribe {
+    width: 100% !important;
+
+    @include respond-m {
+      width: 65% !important;
+    }
+
+    .subscribe-form {
+      display: flex;
+      position: relative;
+      align-items: center;
+      justify-content: flex-end;
+    }
+
+    .subscribe-button {
+      width: 20px;
+      height: 20px;
+      background: url('../../../../public/send.svg') no-repeat center/cover;
+      position: absolute;
+      cursor: pointer;
+      margin-right: 10px;
+    }
   }
 }

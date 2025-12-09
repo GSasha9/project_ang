@@ -6,7 +6,8 @@ html {
   font-family: Inter, sans-serif;
 }
 
-body {
+body,
+h3 {
   margin: 0px;
 }
 
@@ -23,7 +24,11 @@ h2 {
   }
 }
 
-.hightlight {
+.socials {
+  flex-direction: row !important;
+}
+
+.highlight {
   color: $main-button-color;
 }
 
