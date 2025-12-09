@@ -7,6 +7,11 @@
   justify-content: space-between;
   position: relative;
   overflow: hidden;
+  padding: 40px 0px;
+
+  @include respond-m {
+    padding: 0px;
+  }
 
   .burger {
     background-image: url('../../../../public/burger.svg');
@@ -28,6 +33,7 @@
     gap: 10px;
     position: absolute;
     right: -200%;
+    padding: 16px 0px;
 
     @include respond-m {
       position: static;

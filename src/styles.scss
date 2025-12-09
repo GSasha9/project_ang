@@ -6,6 +6,11 @@ html {
   font-family: Inter, sans-serif;
 }
 
+body,
+h3 {
+  margin: 0px;
+}
+
 h2 {
   font-size: 25px;
   margin: 0px;
@@ -19,20 +24,28 @@ h2 {
   }
 }
 
-.hightlight {
+.socials {
+  flex-direction: row !important;
+}
+
+.highlight {
   color: $main-button-color;
 }
 
 .container {
   display: flex;
   flex-direction: column;
-  padding: 0 10px;
+  padding: 0 20px;
 
   @include respond-m {
-    padding: 0 20px;
+    padding: 0 12px;
   }
 
   @include respond-l {
     padding: 0 100px;
   }
+}
+
+.footer {
+  background-color: $background-color-footer;
 }

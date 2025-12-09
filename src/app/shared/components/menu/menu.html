@@ -1,7 +1,13 @@
 <nav class="nav">
-  <ul class="menu-list" [ngClass]="classes()" [style.gap.px]="gap()">
+  <ul [class]="customClass()" [ngClass]="classes()" [style.gap.px]="gap()">
     @for (item of items(); track item.id) {
-      <app-link linkRoute="item.route">{{ item.title }}</app-link>
+      @if (item.title) {
+        <app-link [linkRoute]="item.route">{{ item.title }}</app-link>
+      } @else {
+        <app-link [linkRoute]="item.route">
+          <div class="menu-item-img" [ngStyle]="{ 'background-image': `url(${item.img})` }"></div>
+        </app-link>
+      }
     }
   </ul>
 </nav>

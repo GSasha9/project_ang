@@ -1,15 +1,23 @@
 @use '../../../../styles/variables' as *;
 
-.menu-list {
+.menuList {
   display: flex;
   flex-direction: column;
   gap: 10px;
+  padding: 0px;
+  margin: 0px;
 
   @include respond-m {
     flex-direction: row;
   }
 
   @include respond-l {
+  }
+
+  .menu-item-img {
+    width: 30px;
+    height: 30px;
+    background-size: cover;
   }
 }
 
