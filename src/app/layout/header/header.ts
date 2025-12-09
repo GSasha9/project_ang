@@ -4,6 +4,7 @@ import { Menu } from '../../shared/components/menu/menu';
 import { MENU_HEADER } from '../../shared/constants/menu-header';
 import { Button } from '../../shared/components/button/button';
 import { NgClass } from '@angular/common';
+import { MenuItems } from '../../shared/models/menuItems.model';
 
 @Component({
   selector: 'app-header',
@@ -14,9 +15,14 @@ import { NgClass } from '@angular/common';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Header {
-  readonly logoImage = signal('./logo.svg');
-  readonly menuItems = signal(MENU_HEADER);
+  logoImage: string;
+  menuItems: MenuItems[];
   readonly isMenuOpen = signal(false);
+
+  constructor() {
+    this.logoImage = './logo.svg';
+    this.menuItems = MENU_HEADER;
+  }
 
   handleMenu = (): void => {
     this.isMenuOpen.set(!this.isMenuOpen());
