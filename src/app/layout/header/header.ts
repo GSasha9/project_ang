@@ -20,7 +20,7 @@ export class Header {
   readonly isMenuOpen = signal(false);
 
   constructor() {
-    this.logoImage = './logo.svg';
+    this.logoImage = 'logo.svg';
     this.menuItems = MENU_HEADER;
   }
 

@@ -8,7 +8,7 @@
   },
   "newProjectRoot": "projects",
   "projects": {
-    "temp": {
+    "app": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -23,8 +23,11 @@
           "builder": "@angular/build:application",
           "options": {
             "browser": "src/main.ts",
+            "outputPath": "./dist",
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
+            "baseHref": "/project_ang/",
+          "deployUrl": "/project_ang/",
             "assets": [
               {
                 "glob": "**/*",
@@ -66,10 +69,10 @@
           "builder": "@angular/build:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "temp:build:production"
+              "buildTarget": "app:build:production"
             },
             "development": {
-              "buildTarget": "temp:build:development"
+              "buildTarget": "app:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -92,6 +95,9 @@
           "options": {
             "lintFilePatterns": ["src/**/*.ts", "src/**/*.html"]
           }
+        },
+        "deploy": {
+          "builder": "angular-cli-ghpages:deploy"
         }
       }
     }
