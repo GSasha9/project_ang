@@ -5,12 +5,7 @@
 
   .slider_items {
     display: block;
-    height: 250px;
     width: auto;
-
-    @include respond-m {
-      height: 320px;
-    }
   }
 
   .pagination {
@@ -18,7 +13,7 @@
     gap: 10px;
     justify-content: center;
     .dot {
-      background-image: url('/dot.svg');
+      background-image: url('../../../../../public/dot.svg');
       width: 7px;
       height: 7px;
       background-size: contain;
@@ -28,7 +23,7 @@
     }
 
     .dot_active {
-      background-image: url('/dot_active.svg');
+      background-image: url('../../../../../public/dot_active.svg');
     }
   }
 }
