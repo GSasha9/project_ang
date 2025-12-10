@@ -27,7 +27,7 @@
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
             "baseHref": "/project_ang/",
-          "deployUrl": "/project_ang/",
+            "deployUrl": "/project_ang/",
             "assets": [
               {
                 "glob": "**/*",
