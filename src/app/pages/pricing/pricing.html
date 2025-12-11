@@ -1,1 +1,11 @@
-<p>pricing works!</p>
+<section class="pricing">
+  @if ((books$ | async)?.results) {
+    <ul>
+      @for (book of (books$ | async)?.results; track book.id) {
+        <app-card [bookData]="book"></app-card>
+      }
+    </ul>
+  } @else {
+    <p #loading>Loading…</p>
+  }
+</section>

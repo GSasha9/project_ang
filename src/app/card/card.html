@@ -1,0 +1,17 @@
+<div class="card">
+  <div class="card-header">
+    <h4>{{ bookData()?.title }}</h4>
+    @for (author of bookData()?.authors; track author.name) {
+      <p>{{ author.name }}</p>
+    }
+  </div>
+
+  @for (shelf of bookData()?.bookshelves; track bookData()!.bookshelves) {
+    <p>{{ shelf }}</p>
+  }
+
+  <div class="card-footer">
+    <p>{{ bookData()?.download_count }}</p>
+    <app-button>Download</app-button>
+  </div>
+</div>

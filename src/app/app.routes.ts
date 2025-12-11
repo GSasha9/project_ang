@@ -8,7 +8,7 @@ export const routes: Routes = [
   {
     path: '',
     title: 'App title',
-    redirectTo: '/home',
+    redirectTo: 'home',
     pathMatch: 'full',
   },
   {
