@@ -6,9 +6,11 @@
     }
   </div>
 
-  @for (shelf of bookData()?.bookshelves; track bookData()!.bookshelves) {
-    <p>{{ shelf }}</p>
-  }
+  <div class="card-body">
+    @for (shelf of bookData()?.bookshelves; track bookData()!.bookshelves) {
+      <p>{{ shelf }}</p>
+    }
+  </div>
 
   <div class="card-footer">
     <p>{{ bookData()?.download_count }}</p>

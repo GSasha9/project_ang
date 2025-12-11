@@ -1,6 +1,7 @@
 <section class="pricing">
+  <h2>Books for download</h2>
   @if ((books$ | async)?.results) {
-    <ul>
+    <ul class="pricing_list">
       @for (book of (books$ | async)?.results; track book.id) {
         <app-card [bookData]="book"></app-card>
       }
