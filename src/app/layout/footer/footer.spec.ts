@@ -1,14 +1,17 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { Footer } from './footer';
+import { provideRouter } from '@angular/router';
+import { Home } from '../../pages/home/home';
 
 describe('Footer', () => {
   let component: Footer;
   let fixture: ComponentFixture<Footer>;
 
   beforeEach(async () => {
-    await TestBed.configureTestingModule({
+    TestBed.configureTestingModule({
       imports: [Footer],
+      providers: [provideRouter([{ path: '', component: Home }])],
     }).compileComponents();
 
     fixture = TestBed.createComponent(Footer);
@@ -16,7 +19,7 @@ describe('Footer', () => {
     await fixture.whenStable();
   });
 
-  it('should create', () => {
+  it('should create the footer', () => {
     expect(component).toBeTruthy();
   });
 });
