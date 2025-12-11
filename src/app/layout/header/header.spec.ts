@@ -2,13 +2,18 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { Header } from './header';
 import { beforeEach, describe, expect, it } from 'vitest';
 import { clickHelper } from '../../../test/click-helper';
+import { Home } from '../../pages/home/home';
+import { provideRouter } from '@angular/router';
 
 describe('Header', () => {
   let component: Header;
   let fixture: ComponentFixture<Header>;
 
-  beforeEach(() => {
-    TestBed.configureTestingModule({ imports: [Header] });
+  beforeEach(async () => {
+    TestBed.configureTestingModule({
+      imports: [Header],
+      providers: [provideRouter([{ path: '', component: Home }])],
+    });
     fixture = TestBed.createComponent(Header);
     component = fixture.componentInstance;
   });

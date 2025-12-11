@@ -15,6 +15,7 @@ export class Menu {
   readonly isRow = input<boolean>(true);
   readonly gap = input<string>('16');
   readonly customClass = input('');
+  readonly routeActive = input(false);
 
   classes = (): Record<string, boolean> => {
     return {

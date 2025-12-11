@@ -1,25 +1,25 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { Footer } from './footer';
+import { NotFound } from './not-found';
 import { provideRouter } from '@angular/router';
-import { Home } from '../../pages/home/home';
+import { Home } from '../home/home';
 
-describe('Footer', () => {
-  let component: Footer;
-  let fixture: ComponentFixture<Footer>;
+describe('NotFound', () => {
+  let component: NotFound;
+  let fixture: ComponentFixture<NotFound>;
 
   beforeEach(async () => {
-    TestBed.configureTestingModule({
-      imports: [Footer],
+    await TestBed.configureTestingModule({
+      imports: [NotFound],
       providers: [provideRouter([{ path: '', component: Home }])],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(Footer);
+    fixture = TestBed.createComponent(NotFound);
     component = fixture.componentInstance;
     await fixture.whenStable();
   });
 
-  it('should create the footer', () => {
+  it('should create not found page', () => {
     expect(component).toBeTruthy();
   });
 });

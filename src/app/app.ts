@@ -1,18 +1,13 @@
-import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { Header } from './layout/header/header';
-import { Slider } from './shared/components/slider/slider';
-import { Lesson } from './layout/slides/lesson/lesson';
-import { Lesson2 } from './layout/slides/lesson-2/lesson-2';
 import { Footer } from './layout/footer/footer';
+import { RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-root',
-  imports: [Header, Slider, Footer],
+  imports: [Header, Footer, RouterOutlet],
   templateUrl: './app.html',
   styleUrl: './app.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class App {
-  protected readonly title = signal('temp');
-  mySlide = [Lesson, Lesson2];
-}
+export class App {}

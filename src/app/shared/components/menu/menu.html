@@ -2,9 +2,11 @@
   <ul [class]="customClass()" [ngClass]="classes()" [style.gap.px]="gap()">
     @for (item of items(); track item.id) {
       @if (item.title) {
-        <app-link [linkRoute]="item.route">{{ item.title }}</app-link>
+        <app-link [linkRoute]="item.route" [isRouteActive]="routeActive()">{{
+          item.title
+        }}</app-link>
       } @else {
-        <app-link [linkRoute]="item.route">
+        <app-link [linkRoute]="item.route" [isRouteActive]="routeActive()">
           <div class="menu-item-img" [ngStyle]="{ 'background-image': `url(${item.img})` }"></div>
         </app-link>
       }

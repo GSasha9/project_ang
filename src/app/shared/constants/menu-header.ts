@@ -4,26 +4,21 @@ export const MENU_HEADER: MenuItems[] = [
   {
     id: 1,
     title: 'Home',
-    route: '#',
+    route: '/home',
   },
   {
     id: 2,
-    title: 'Features',
-    route: '#',
-  },
-  {
-    id: 3,
     title: 'Community',
     route: '#',
   },
   {
-    id: 4,
+    id: 3,
     title: 'Blog',
-    route: '#',
+    route: '/blog',
   },
   {
-    id: 5,
+    id: 4,
     title: 'Pricing',
-    route: '#',
+    route: '/pricing',
   },
 ];
