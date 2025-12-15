@@ -1,3 +1,8 @@
-<button class="app-button" [ngClass]="hasArrow() ? 'with-arrow' : null" (click)="handler()">
+<button
+  class="app-button"
+  [ngClass]="hasArrow() ? 'with-arrow' : null"
+  (click)="handler()?.()"
+  [disabled]="isDisabled() ? true : false"
+>
   <ng-content></ng-content>
 </button>

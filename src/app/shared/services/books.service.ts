@@ -9,7 +9,9 @@ export class BooksService {
   private http = inject(HttpClient);
   books$ = this.http.get<BooksResponse>(BOOKS_API_BASE_URL).pipe(shareReplay(1));
 
-  getBooks = (): Observable<BooksResponse> => {
-    return this.books$;
+  getBooks = (page: number): Observable<BooksResponse> => {
+    const requestUrl = `${BOOKS_API_BASE_URL}?page=${page}`;
+
+    return this.http.get<BooksResponse>(requestUrl).pipe(shareReplay(1));
   };
 }
