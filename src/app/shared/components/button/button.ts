@@ -11,4 +11,5 @@ import { NgClass } from '@angular/common';
 export class Button {
   readonly hasArrow = input(false);
   readonly handler = input<() => void>();
+  readonly isDisabled = input<boolean | null>(false);
 }

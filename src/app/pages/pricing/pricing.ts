@@ -1,10 +1,44 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { Card } from '../../card/card';
+import { AsyncPipe, CommonModule } from '@angular/common';
+import { BooksService } from '../../shared/services/books.service';
+import { BehaviorSubject, catchError, map, of, shareReplay, startWith, switchMap } from 'rxjs';
+import { BooksResponse } from '../../shared/models/books-response';
+import { Button } from '../../shared/components/button/button';
+import { Spinner } from '../../shared/components/spinner/spinner';
 
 @Component({
   selector: 'app-pricing',
-  imports: [],
+  imports: [Card, AsyncPipe, CommonModule, Button, Spinner],
   templateUrl: './pricing.html',
   styleUrl: './pricing.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class Pricing {}
+export class Pricing {
+  private booksService = inject(BooksService);
+
+  currentPage$ = new BehaviorSubject<number>(1);
+
+  currentPageData$ = this.currentPage$.pipe(
+    switchMap((page) =>
+      this.booksService.getBooks(page).pipe(
+        map((res: BooksResponse) => ({ status: 'success', data: res.results }) as const),
+        startWith({ status: 'loading' } as const),
+        catchError(() => of({ status: 'error' } as const)),
+      ),
+    ),
+    shareReplay({ bufferSize: 1, refCount: true }),
+  );
+
+  isLoading$ = this.currentPageData$.pipe(map((state) => state.status === 'loading'));
+
+  nextPage = (): void => {
+    this.currentPage$.next(this.currentPage$.value + 1);
+  };
+
+  prevPage = (): void => {
+    if (this.currentPage$.value > 1) {
+      this.currentPage$.next(this.currentPage$.value - 1);
+    }
+  };
+}

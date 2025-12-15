@@ -29,4 +29,9 @@
   &:active {
     background-color: $main-button-color_active;
   }
+
+  &:disabled {
+    background-color: grey;
+    pointer-events: none;
+  }
 }

@@ -1,1 +1,39 @@
-<p>pricing works!</p>
+@if (currentPageData$ | async; as state) {
+  @switch (state.status) {
+    @case ('loading') {
+      <section class="pricing">
+        <h2>Books for download</h2>
+        <ul class="pricing_list">
+          <app-spinner />
+        </ul>
+
+        <div class="pricing_pagination">
+          <app-button [handler]="prevPage" [isDisabled]="isLoading$ | async">Prev</app-button>
+          <span>Page {{ currentPage$ | async }}</span>
+          <app-button [handler]="nextPage" [isDisabled]="isLoading$ | async">Next</app-button>
+        </div>
+      </section>
+    }
+
+    @case ('error') {
+      <p>Error! Try again</p>
+    }
+
+    @case ('success') {
+      <section class="pricing">
+        <h2>Books for download</h2>
+        <ul class="pricing_list">
+          @for (book of state.data; track book.id) {
+            <app-card [bookData]="book"></app-card>
+          }
+        </ul>
+
+        <div class="pricing_pagination">
+          <app-button [handler]="prevPage" [isDisabled]="isLoading$ | async">Prev</app-button>
+          <span>Page {{ currentPage$ | async }}</span>
+          <app-button [handler]="nextPage" [isDisabled]="isLoading$ | async">Next</app-button>
+        </div>
+      </section>
+    }
+  }
+}
