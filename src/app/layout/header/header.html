@@ -1,7 +1,12 @@
 <app-logo [logo]="logoImage"></app-logo>
 <button class="burger" (click)="handleMenu()" aria-label="open menu"></button>
-<div class="header-menu" [ngClass]="isMenuOpen() ? 'open' : null">
+<div class="header-menu" [ngClass]="isMenuOpen() ? 'open' : null" (resize)="handleResize()">
   <button class="close" (click)="handleMenu()" aria-label="close menu"></button>
-  <app-menu [items]="menuItems" [isRow]="true" [routeActive]="true"></app-menu>
+  <app-menu
+    [items]="menuItems"
+    [isRow]="true"
+    [routeActive]="true"
+    (clicked)="handleResize()"
+  ></app-menu>
   <app-button [hasArrow]="true">Register Now</app-button>
 </div>

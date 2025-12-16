@@ -1,8 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { Slider } from './slider';
-
 import { Lesson } from '../../../layout/slides/lesson/lesson';
+import { Slider } from './slider';
 
 describe('Slider', () => {
   let component: Slider;

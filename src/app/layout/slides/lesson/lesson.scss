@@ -19,6 +19,7 @@
     flex-direction: column;
     align-items: center;
     gap: 15px;
+    justify-content: center;
 
     @include respond-m {
       width: 40%;
@@ -34,6 +35,7 @@
     max-width: 270px;
     order: -1;
     height: 150px;
+    min-width: 200px;
 
     @include respond-m {
       display: initial;

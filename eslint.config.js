@@ -5,9 +5,18 @@ const angular = require('angular-eslint');
 
 const eslintPluginPrettierRecommended = require('eslint-plugin-prettier/recommended');
 
+const simpleImportSort = require('eslint-plugin-simple-import-sort');
+
 module.exports = defineConfig([
+  {ignores: [
+    'coverage/**',
+    'node_modules/**',
+    'dist/**',
+    '.angular/**'
+  ]},
   {
     files: ['**/*.ts'],
+   
     extends: [
       eslint.configs.recommended,
       tseslint.configs.recommended,
@@ -16,7 +25,12 @@ module.exports = defineConfig([
       eslintPluginPrettierRecommended,
     ],
     processor: angular.processInlineTemplates,
+    plugins: {
+  'simple-import-sort': simpleImportSort,
+},
     rules: {
+      'simple-import-sort/imports': 'error',
+  'simple-import-sort/exports': 'error',
       '@angular-eslint/directive-selector': [
         'error',
         {
@@ -87,17 +101,11 @@ module.exports = defineConfig([
       'one-var': ['error', 'never'],
       'prefer-arrow-callback': 'error',
       'prefer-const': 'error',
-      'sort-imports': [
-        'error',
-        {
-          ignoreCase: true,
-          ignoreDeclarationSort: true,
-          allowSeparatedGroups: true,
-        },
-      ],
+      
 
       'no-eval': 'error',
       'no-implied-eval': 'error',
+
     },
   },
   {

@@ -1,9 +1,10 @@
+import { NgClass } from '@angular/common';
 import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
+
+import { Button } from '../../shared/components/button/button';
 import { Logo } from '../../shared/components/logo/logo';
 import { Menu } from '../../shared/components/menu/menu';
 import { MENU_HEADER } from '../../shared/constants/menu-header';
-import { Button } from '../../shared/components/button/button';
-import { NgClass } from '@angular/common';
 import { MenuItems } from '../../shared/models/menuItems.model';
 
 @Component({
@@ -13,6 +14,9 @@ import { MenuItems } from '../../shared/models/menuItems.model';
   styleUrl: './header.scss',
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
+  host: {
+    '(window:resize)': 'handleResize()',
+  },
 })
 export class Header {
   logoImage: string;
@@ -26,5 +30,9 @@ export class Header {
 
   handleMenu = (): void => {
     this.isMenuOpen.set(!this.isMenuOpen());
+  };
+
+  handleResize = (): void => {
+    this.isMenuOpen.set(false);
   };
 }

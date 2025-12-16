@@ -1,11 +1,12 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-import { Card } from '../../card/card';
 import { AsyncPipe, CommonModule } from '@angular/common';
-import { BooksService } from '../../shared/services/books.service';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { BehaviorSubject, catchError, map, of, shareReplay, startWith, switchMap } from 'rxjs';
-import { BooksResponse } from '../../shared/models/books-response';
+
+import { Card } from '../../card/card';
 import { Button } from '../../shared/components/button/button';
 import { Spinner } from '../../shared/components/spinner/spinner';
+import { BooksResponse } from '../../shared/models/books-response';
+import { BooksService } from '../../shared/services/books.service';
 
 @Component({
   selector: 'app-pricing',

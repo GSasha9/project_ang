@@ -1,8 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { Footer } from './footer';
 import { provideRouter } from '@angular/router';
+
 import { Home } from '../../pages/home/home';
+import { Footer } from './footer';
 
 describe('Footer', () => {
   let component: Footer;
