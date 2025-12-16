@@ -24,7 +24,7 @@
         <h2>Books for download</h2>
         <ul class="pricing_list">
           @for (book of state.data; track book.id) {
-            <app-card [bookData]="book"></app-card>
+            <li><app-card [bookData]="book"></app-card></li>
           }
         </ul>
 
