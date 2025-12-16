@@ -2,7 +2,7 @@ import { HttpInterceptorFn } from '@angular/common/http';
 import { HttpResponse } from '@angular/common/http';
 import { of, tap } from 'rxjs';
 
-const appCache = new Map<string, unknown>();
+export const appCache = new Map<string, unknown>();
 
 export const cacheInterceptor: HttpInterceptorFn = (req, next) => {
   const cacheKey = req.urlWithParams;
