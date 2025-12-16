@@ -1,8 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
+import { Observable, shareReplay } from 'rxjs';
+
 import { BOOKS_API_BASE_URL } from '../constants/books-api-base-url';
 import { BooksResponse } from '../models/books-response';
-import { Observable, shareReplay } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class BooksService {

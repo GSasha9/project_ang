@@ -65,11 +65,15 @@
   .open {
     right: 0px;
     top: 0px;
+    left: 0px;
     background-color: white;
     align-items: start;
     position: fixed;
-    padding: 9px 16px;
-    border: 1px solid grey;
-    border-radius: 3px;
+    padding: 30px 30px;
+    border-top: 1px solid grey;
+    width: 100vw;
+    border-bottom: 1px solid grey;
+    height: 100vh;
+    z-index: 99;
   }
 }

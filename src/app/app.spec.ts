@@ -1,6 +1,7 @@
 import { TestBed } from '@angular/core/testing';
-import { App } from './app';
 import { provideRouter } from '@angular/router';
+
+import { App } from './app';
 import { Home } from './pages/home/home';
 
 describe('App', () => {

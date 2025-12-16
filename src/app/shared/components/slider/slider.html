@@ -5,7 +5,7 @@
     @for (slide of slides(); track $index) {
       <button
         (click)="renderSlide($index)"
-        [ngClass]="currentIndex === $index ? 'dot dot_active' : 'dot'"
+        [ngClass]="currentIndex() === $index ? 'dot dot_active' : 'dot'"
         aria-label="slider pagination"
       ></button>
     }

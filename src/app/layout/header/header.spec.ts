@@ -1,9 +1,10 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { Header } from './header';
+import { provideRouter } from '@angular/router';
 import { beforeEach, describe, expect, it } from 'vitest';
+
 import { clickHelper } from '../../../test/click-helper';
 import { Home } from '../../pages/home/home';
-import { provideRouter } from '@angular/router';
+import { Header } from './header';
 
 describe('Header', () => {
   let component: Header;

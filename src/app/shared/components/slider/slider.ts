@@ -1,12 +1,15 @@
+import { NgClass } from '@angular/common';
 import {
   AfterViewInit,
   ChangeDetectionStrategy,
   Component,
+  DestroyRef,
+  inject,
   input,
+  signal,
   viewChild,
   ViewContainerRef,
 } from '@angular/core';
-import { NgClass } from '@angular/common';
 
 @Component({
   selector: 'app-slider',
@@ -17,24 +20,39 @@ import { NgClass } from '@angular/common';
 })
 export class Slider implements AfterViewInit {
   readonly slides = input<any[]>([]);
-  currentIndex = 0;
+  readonly currentIndex = signal(0);
 
   readonly container = viewChild('container', { read: ViewContainerRef });
   vc: ViewContainerRef | undefined;
 
+  private destroyRef = inject(DestroyRef);
+
   ngAfterViewInit(): void {
     this.vc = this.container();
-    this.renderSlide(this.currentIndex);
+
+    this.renderSlide(0);
+
+    const id = setInterval(this.autoRenderSlide, 5000);
+
+    this.destroyRef.onDestroy(() => clearInterval(id));
   }
 
-  renderSlide(index: number): void {
+  renderSlide = (index: number): void => {
     if (!this.vc) {
       return;
     }
     this.vc.clear();
 
     this.vc.createComponent(this.slides()[index]);
+  };
 
-    this.currentIndex = index;
-  }
+  autoRenderSlide = (): void => {
+    const maxCount = this.slides().length;
+
+    const nextIndex = this.currentIndex() + 1 >= maxCount ? 0 : this.currentIndex() + 1;
+
+    this.renderSlide(nextIndex);
+
+    this.currentIndex.set(nextIndex);
+  };
 }

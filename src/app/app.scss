@@ -1,9 +1,15 @@
+@use '../styles/variables' as *;
+
 :host {
   display: flex;
   flex-direction: column;
   gap: 30px;
 
   main {
-    padding: 40px 0px;
+    padding: 0px 0px;
+
+    @include respond-m {
+      padding: 40px 0px;
+    }
   }
 }

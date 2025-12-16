@@ -1,6 +1,7 @@
-import { ChangeDetectionStrategy, Component, input } from '@angular/core';
-import { MenuItems } from '../../models/menuItems.model';
 import { NgClass, NgStyle } from '@angular/common';
+import { ChangeDetectionStrategy, Component, input, output } from '@angular/core';
+
+import { MenuItems } from '../../models/menuItems.model';
 import { Link } from '../link/link';
 
 @Component({
@@ -16,11 +17,16 @@ export class Menu {
   readonly gap = input<string>('16');
   readonly customClass = input('');
   readonly routeActive = input(false);
+  readonly clicked = output<MenuItems>();
 
   classes = (): Record<string, boolean> => {
     return {
       column: !this.isRow(),
       menuList: true,
     };
+  };
+
+  handleClick = (item: MenuItems): void => {
+    this.clicked.emit(item);
   };
 }
