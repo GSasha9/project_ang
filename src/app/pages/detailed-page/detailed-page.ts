@@ -1,34 +1,27 @@
-import { AsyncPipe } from '@angular/common';
-import { ChangeDetectionStrategy, Component, inject, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
 import { ActivatedRoute, Router } from '@angular/router';
-import { filter, map, switchMap } from 'rxjs';
 import { Observable } from 'rxjs';
 
 import { Button } from '../../shared/components/button/button';
 import { Book } from '../../shared/models/book.model';
-import { BooksService } from '../../shared/services/books.service';
 
 @Component({
   selector: 'app-detailed-page',
-  imports: [Button, AsyncPipe],
+  imports: [Button],
   templateUrl: './detailed-page.html',
-  styleUrl: './detailed-page.scss',
+  styleUrls: ['./detailed-page.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class DetailedPage implements OnInit {
+export class DetailedPage {
   private router = inject(Router);
-  private service = inject(BooksService);
   private activatedRoute = inject(ActivatedRoute);
+  private readonly data = toSignal(this.activatedRoute.data);
+  readonly books = computed(() => this.data()?.['book'] as Book | undefined);
+  readonly bookImage = computed(() => this.books()?.formats?.['image/jpeg'] ?? '');
+
   bookId: string | null = null;
   bookData$: Observable<Book> | null = null;
-
-  ngOnInit(): void {
-    this.bookData$ = this.activatedRoute.params.pipe(
-      map((params) => params['id']),
-      filter(Boolean),
-      switchMap((id) => this.service.getBookById(id)),
-    );
-  }
 
   handleBackButton = (): void => {
     this.router.navigate(['/pricing']);

@@ -7,6 +7,7 @@ import { Login } from './pages/login/login';
 import { NotFound } from './pages/not-found/not-found';
 import { Pricing } from './pages/pricing/pricing';
 import { Register } from './pages/register/register';
+import { BookResolver } from './shared/services/book-resolver.service';
 
 export const routes: Routes = [
   {
@@ -33,6 +34,9 @@ export const routes: Routes = [
   {
     path: 'pricing/:id',
     component: DetailedPage,
+    resolve: {
+      book: BookResolver,
+    },
   },
   {
     path: 'login',

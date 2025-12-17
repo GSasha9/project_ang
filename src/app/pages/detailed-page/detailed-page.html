@@ -1,10 +1,10 @@
 <section class="detailed-page">
-  @if (bookData$ | async; as book) {
-    <h2>{{ book?.title }}</h2>
+  @if (books()) {
+    <h2>{{ books()?.title }}</h2>
     <div class="detailed-page-book">
       <div class="book-description">
         <div class="book-author">
-          @for (item of book?.authors; track $index) {
+          @for (item of books()?.authors; track $index) {
             <div>
               <p>{{ item.name }}</p>
               <p>{{ item.birth_year || 'unknown' }}</p>
@@ -14,18 +14,14 @@
           }
         </div>
         <div class="book-summaries">
-          @for (item of book?.summaries; track $index) {
+          @for (item of books()?.summaries; track $index) {
             <p>{{ item }}</p>
           }
         </div>
         <app-button class="book-button" [handler]="handleBackButton">Back</app-button>
       </div>
 
-      @if (book) {
-        <img class="book-img" [src]="book.formats['image/jpeg']" [alt]="book?.title" />
-      } @else {
-        <p>empty</p>
-      }
+      <img class="book-img" [src]="bookImage()" [alt]="books()?.title" />
     </div>
   }
 </section>
