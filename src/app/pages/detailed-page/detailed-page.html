@@ -1,0 +1,27 @@
+<section class="detailed-page">
+  @if (books()) {
+    <h2>{{ books()?.title }}</h2>
+    <div class="detailed-page-book">
+      <div class="book-description">
+        <div class="book-author">
+          @for (item of books()?.authors; track $index) {
+            <div>
+              <p>{{ item.name }}</p>
+              <p>{{ item.birth_year || 'unknown' }}</p>
+              <span>-</span>
+              <p>{{ item.death_year || 'unknown' }}</p>
+            </div>
+          }
+        </div>
+        <div class="book-summaries">
+          @for (item of books()?.summaries; track $index) {
+            <p>{{ item }}</p>
+          }
+        </div>
+        <app-button class="book-button" [handler]="handleBackButton">Back</app-button>
+      </div>
+
+      <img class="book-img" [src]="bookImage()" [alt]="books()?.title" />
+    </div>
+  }
+</section>

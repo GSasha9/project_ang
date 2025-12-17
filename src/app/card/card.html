@@ -1,13 +1,13 @@
-<div class="card">
+<div class="card" (click)="cardHandler()" (keyup)="cardHandler()" tabindex="0">
   <div class="card-header">
     <h4>{{ bookData()?.title }}</h4>
-    @for (author of bookData()?.authors; track author.name) {
+    @for (author of bookData()?.authors; track $index) {
       <p>{{ author.name }}</p>
     }
   </div>
 
   <div class="card-body">
-    @for (shelf of bookData()?.bookshelves; track bookData()!.bookshelves) {
+    @for (shelf of bookData()?.bookshelves; track $index) {
       <p>{{ shelf }}</p>
     }
   </div>

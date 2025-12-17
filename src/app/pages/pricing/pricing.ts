@@ -1,5 +1,6 @@
 import { AsyncPipe, CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { Router } from '@angular/router';
 import { BehaviorSubject, catchError, map, of, shareReplay, startWith, switchMap } from 'rxjs';
 
 import { Card } from '../../card/card';
@@ -17,6 +18,7 @@ import { BooksService } from '../../shared/services/books.service';
 })
 export class Pricing {
   private booksService = inject(BooksService);
+  private router = inject(Router);
 
   currentPage$ = new BehaviorSubject<number>(1);
 
@@ -41,5 +43,9 @@ export class Pricing {
     if (this.currentPage$.value > 1) {
       this.currentPage$.next(this.currentPage$.value - 1);
     }
+  };
+
+  handleCardClick = (id: number): void => {
+    this.router.navigate([`pricing/${id}`]);
   };
 }

@@ -11,4 +11,5 @@ export type Book = {
   languages: string[];
   copyright: boolean | null;
   download_count: number;
+  formats: Record<string, string>;
 };
