@@ -1,5 +1,6 @@
 import { NgClass } from '@angular/common';
-import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { Button } from '../../shared/components/button/button';
 import { Logo } from '../../shared/components/logo/logo';
@@ -19,6 +20,7 @@ import { MenuItems } from '../../shared/models/menuItems.model';
   },
 })
 export class Header {
+  private router = inject(Router);
   logoImage: string;
   menuItems: MenuItems[];
   readonly isMenuOpen = signal(false);
@@ -34,5 +36,13 @@ export class Header {
 
   handleResize = (): void => {
     this.isMenuOpen.set(false);
+  };
+
+  handleLoginButton = (): void => {
+    this.router.navigate(['/login']);
+  };
+
+  handleRegistrationButton = (): void => {
+    this.router.navigate(['/registration']);
   };
 }
