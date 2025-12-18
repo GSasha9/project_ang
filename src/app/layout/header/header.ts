@@ -7,6 +7,7 @@ import { filter, map, startWith } from 'rxjs';
 import { Button } from '../../shared/components/button/button';
 import { Logo } from '../../shared/components/logo/logo';
 import { Menu } from '../../shared/components/menu/menu';
+import { APP_ROUTES } from '../../shared/constants/app-routs';
 import { MENU_HEADER } from '../../shared/constants/menu-header';
 import { MenuItems } from '../../shared/models/menuItems.model';
 
@@ -22,10 +23,10 @@ import { MenuItems } from '../../shared/models/menuItems.model';
   },
 })
 export class Header {
+  private router = inject(Router);
   logoImage: string;
   menuItems: MenuItems[];
   readonly isMenuOpen = signal(false);
-  router = inject(Router);
 
   readonly currentUrl = toSignal(
     this.router.events.pipe(
@@ -49,10 +50,10 @@ export class Header {
   };
 
   buttonHandler = (): void => {
-    if (this.currentUrl() === 'login') {
-      this.router.navigate(['register']);
+    if (this.currentUrl() === `/${APP_ROUTES.login}`) {
+      this.router.navigate([APP_ROUTES.registration]);
     } else {
-      this.router.navigate(['login']);
+      this.router.navigate([APP_ROUTES.login]);
     }
   };
 }

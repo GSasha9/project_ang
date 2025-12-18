@@ -12,4 +12,10 @@ import { Book } from '../shared/models/book.model';
 })
 export class Card {
   readonly bookData = input<Book>();
+
+  readonly handler = input<(id: number) => void>();
+
+  cardHandler = (): void => {
+    this.handler()?.(this.bookData()?.id || 1);
+  };
 }

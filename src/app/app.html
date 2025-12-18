@@ -5,7 +5,11 @@
 </header>
 
 <main class="main">
-  <div class="container"><router-outlet /></div>
+  @if (isNavigated()) {
+    <app-spinner />
+  } @else {
+    <div class="container"><router-outlet /></div>
+  }
 </main>
 
 <footer class="footer">

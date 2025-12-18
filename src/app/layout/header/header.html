@@ -8,7 +8,7 @@
     [routeActive]="true"
     (clicked)="handleResize()"
   ></app-menu>
-  @if (currentUrl() === 'login') {
+  @if (currentUrl() === '/login') {
     <app-button [hasArrow]="true" [handler]="buttonHandler">Register Now</app-button>
   } @else {
     <app-button [hasArrow]="true" [handler]="buttonHandler">Login</app-button>
