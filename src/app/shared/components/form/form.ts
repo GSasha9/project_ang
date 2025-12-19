@@ -1,5 +1,5 @@
 import { KeyValuePipe, NgClass, TitleCasePipe } from '@angular/common';
-import { ChangeDetectionStrategy, Component, input, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input, model, OnInit } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 
 import { ERROR_MESSAGES } from '../../constants/error-messages';
@@ -16,8 +16,9 @@ import { Button } from '../button/button';
 })
 export class Form implements OnInit {
   readonly formItems = input<FormData[]>([]);
-  form!: FormGroup<any>;
+  readonly form = model<FormGroup<any>>();
   errorMessages = ERROR_MESSAGES;
+  readonly buttonHandler = input<() => void>();
 
   ngOnInit(): void {
     this.generateForm();
@@ -29,11 +30,11 @@ export class Form implements OnInit {
       const validators = getValidators(el);
       formFields[el.title] = new FormControl('', validators);
     });
-    this.form = new FormGroup(formFields);
+    this.form.set(new FormGroup(formFields));
   };
 
   onSubmit = (): void => {
-    console.log(this.form.value);
+    this.buttonHandler()?.();
   };
 
   getErrorMessage = (controlName: string, errorKey: string, errorValue: string): string => {

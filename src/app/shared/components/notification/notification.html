@@ -1,0 +1,5 @@
+@for (n of service.notifications(); track $index) {
+  <div class="notification">
+    <p [ngClass]="n.type">{{ n.text }}</p>
+  </div>
+}

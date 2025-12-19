@@ -1,6 +1,6 @@
 import { Routes } from '@angular/router';
 
-import { Blog } from './blog/blog';
+import { Blog } from './pages/blog/blog';
 import { DetailedPage } from './pages/detailed-page/detailed-page';
 import { Home } from './pages/home/home';
 import { Login } from './pages/login/login';

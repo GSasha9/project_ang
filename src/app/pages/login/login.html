@@ -1,3 +1,5 @@
 <section class="login">
-  <app-form [formItems]="formFields"></app-form>
+  <app-notification></app-notification>
+
+  <app-form [formItems]="formFields" [(form)]="form" [buttonHandler]="handleSubmit"></app-form>
 </section>

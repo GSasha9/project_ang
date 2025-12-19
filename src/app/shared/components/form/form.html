@@ -1,4 +1,4 @@
-<form [formGroup]="form" class="form" (ngSubmit)="onSubmit()">
+<form [formGroup]="form()!" class="form" (ngSubmit)="onSubmit()">
   @for (item of formItems(); track $index) {
     <div class="form-field">
       <label [for]="item.title" [ngClass]="item.isRequired ? 'required' : ''">{{
@@ -6,12 +6,12 @@
       }}</label>
       <input [id]="item.title" type="text" [formControlName]="item.title" autocomplete="email" />
 
-      @for (error of form.get(item.title)?.errors | keyvalue; track $index) {
-        @if (form.get(item.title)?.touched) {
+      @for (error of form()?.get(item.title)?.errors | keyvalue; track $index) {
+        @if (form()?.get(item.title)?.touched) {
           <p class="error">{{ getErrorMessage(item.title, error.key, error.value) }}</p>
         }
       }
     </div>
   }
-  <app-button [isDisabled]="form.status === 'INVALID' ? true : false">Send</app-button>
+  <app-button [isDisabled]="form()?.status === 'INVALID' ? true : false">Send</app-button>
 </form>

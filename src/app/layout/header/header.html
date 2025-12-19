@@ -1,4 +1,7 @@
 <app-logo [logo]="logoImage"></app-logo>
+@if (userName()) {
+  <p>{{ `Hello ${userName()}` }}</p>
+}
 <button class="burger" (click)="handleMenu()" aria-label="open menu"></button>
 <div class="header-menu" [ngClass]="isMenuOpen() ? 'open' : null" (resize)="handleResize()">
   <button class="close" (click)="handleMenu()" aria-label="close menu"></button>
@@ -10,6 +13,8 @@
   ></app-menu>
   @if (currentUrl() === '/login') {
     <app-button [hasArrow]="true" [handler]="buttonHandler">Register Now</app-button>
+  } @else if (userName()) {
+    <app-button [hasArrow]="true" [handler]="logOutHandler">LogOut</app-button>
   } @else {
     <app-button [hasArrow]="true" [handler]="buttonHandler">Login</app-button>
   }

@@ -10,6 +10,7 @@ import { Menu } from '../../shared/components/menu/menu';
 import { APP_ROUTES } from '../../shared/constants/app-routs';
 import { MENU_HEADER } from '../../shared/constants/menu-header';
 import { MenuItems } from '../../shared/models/menuItems.model';
+import { AuthService } from '../../shared/services/auth.service';
 
 @Component({
   selector: 'app-header',
@@ -27,6 +28,9 @@ export class Header {
   logoImage: string;
   menuItems: MenuItems[];
   readonly isMenuOpen = signal(false);
+
+  auth = inject(AuthService);
+  userName = this.auth.userName;
 
   readonly currentUrl = toSignal(
     this.router.events.pipe(
@@ -55,5 +59,11 @@ export class Header {
     } else {
       this.router.navigate([APP_ROUTES.login]);
     }
+
+    this.isMenuOpen.set(false);
+  };
+
+  logOutHandler = (): void => {
+    this.auth.userName.set(null);
   };
 }

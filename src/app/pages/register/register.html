@@ -1,3 +1,4 @@
 <section class="register">
-  <app-form [formItems]="formFields"></app-form>
+  <app-form [formItems]="formFields" [(form)]="form" [buttonHandler]="handleRegister"></app-form>
+  <app-notification></app-notification>
 </section>
