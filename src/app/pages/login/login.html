@@ -1,1 +1,5 @@
-<p>login works!</p>
+<section class="login">
+  <app-notification></app-notification>
+
+  <app-form [formItems]="formFields" [(form)]="form" [buttonHandler]="handleSubmit"></app-form>
+</section>

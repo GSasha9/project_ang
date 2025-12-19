@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 
 import { Button } from '../../shared/components/button/button';
+import { APP_ROUTES } from '../../shared/constants/app-routs';
 import { Book } from '../../shared/models/book.model';
 
 @Component({
@@ -24,7 +25,7 @@ export class DetailedPage {
   bookData$: Observable<Book> | null = null;
 
   handleBackButton = (): void => {
-    this.router.navigate(['/pricing']);
+    this.router.navigate([APP_ROUTES.pricing]);
     this.bookId = null;
   };
 }

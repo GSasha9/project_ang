@@ -3,8 +3,8 @@ import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject, catchError, map, of, shareReplay, startWith, switchMap } from 'rxjs';
 
-import { Card } from '../../card/card';
 import { Button } from '../../shared/components/button/button';
+import { Card } from '../../shared/components/card/card';
 import { Spinner } from '../../shared/components/spinner/spinner';
 import { BooksResponse } from '../../shared/models/books-response';
 import { BooksService } from '../../shared/services/books.service';

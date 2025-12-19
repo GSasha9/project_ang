@@ -1,12 +1,13 @@
 import { Routes } from '@angular/router';
 
-import { Blog } from './blog/blog';
+import { Blog } from './pages/blog/blog';
 import { DetailedPage } from './pages/detailed-page/detailed-page';
 import { Home } from './pages/home/home';
 import { Login } from './pages/login/login';
 import { NotFound } from './pages/not-found/not-found';
 import { Pricing } from './pages/pricing/pricing';
 import { Register } from './pages/register/register';
+import { APP_ROUTES } from './shared/constants/app-routs';
 import { BookResolver } from './shared/services/book-resolver.service';
 
 export const routes: Routes = [
@@ -17,17 +18,17 @@ export const routes: Routes = [
     pathMatch: 'full',
   },
   {
-    path: 'home',
+    path: APP_ROUTES.home,
     component: Home,
     title: 'Home Page',
   },
   {
-    path: 'blog',
+    path: APP_ROUTES.blog,
     component: Blog,
     title: 'Blog',
   },
   {
-    path: 'pricing',
+    path: APP_ROUTES.pricing,
     component: Pricing,
     title: 'Pricing',
   },
@@ -39,12 +40,12 @@ export const routes: Routes = [
     },
   },
   {
-    path: 'login',
+    path: APP_ROUTES.login,
     component: Login,
     title: 'Login',
   },
   {
-    path: 'registration',
+    path: APP_ROUTES.registration,
     component: Register,
     title: 'Registration',
   },
