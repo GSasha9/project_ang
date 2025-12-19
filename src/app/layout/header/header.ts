@@ -25,9 +25,9 @@ import { AuthService } from '../../shared/services/auth.service';
 })
 export class Header {
   private router = inject(Router);
+  readonly isMenuOpen = signal(false);
   logoImage: string;
   menuItems: MenuItems[];
-  readonly isMenuOpen = signal(false);
 
   auth = inject(AuthService);
   userName = this.auth.userName;

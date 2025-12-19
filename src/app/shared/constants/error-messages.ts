@@ -14,4 +14,5 @@ export const ERROR_MESSAGES: Record<
   userExists: 'User already exists',
   passwordsNotMatch: 'Passwords do not match',
   pleaseLogin: 'Please login',
+  invalidField: 'Invalid field',
 };

@@ -12,7 +12,6 @@ import { Button } from '../button/button';
 })
 export class Card {
   readonly bookData = input<Book>();
-
   readonly handler = input<(id: number) => void>();
 
   cardHandler = (): void => {

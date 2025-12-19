@@ -17,10 +17,10 @@ import { NotificationService } from '../../shared/services/notification.service'
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Register {
-  formFields: FormData[] = [];
-  readonly form = signal<FormGroup<any> | undefined>(undefined);
   private router = inject(Router);
   private notification = inject(NotificationService);
+  readonly form = signal<FormGroup<any> | undefined>(undefined);
+  formFields: FormData[] = [];
 
   constructor() {
     this.formFields = REGISTER_FORM_DATA;

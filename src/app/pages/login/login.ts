@@ -19,12 +19,12 @@ import { NotificationService } from '../../shared/services/notification.service'
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Login {
-  formFields: FormData[] = [];
-  readonly form = signal<FormGroup<any> | undefined>(undefined);
-  user: UserData | null = null;
-  private router = inject(Router);
-  auth = inject(AuthService);
   private notification = inject(NotificationService);
+  private router = inject(Router);
+  private auth = inject(AuthService);
+  readonly form = signal<FormGroup<any> | undefined>(undefined);
+  formFields: FormData[] = [];
+  user: UserData | null = null;
 
   constructor() {
     this.formFields = LOGIN_FORM_DATA;
