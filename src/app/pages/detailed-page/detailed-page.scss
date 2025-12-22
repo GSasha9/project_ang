@@ -17,7 +17,7 @@
     @include respond-m {
       flex-direction: row;
       justify-content: space-around;
-      align-items: initial;
+      align-items: center;
     }
 
     .book-description {
@@ -56,6 +56,10 @@
       @include respond-m {
         width: 30%;
         order: 1;
+      }
+
+      img {
+        width: 100%;
       }
     }
   }

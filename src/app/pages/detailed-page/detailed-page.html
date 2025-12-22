@@ -21,7 +21,13 @@
         <app-button class="book-button" [handler]="handleBackButton">Back</app-button>
       </div>
 
-      <img class="book-img" [src]="bookImage()" [alt]="books()?.title" />
+      <div class="book-img">
+        <img [src]="bookImage()" [alt]="books()?.title" (load)="onImageLoad()" />
+
+        @if (imageLoad()) {
+          <app-spinner></app-spinner>
+        }
+      </div>
     </div>
   }
 </section>
