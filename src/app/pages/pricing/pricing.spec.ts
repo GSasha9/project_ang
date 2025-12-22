@@ -4,8 +4,8 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
 import { clickHelper } from '../../../test/click-helper';
-import { Card } from '../../card/card';
 import { Button } from '../../shared/components/button/button';
+import { Card } from '../../shared/components/card/card';
 import { BOOKS_API_BASE_URL } from '../../shared/constants/books-api-base-url';
 import { BooksService } from '../../shared/services/books.service';
 import { Pricing } from './pricing';
