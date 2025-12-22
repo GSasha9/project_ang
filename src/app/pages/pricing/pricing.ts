@@ -48,4 +48,8 @@ export class Pricing {
   handleCardClick = (id: number): void => {
     this.router.navigate([`pricing/${id}`]);
   };
+
+  handleBackButton = (): void => {
+    this.router.navigate(['pricing']);
+  };
 }

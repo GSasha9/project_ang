@@ -9,6 +9,7 @@
   height: 100%;
   left: 0;
   top: 0;
+  z-index: 999;
 
   p {
     background-color: white;
@@ -29,4 +30,5 @@
 .error {
   border: 3px $error-color solid;
   font-size: initial;
+  background-color: white;
 }

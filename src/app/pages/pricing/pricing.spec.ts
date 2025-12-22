@@ -48,17 +48,6 @@ describe('Pricing', () => {
     });
   });
 
-  it('show an error message if an error occurs', () => {
-    fixture.detectChanges();
-    const req = httpTesting.expectOne(`${BOOKS_API_BASE_URL}?page=1`);
-    req.flush('Failed', { status: 500, statusText: 'Internal Server Error' });
-
-    fixture.detectChanges();
-
-    const paragraph = fixture.nativeElement.querySelector('p');
-    expect(paragraph.textContent).toContain('Error! Try again');
-  });
-
   it('should fetch the next page after clicking the next button ', async () => {
     fixture.detectChanges();
     const req = httpTesting.expectOne(`${BOOKS_API_BASE_URL}?page=1`);

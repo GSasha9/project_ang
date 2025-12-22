@@ -16,7 +16,7 @@
     }
 
     @case ('error') {
-      <p>Error! Try again</p>
+      <section class="pricing"><app-button [handler]="handleBackButton">Back</app-button></section>
     }
 
     @case ('success') {
