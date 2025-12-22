@@ -16,9 +16,9 @@ import { Button } from '../button/button';
 })
 export class Form implements OnInit {
   readonly formItems = input<FormData[]>([]);
+  readonly buttonHandler = input<() => void>();
   readonly form = model<FormGroup<any>>();
   errorMessages = ERROR_MESSAGES;
-  readonly buttonHandler = input<() => void>();
 
   ngOnInit(): void {
     this.generateForm();
@@ -41,7 +41,7 @@ export class Form implements OnInit {
     const message = this.errorMessages[errorKey];
 
     if (!message) {
-      return 'Invalid field';
+      return ERROR_MESSAGES['Invalid field'] as string;
     }
 
     if (typeof message === 'function') {
