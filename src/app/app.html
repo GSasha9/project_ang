@@ -5,7 +5,7 @@
 </header>
 
 <main class="main">
-  @if (isNavigated()) {
+  @if (loadingStatus) {
     <app-spinner />
   } @else {
     <div class="container"><router-outlet></router-outlet></div>

@@ -1,10 +1,11 @@
-import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/core';
-import { Router, RouterOutlet } from '@angular/router';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { RouterOutlet } from '@angular/router';
 
 import { Footer } from './layout/footer/footer';
 import { Header } from './layout/header/header';
 import { Notification } from './shared/components/notification/notification';
 import { Spinner } from './shared/components/spinner/spinner';
+import { LoadingService } from './shared/services/loading.service';
 
 @Component({
   selector: 'app-root',
@@ -14,6 +15,11 @@ import { Spinner } from './shared/components/spinner/spinner';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class App {
-  private router = inject(Router);
-  readonly isNavigated = computed(() => !!this.router.currentNavigation());
+  loadingStatus = false;
+
+  loading = inject(LoadingService);
+
+  setLoadingStatus = (): void => {
+    this.loading.isLoadingSub.subscribe((status) => (this.loadingStatus = status));
+  };
 }
