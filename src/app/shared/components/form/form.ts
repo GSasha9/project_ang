@@ -4,7 +4,7 @@ import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 
 import { ERROR_MESSAGES } from '../../constants/error-messages';
 import { FormData } from '../../models/form-data.model';
-import { getValidators } from '../../utils/getValidators';
+import { getValidators } from '../../utils/get-validators';
 import { Button } from '../button/button';
 
 @Component({
