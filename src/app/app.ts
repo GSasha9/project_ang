@@ -1,25 +1,16 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 
 import { Footer } from './layout/footer/footer';
 import { Header } from './layout/header/header';
+import { Loader } from './loader/loader';
 import { Notification } from './shared/components/notification/notification';
-import { Spinner } from './shared/components/spinner/spinner';
-import { LoadingService } from './shared/services/loading.service';
 
 @Component({
   selector: 'app-root',
-  imports: [Header, Footer, RouterOutlet, Spinner, Notification],
+  imports: [Header, Footer, RouterOutlet, Loader, Notification],
   templateUrl: './app.html',
   styleUrl: './app.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class App {
-  loadingStatus = false;
-
-  loading = inject(LoadingService);
-
-  setLoadingStatus = (): void => {
-    this.loading.isLoadingSub.subscribe((status) => (this.loadingStatus = status));
-  };
-}
+export class App {}

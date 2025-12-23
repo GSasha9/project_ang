@@ -1,39 +1,18 @@
-@if (currentPageData$ | async; as state) {
-  @switch (state.status) {
-    @case ('loading') {
-      <section class="pricing">
-        <h2>Books for download</h2>
-        <ul class="pricing_list">
-          <app-spinner />
-        </ul>
-
-        <div class="pricing_pagination">
-          <app-button [handler]="prevPage" [isDisabled]="isLoading$ | async">Prev</app-button>
-          <span>Page {{ currentPage$ | async }}</span>
-          <app-button [handler]="nextPage" [isDisabled]="isLoading$ | async">Next</app-button>
-        </div>
-      </section>
+@if (currentPageData$ | async; as result) {
+  <section class="pricing">
+    <h2>Books for download</h2>
+    @if (!isLoading()) {
+      <ul class="pricing_list">
+        @for (book of result.data; track book.id) {
+          <li><app-card [bookData]="book" [handler]="handleCardClick"></app-card></li>
+        }
+      </ul>
     }
 
-    @case ('error') {
-      <section class="pricing"><app-button [handler]="handleBackButton">Back</app-button></section>
-    }
-
-    @case ('success') {
-      <section class="pricing">
-        <h2>Books for download</h2>
-        <ul class="pricing_list">
-          @for (book of state.data; track book.id) {
-            <li><app-card [bookData]="book" [handler]="handleCardClick"></app-card></li>
-          }
-        </ul>
-
-        <div class="pricing_pagination">
-          <app-button [handler]="prevPage" [isDisabled]="isLoading$ | async">Prev</app-button>
-          <span>Page {{ currentPage$ | async }}</span>
-          <app-button [handler]="nextPage" [isDisabled]="isLoading$ | async">Next</app-button>
-        </div>
-      </section>
-    }
-  }
+    <div class="pricing_pagination">
+      <app-button [handler]="prevPage" [isDisabled]="isLoading()">Prev</app-button>
+      <span>Page {{ currentPage$ | async }}</span>
+      <app-button [handler]="nextPage" [isDisabled]="isLoading()">Next</app-button>
+    </div>
+  </section>
 }

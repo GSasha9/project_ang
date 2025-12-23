@@ -1,7 +1,7 @@
-import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject, input, signal } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 import { Button } from '../../shared/components/button/button';
 import { Spinner } from '../../shared/components/spinner/spinner';
@@ -22,6 +22,7 @@ export class DetailedPage {
   readonly books = computed(() => this.data()?.['book'] as Book | undefined);
   readonly bookImage = computed(() => this.books()?.formats?.['image/jpeg'] ?? '');
   readonly imageLoad = signal(true);
+  readonly currentPage = input<BehaviorSubject<number>>();
 
   bookId: string | null = null;
   bookData$: Observable<Book> | null = null;

@@ -5,12 +5,10 @@
 </header>
 
 <main class="main">
-  @if (loadingStatus) {
-    <app-spinner />
-  } @else {
-    <div class="container"><router-outlet></router-outlet></div>
-  }
+  <div class="container"><router-outlet></router-outlet></div>
+
   <app-notification></app-notification>
+  <app-loader></app-loader>
 </main>
 
 <footer class="footer">
