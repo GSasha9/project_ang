@@ -32,7 +32,11 @@ export class DetailedPage {
   };
 
   handleBackButton = (): void => {
-    this.router.navigate([APP_ROUTES.pricing]);
+    const page = this.activatedRoute.snapshot.queryParams['page'];
+    this.router.navigate([APP_ROUTES.pricing], {
+      queryParams: { page: page },
+      queryParamsHandling: 'merge',
+    });
     this.bookId = null;
   };
 }
