@@ -9,11 +9,13 @@
   height: 100%;
   left: 0;
   top: 0;
+  z-index: 999;
 
   p {
     background-color: white;
     padding: 20px;
     border-radius: 5px;
+    position: fixed;
   }
 }
 
@@ -28,8 +30,5 @@
 .error {
   border: 3px $error-color solid;
   font-size: initial;
-}
-
-.hidden {
-  display: none;
+  background-color: white;
 }

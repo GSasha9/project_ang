@@ -19,8 +19,7 @@ export const BookResolver: ResolveFn<Book> = (
 
   const bookId = route.paramMap.get('id')!;
   return service.getBookById(bookId).pipe(
-    catchError((error) => {
-      console.error('Failed to load book', error);
+    catchError(() => {
       return of(new RedirectCommand(router.parseUrl('/pricing')));
     }),
   );

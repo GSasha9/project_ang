@@ -4,8 +4,8 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
 import { clickHelper } from '../../../test/click-helper';
-import { Card } from '../../card/card';
 import { Button } from '../../shared/components/button/button';
+import { Card } from '../../shared/components/card/card';
 import { BOOKS_API_BASE_URL } from '../../shared/constants/books-api-base-url';
 import { BooksService } from '../../shared/services/books.service';
 import { Pricing } from './pricing';
@@ -46,17 +46,6 @@ describe('Pricing', () => {
       expect(cards.length).toBe(1);
       expect(cards[0].nativeElement.textContent).toContain('Book 1');
     });
-  });
-
-  it('show an error message if an error occurs', () => {
-    fixture.detectChanges();
-    const req = httpTesting.expectOne(`${BOOKS_API_BASE_URL}?page=1`);
-    req.flush('Failed', { status: 500, statusText: 'Internal Server Error' });
-
-    fixture.detectChanges();
-
-    const paragraph = fixture.nativeElement.querySelector('p');
-    expect(paragraph.textContent).toContain('Error! Try again');
   });
 
   it('should fetch the next page after clicking the next button ', async () => {

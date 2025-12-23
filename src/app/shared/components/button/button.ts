@@ -11,5 +11,6 @@ import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 export class Button {
   readonly hasArrow = input(false);
   readonly handler = input<() => void>();
-  readonly isDisabled = input<boolean | null>(false);
+  // readonly isDisabled = input<boolean | null>(false);
+  readonly isDisabled = input<boolean | undefined>(undefined);
 }

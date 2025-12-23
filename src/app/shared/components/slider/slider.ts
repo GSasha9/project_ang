@@ -19,13 +19,11 @@ import {
   imports: [NgClass],
 })
 export class Slider implements AfterViewInit {
+  private destroyRef = inject(DestroyRef);
   readonly slides = input<any[]>([]);
   readonly currentIndex = signal(0);
-
   readonly container = viewChild('container', { read: ViewContainerRef });
   vc: ViewContainerRef | undefined;
-
-  private destroyRef = inject(DestroyRef);
 
   ngAfterViewInit(): void {
     this.vc = this.container();

@@ -4,13 +4,18 @@ import { provideClientHydration, withEventReplay } from '@angular/platform-brows
 import { provideRouter } from '@angular/router';
 
 import { routes } from './app.routes';
-import { cacheInterceptor } from './shared/interceptors/cache-interceptor';
+import { cacheInterceptor } from './shared/interceptors/cache-interceptor/cache-interceptor';
+import { errorHandlingInterceptor } from './shared/interceptors/error-handling-interceptor/error-handling-interceptor';
+import { loadingInterceptor } from './shared/interceptors/loading-interceptor/loading-interceptor';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideBrowserGlobalErrorListeners(),
     provideRouter(routes),
     provideClientHydration(withEventReplay()),
-    provideHttpClient(withFetch(), withInterceptors([cacheInterceptor])),
+    provideHttpClient(
+      withFetch(),
+      withInterceptors([cacheInterceptor, errorHandlingInterceptor, loadingInterceptor]),
+    ),
   ],
 };
