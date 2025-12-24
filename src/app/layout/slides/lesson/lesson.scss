@@ -1,4 +1,4 @@
-@use '../../../../styles/variables' as *;
+@use 'variables' as *;
 
 .slide_lesson {
   width: 100%;
@@ -29,7 +29,7 @@
 
   .slide_lesson-img {
     width: 30%;
-    background-image: url('../../../../../public/illustration.png');
+    background-image: url('/project_ang/illustration.png');
     background-repeat: no-repeat;
     background-size: contain;
     max-width: 270px;

@@ -1,4 +1,4 @@
-@use '../../../../styles/variables' as *;
+@use 'variables' as *;
 
 .slider {
   width: 100%;
@@ -17,7 +17,7 @@
     gap: 10px;
     justify-content: center;
     .dot {
-      background-image: url('../../../../../public/dot.svg');
+      background-image: url('/project_ang/dot.svg');
       width: 7px;
       height: 7px;
       background-size: contain;
@@ -27,7 +27,7 @@
     }
 
     .dot_active {
-      background-image: url('../../../../../public/dot_active.svg');
+      background-image: url('/project_ang/dot_active.svg');
     }
   }
 }

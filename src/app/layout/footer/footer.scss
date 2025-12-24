@@ -1,4 +1,4 @@
-@use '../../../styles/variables' as *;
+@use 'variables' as *;
 
 :host {
   color: white;
@@ -73,7 +73,7 @@
     .subscribe-button {
       width: 20px;
       height: 20px;
-      background: url('../../../../../project_ang/public/send.svg') no-repeat center/cover;
+      background: url('/project_ang/send.svg') no-repeat center/cover;
       position: absolute;
       cursor: pointer;
       margin-right: 10px;

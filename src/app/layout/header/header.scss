@@ -1,4 +1,4 @@
-@use '../../../styles/variables' as *;
+@use 'variables' as *;
 
 :host {
   width: 100%;
@@ -14,7 +14,7 @@
   }
 
   .burger {
-    background-image: url('../../../../public/burger.svg');
+    background-image: url('/project_ang/burger.svg');
     width: 24px;
     height: 24px;
 
@@ -46,7 +46,7 @@
     }
 
     .close {
-      background-image: url('../../../../public/close.svg');
+      background-image: url('/project_ang/close.svg');
       width: 24px;
       height: 24px;
       position: fixed;

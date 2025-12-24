@@ -4,7 +4,13 @@
       <label [for]="item.title" [ngClass]="item.isRequired ? 'required' : ''">{{
         item.title | titlecase
       }}</label>
-      <input [id]="item.title" type="text" [formControlName]="item.title" autocomplete="email" />
+      <input
+        [id]="item.title"
+        type="text"
+        [formControlName]="item.title"
+        autocomplete="email"
+        data-testId="item.title"
+      />
 
       @for (error of form()?.get(item.title)?.errors | keyvalue; track $index) {
         @if (form()?.get(item.title)?.touched) {
