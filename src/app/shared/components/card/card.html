@@ -1,0 +1,19 @@
+<div class="card" (click)="cardHandler()" (keyup)="cardHandler()" tabindex="0">
+  <div class="card-header">
+    <h4>{{ bookData()?.title }}</h4>
+    @for (author of bookData()?.authors; track $index) {
+      <p>{{ author.name }}</p>
+    }
+  </div>
+
+  <div class="card-body">
+    @for (shelf of bookData()?.bookshelves; track $index) {
+      <p>{{ shelf }}</p>
+    }
+  </div>
+
+  <div class="card-footer">
+    <p>{{ bookData()?.download_count }}</p>
+    <app-button>Download</app-button>
+  </div>
+</div>

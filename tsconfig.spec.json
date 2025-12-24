@@ -1,0 +1,9 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "outDir": "./out-tsc/spec",
+    "types": ["vitest/globals"],
+    "lib": ["ES2017", "DOM"]
+  },
+  "include": ["src/**/*.d.ts", "src/**/*.spec.ts"]
+}

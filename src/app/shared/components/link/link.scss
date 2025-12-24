@@ -1,0 +1,20 @@
+@use '../../../../styles/variables' as *;
+
+.app-link {
+  text-decoration: none;
+  color: inherit;
+  border-bottom: 1px solid transparent;
+
+  &:visited {
+    color: inherit;
+  }
+
+  &:hover {
+    color: green;
+  }
+}
+
+.active {
+  color: $main-button-color !important;
+  border-bottom: 1px solid $main-button-color;
+}

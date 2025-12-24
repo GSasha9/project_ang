@@ -1,0 +1,25 @@
+<div class="about">
+  <app-logo logo="logo_footer.png"></app-logo>
+  <div class="about_description">
+    <p>Copyright © 2020 Landify UI Kit.</p>
+    <p>All rights reserved</p>
+  </div>
+  <app-menu [customClass]="menuSocialsClass" [items]="menuSocials"></app-menu>
+</div>
+<nav class="footer_menu">
+  <div class="footer_menu-company">
+    <h3>Company</h3>
+    <app-menu [items]="menuCompany" [isRow]="false" gap="8"></app-menu>
+  </div>
+  <div class="footer_menu-support">
+    <h3>Support</h3>
+    <app-menu [items]="menuSupport" [isRow]="false" gap="8"></app-menu>
+  </div>
+  <div class="subscribe">
+    <h3>Stay up to date</h3>
+    <form class="subscribe-form">
+      <app-input placeholder="Your email address" type="email"></app-input>
+      <button aria-label="subscribe button" class="subscribe-button"></button>
+    </form>
+  </div>
+</nav>

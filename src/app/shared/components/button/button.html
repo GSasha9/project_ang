@@ -1,0 +1,9 @@
+<button
+  class="app-button"
+  [ngClass]="hasArrow() ? 'with-arrow' : null"
+  (click)="handler()?.()"
+  [disabled]="isDisabled() ? true : false"
+  type="submit"
+>
+  <ng-content></ng-content>
+</button>

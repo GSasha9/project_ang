@@ -1,0 +1,8 @@
+<a
+  class="app-link"
+  [routerLink]="[linkRoute()]"
+  [routerLinkActive]="isRouteActive() ? 'active' : ''"
+  ariaCurrentWhenActive="page"
+>
+  <ng-content></ng-content>
+</a>

@@ -1,0 +1,34 @@
+@use '../../../../styles/variables' as *;
+
+.notification {
+  position: fixed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  z-index: 999;
+
+  p {
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+    position: fixed;
+  }
+}
+
+.warning {
+  border: 3px rgba(255, 255, 0, 0.804) solid;
+}
+
+.success {
+  border: 3px $main-button-color solid;
+}
+
+.error {
+  border: 3px $error-color solid;
+  font-size: initial;
+  background-color: white;
+}
