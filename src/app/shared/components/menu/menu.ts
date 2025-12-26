@@ -19,13 +19,6 @@ export class Menu {
   readonly routeActive = input(false);
   readonly clicked = output<MenuItems>();
 
-  classes = (): Record<string, boolean> => {
-    return {
-      column: !this.isRow(),
-      menuList: true,
-    };
-  };
-
   handleClick = (item: MenuItems): void => {
     this.clicked.emit(item);
   };

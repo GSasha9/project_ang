@@ -1,5 +1,9 @@
-<nav class="nav">
-  <ul [class]="customClass()" [ngClass]="classes()" [style.gap.px]="gap()">
+<nav>
+  <ul
+    [class]="customClass()"
+    [ngClass]="isRow() ? 'd-flex flex-column flex-sm-row' : 'd-flex flex-column'"
+    [style.gap.px]="gap()"
+  >
     @for (item of items(); track item.id) {
       @if (item.title) {
         <app-link

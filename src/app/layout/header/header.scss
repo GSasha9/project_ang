@@ -21,9 +21,6 @@
     @include respond-m {
       display: none;
     }
-
-    @include respond-l {
-    }
   }
 
   .header-menu {
@@ -32,40 +29,26 @@
     flex-direction: column;
     gap: 10px;
     position: absolute;
-    right: -200%;
     padding: 16px 0px;
+    transform: translateX(600px);
 
     @include respond-m {
       position: static;
-      right: 0%;
+      transform: translateX(0px);
       flex-direction: row;
       gap: 23px;
     }
 
-    @include respond-l {
-    }
-
-    .close {
-      background-image: url('/project_ang/close.svg');
-      width: 24px;
-      height: 24px;
+    .btn-close {
       position: fixed;
       right: 17px;
-      margin-bottom: 5px;
-
-      @include respond-m {
-        display: none;
-      }
-
-      @include respond-l {
-      }
     }
   }
 
   .open {
     right: 0px;
     top: 0px;
-    left: 0px;
+    transform: translateX(0px);
     background-color: white;
     align-items: start;
     position: fixed;

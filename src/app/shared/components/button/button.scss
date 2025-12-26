@@ -12,26 +12,11 @@
   }
 }
 
-.app-button {
-  padding: 10px 20px;
-  border-radius: 3px;
+.my-btn {
   background-color: $main-button-color;
   border: none;
-  color: white;
-  display: flex;
-  align-items: center;
-  cursor: pointer;
-
-  &:hover {
-    background-color: $main-button-color_hover;
-  }
 
   &:active {
     background-color: $main-button-color_active;
-  }
-
-  &:disabled {
-    background-color: grey;
-    pointer-events: none;
   }
 }

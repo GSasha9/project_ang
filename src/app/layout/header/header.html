@@ -4,7 +4,12 @@
 }
 <button class="burger" (click)="handleMenu()" aria-label="open menu"></button>
 <div class="header-menu" [ngClass]="isMenuOpen() ? 'open' : null" (resize)="handleResize()">
-  <button class="close" (click)="handleMenu()" aria-label="close menu"></button>
+  <button
+    type="button"
+    class="btn-close d-sm-none"
+    aria-label="Close"
+    (click)="handleMenu()"
+  ></button>
   <app-menu
     [items]="menuItems"
     [isRow]="true"
