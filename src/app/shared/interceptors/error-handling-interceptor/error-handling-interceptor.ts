@@ -10,7 +10,7 @@ export const errorHandlingInterceptor: HttpInterceptorFn = (req, next) => {
     catchError((error: HttpErrorResponse) => {
       console.error(error.status, error.message);
 
-      notificationService.show(error.message, 'error');
+      notificationService.show(error.message, 'alert-danger');
 
       return throwError(() => error);
     }),

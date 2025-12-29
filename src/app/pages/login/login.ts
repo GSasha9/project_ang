@@ -32,7 +32,7 @@ export class Login {
   handleSubmit = (): void => {
     const user = localStorage.getItem(this.form()?.value.email);
     if (!user) {
-      this.notification.show(ERROR_MESSAGES['userNotFound'] as string, 'error');
+      this.notification.show(ERROR_MESSAGES['userNotFound'] as string, 'alert-danger');
       return;
     }
 
@@ -41,11 +41,11 @@ export class Login {
     if (this.form()?.value.password === userData.password) {
       this.auth.userName.set(userData.name);
 
-      this.notification.show(ERROR_MESSAGES['loginSuccess'] as string, 'success');
+      this.notification.show(ERROR_MESSAGES['loginSuccess'] as string, 'alert-success');
 
       setTimeout(() => this.router.navigate(['/home']), 2000);
     } else {
-      this.notification.show(ERROR_MESSAGES['incorrectPassword'] as string, 'error');
+      this.notification.show(ERROR_MESSAGES['incorrectPassword'] as string, 'alert-danger');
     }
   };
 }

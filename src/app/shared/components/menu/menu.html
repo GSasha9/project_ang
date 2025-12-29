@@ -16,7 +16,7 @@
           >
         } @else {
           <app-link [linkRoute]="item.route" [isRouteActive]="routeActive()" class="nav-link">
-            <div class="menu-item-img" [ngStyle]="{ 'background-image': `url(${item.img})` }"></div>
+            <img [src]="item.img" [alt]="item.title" />
           </app-link>
         }
       </li>

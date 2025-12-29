@@ -1,17 +1,15 @@
 @use 'variables' as *;
 
-.pricing {
-  .pricing_pagination {
-    gap: 20px;
-    margin-top: 20px;
+.pricing_pagination {
+  gap: 20px;
+  margin-top: 20px;
 
-    .pricing_pagination-button {
-      cursor: pointer;
-      border: 1px solid grey;
-    }
+  .pricing_pagination-button {
+    cursor: pointer;
+    border: 1px solid grey;
+  }
 
-    .active {
-      border: 1px solid red;
-    }
+  .active {
+    border: 1px solid red;
   }
 }
