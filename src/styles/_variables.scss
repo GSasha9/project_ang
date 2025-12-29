@@ -8,7 +8,7 @@ $background-color-footer: #263238;
 
 $breakpoint-xs: 375px;
 $breakpoint-m: 720px;
-$breakpoint-l: 1280px;
+$breakpoint-lg: 960px;
 
 @mixin respond-xs {
   @media screen and (min-width: $breakpoint-xs) {
@@ -22,8 +22,8 @@ $breakpoint-l: 1280px;
   }
 }
 
-@mixin respond-l {
-  @media screen and (min-width: $breakpoint-l) {
+@mixin respond-lg {
+  @media screen and (min-width: $breakpoint-lg) {
     @content;
   }
 }

@@ -13,7 +13,6 @@ import { NotificationService } from '../../shared/services/notification.service'
   selector: 'app-register',
   imports: [ReactiveFormsModule, Form, Notification],
   templateUrl: './register.html',
-  styleUrl: './register.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Register {

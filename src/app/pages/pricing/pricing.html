@@ -1,19 +1,19 @@
 @if (currentPageData$ | async; as response) {
-  <section class="pricing">
-    <h2>Books for download</h2>
+  <section class="pricing d-flex flex-column align-items-center justify-content-center gap-5">
+    <h2 class="text-center">Books for download</h2>
     @if (!isLoading()) {
-      <ul class="pricing_list">
+      <ul class="d-flex flex-wrap justify-content-center gap-5 position-relative">
         @for (book of response.results; track book.id) {
           <li><app-card [bookData]="book" [handler]="handleCardClick"></app-card></li>
         }
       </ul>
     }
 
-    <div class="pricing_pagination">
+    <div class="pricing_pagination d-flex align-items-center flex-column flex-md-row">
       <app-button [handler]="prevPage" [isDisabled]="isLoading() || getCurrentPage() === 1"
         >Prev</app-button
       >
-      <div class="pagination-button-container">
+      <div class="pagination-button-container d-flex gap-1 gap-md-3">
         @for (page of visiblePages$ | async; track $index) {
           @if (page !== '...') {
             <button

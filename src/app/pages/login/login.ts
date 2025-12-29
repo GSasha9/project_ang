@@ -15,7 +15,6 @@ import { NotificationService } from '../../shared/services/notification.service'
   selector: 'app-login',
   imports: [Form, Notification],
   templateUrl: './login.html',
-  styleUrl: './login.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Login {
