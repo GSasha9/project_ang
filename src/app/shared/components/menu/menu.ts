@@ -14,7 +14,6 @@ import { Link } from '../link/link';
 export class Menu {
   readonly items = input<MenuItems[]>([]);
   readonly isRow = input<boolean>(true);
-  readonly gap = input<string>('16');
   readonly customClass = input('');
   readonly routeActive = input(false);
   readonly clicked = output<MenuItems>();
