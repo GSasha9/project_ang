@@ -1,5 +1,4 @@
-import { NgClass } from '@angular/common';
-import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { NavigationEnd, Router } from '@angular/router';
 import { filter, map, startWith } from 'rxjs';
@@ -14,18 +13,13 @@ import { AuthService } from '../../shared/services/auth.service';
 
 @Component({
   selector: 'app-header',
-  imports: [Logo, Menu, Button, NgClass],
+  imports: [Logo, Menu, Button],
   templateUrl: './header.html',
-  styleUrl: './header.scss',
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  host: {
-    '(window:resize)': 'handleResize()',
-  },
 })
 export class Header {
   private router = inject(Router);
-  readonly isMenuOpen = signal(false);
   logoImage: string;
   menuItems: MenuItems[];
 
@@ -45,22 +39,12 @@ export class Header {
     this.menuItems = MENU_HEADER;
   }
 
-  handleMenu = (): void => {
-    this.isMenuOpen.set(!this.isMenuOpen());
-  };
-
-  handleResize = (): void => {
-    this.isMenuOpen.set(false);
-  };
-
   buttonHandler = (): void => {
     if (this.currentUrl() === `/${APP_ROUTES.login}`) {
       this.router.navigate([APP_ROUTES.registration]);
     } else {
       this.router.navigate([APP_ROUTES.login]);
     }
-
-    this.isMenuOpen.set(false);
   };
 
   logOutHandler = (): void => {

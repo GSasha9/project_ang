@@ -11,7 +11,7 @@ export type NotificationData = {
 export class NotificationService {
   readonly notifications = signal<NotificationData[]>([]);
 
-  show = (text: string, type: NotificationType = 'success', duration = 3000): void => {
+  show = (text: string, type: NotificationType = 'alert-primary', duration = 3000): void => {
     const newNotification: NotificationData = { text, type };
     this.notifications.set([...this.notifications(), newNotification]);
 

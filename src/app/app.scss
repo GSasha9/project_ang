@@ -1,20 +1,6 @@
-@use '../styles/variables' as *;
+@use 'variables' as *;
 
-:host {
-  display: flex;
-  flex-direction: column;
-  gap: 30px;
-  justify-content: space-between;
-  min-height: 100%;
-  overflow: hidden;
-  box-sizing: border-box;
-
-  main {
-    padding: 0px 0px;
-    flex-grow: 1;
-
-    @include respond-m {
-      padding: 40px 0px;
-    }
-  }
+main {
+  padding: 0px 0px;
+  flex-grow: 1;
 }

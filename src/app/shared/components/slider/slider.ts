@@ -42,6 +42,7 @@ export class Slider implements AfterViewInit {
     this.vc.clear();
 
     this.vc.createComponent(this.slides()[index]);
+    this.currentIndex.set(index);
   };
 
   autoRenderSlide = (): void => {

@@ -1,18 +1,20 @@
 <div class="card" (click)="cardHandler()" (keyup)="cardHandler()" tabindex="0">
   <div class="card-header">
-    <h4>{{ bookData()?.title }}</h4>
+    <h4 class="card-title">{{ bookData()?.title }}</h4>
     @for (author of bookData()?.authors; track $index) {
-      <p>{{ author.name }}</p>
+      <p class="card-subtitle">{{ author.name }}</p>
     }
   </div>
 
   <div class="card-body">
-    @for (shelf of bookData()?.bookshelves; track $index) {
-      <p>{{ shelf }}</p>
-    }
+    <ul class="list-group list-group-flush">
+      @for (shelf of bookData()?.bookshelves; track $index) {
+        <li class="list-group-item">{{ shelf }}</li>
+      }
+    </ul>
   </div>
 
-  <div class="card-footer">
+  <div class="card-footer d-flex justify-content-between align-items-center">
     <p>{{ bookData()?.download_count }}</p>
     <app-button>Download</app-button>
   </div>

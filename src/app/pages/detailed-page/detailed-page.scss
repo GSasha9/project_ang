@@ -1,66 +1,23 @@
-@use '../../../styles/variables' as *;
+@use 'variables' as *;
 
 .detailed-page {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  align-items: center;
   gap: 50px;
 
-  .detailed-page-book {
-    display: flex;
-    width: 100%;
-    flex-direction: column;
-    align-items: center;
+  .book-description {
     gap: 20px;
+    width: 100%;
 
-    @include respond-m {
-      flex-direction: row;
-      justify-content: space-around;
-      align-items: center;
+    @include respond-lg {
+      width: 50%;
     }
+  }
 
-    .book-description {
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
+  .book-img {
+    order: -1;
+    max-width: 50%;
 
-      @include respond-m {
-        width: 50%;
-      }
-      .book-author {
-        display: flex;
-        flex-direction: column;
-
-        div {
-          display: flex;
-          gap: 10px;
-          flex-direction: column;
-
-          @include respond-m {
-            flex-direction: row;
-          }
-        }
-      }
-
-      .book-button {
-        align-self: center;
-      }
-    }
-
-    .book-img {
-      order: -1;
-      height: fit-content;
-      max-width: 50%;
-
-      @include respond-m {
-        width: 30%;
-        order: 1;
-      }
-
-      img {
-        width: 100%;
-      }
+    @include respond-lg {
+      width: 30%;
     }
   }
 }

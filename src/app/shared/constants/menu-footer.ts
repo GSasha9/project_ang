@@ -2,22 +2,22 @@ export const MENU_FOOTER_SOCIALS = [
   {
     id: 1,
     route: '#',
-    img: './socials/inst.svg',
+    img: '/project_ang/socials/inst.svg',
   },
   {
     id: 2,
     route: '#',
-    img: './socials/dribble.svg',
+    img: '/project_ang/socials/dribble.svg',
   },
   {
     id: 3,
     route: '#',
-    img: './socials/twitter.svg',
+    img: '/project_ang/socials/twitter.svg',
   },
   {
     id: 4,
     route: '#',
-    img: './socials/youtube.svg',
+    img: '/project_ang/socials/youtube.svg',
   },
 ];
 

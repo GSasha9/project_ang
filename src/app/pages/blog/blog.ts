@@ -4,7 +4,6 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   selector: 'app-blog',
   imports: [],
   templateUrl: './blog.html',
-  styleUrl: './blog.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Blog {}

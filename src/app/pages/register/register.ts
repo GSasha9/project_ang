@@ -13,7 +13,6 @@ import { NotificationService } from '../../shared/services/notification.service'
   selector: 'app-register',
   imports: [ReactiveFormsModule, Form, Notification],
   templateUrl: './register.html',
-  styleUrl: './register.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Register {
@@ -28,12 +27,12 @@ export class Register {
 
   handleRegister = (): void => {
     if (localStorage.key(this.form()?.value.email)) {
-      this.notification.show(ERROR_MESSAGES['userExists'] as string, 'error');
+      this.notification.show(ERROR_MESSAGES['userExists'] as string, 'alert-danger');
       return;
     }
 
     if (this.form()?.value.password !== this.form()?.value['repeat password']) {
-      this.notification.show(ERROR_MESSAGES['passwordsNotMatch'] as string, 'warning');
+      this.notification.show(ERROR_MESSAGES['passwordsNotMatch'] as string, 'alert-warning');
       return;
     }
 
@@ -42,7 +41,7 @@ export class Register {
 
     this.notification.show(
       `${ERROR_MESSAGES['loginSuccess'] as string} ${ERROR_MESSAGES['pleaseLogin'] as string}`,
-      'success',
+      'alert-success',
     );
 
     setTimeout(() => this.router.navigate(['/login']), 3000);

@@ -1,21 +1,40 @@
-<app-logo [logo]="logoImage"></app-logo>
-@if (userName()) {
-  <p>{{ `Hello ${userName()}` }}</p>
-}
-<button class="burger" (click)="handleMenu()" aria-label="open menu"></button>
-<div class="header-menu" [ngClass]="isMenuOpen() ? 'open' : null" (resize)="handleResize()">
-  <button class="close" (click)="handleMenu()" aria-label="close menu"></button>
-  <app-menu
-    [items]="menuItems"
-    [isRow]="true"
-    [routeActive]="true"
-    (clicked)="handleResize()"
-  ></app-menu>
-  @if (currentUrl() === '/login') {
-    <app-button [hasArrow]="true" [handler]="buttonHandler">Register Now</app-button>
-  } @else if (userName()) {
-    <app-button [hasArrow]="true" [handler]="logOutHandler">LogOut</app-button>
-  } @else {
-    <app-button [hasArrow]="true" [handler]="buttonHandler">Login</app-button>
-  }
-</div>
+<nav class="navbar navbar-expand-md" style="width: 100%">
+  <div class="d-flex align-items-center justify-content-between" style="width: 100%">
+    <app-logo [logo]="logoImage" class="navbar-brand"></app-logo>
+    @if (userName()) {
+      <p>{{ `Hello ${userName()}` }}</p>
+    }
+
+    <div class="offcanvas offcanvas-start" tabindex="-1" id="nav">
+      <div class="offcanvas-header">
+        <h5 class="offcanvas-title">Menu</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="offcanvas"
+          aria-label="close menu"
+        ></button>
+      </div>
+
+      <div class="offcanvas-body justify-content-end gap-3">
+        <app-menu [items]="menuItems" [isRow]="true" [routeActive]="true"></app-menu>
+        @if (currentUrl() === '/login') {
+          <app-button [hasArrow]="true" [handler]="buttonHandler">Register Now</app-button>
+        } @else if (userName()) {
+          <app-button [hasArrow]="true" [handler]="logOutHandler">LogOut</app-button>
+        } @else {
+          <app-button [hasArrow]="true" [handler]="buttonHandler">Login</app-button>
+        }
+      </div>
+    </div>
+    <button
+      class="navbar-toggler"
+      data-bs-toggle="offcanvas"
+      aria-controls="nav"
+      aria-label="expand navigation"
+      data-bs-target="#nav"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  </div>
+</nav>

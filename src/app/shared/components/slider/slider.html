@@ -1,13 +1,11 @@
-<div class="slider">
-  <div class="slider_items"><ng-template #container></ng-template></div>
+<div class="slider_items d-block" style="width: auto"><ng-template #container></ng-template></div>
 
-  <div class="pagination">
-    @for (slide of slides(); track $index) {
-      <button
-        (click)="renderSlide($index)"
-        [ngClass]="currentIndex() === $index ? 'dot dot_active' : 'dot'"
-        aria-label="slider pagination"
-      ></button>
-    }
-  </div>
+<div class="d-flex gap-2 justify-content-center clearfix">
+  @for (slide of slides(); track $index) {
+    <button
+      (click)="renderSlide($index)"
+      [ngClass]="currentIndex() === $index ? 'dot dot_active' : 'dot'"
+      aria-label="slider pagination"
+    ></button>
+  }
 </div>

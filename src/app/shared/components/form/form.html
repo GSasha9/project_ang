@@ -1,10 +1,23 @@
-<form [formGroup]="form()!" class="form" (ngSubmit)="onSubmit()">
+<form
+  [formGroup]="form()!"
+  class="form d-flex flex-column align-items-center gap-4"
+  (ngSubmit)="onSubmit()"
+>
   @for (item of formItems(); track $index) {
-    <div class="form-field">
-      <label [for]="item.title" [ngClass]="item.isRequired ? 'required' : ''">{{
-        item.title | titlecase
-      }}</label>
-      <input [id]="item.title" type="text" [formControlName]="item.title" autocomplete="email" />
+    <div class="form-field d-flex flex-column g-1 position-relative">
+      <label
+        [for]="item.title"
+        [ngClass]="item.isRequired ? 'required form-label' : 'form-label'"
+        >{{ item.title | titlecase }}</label
+      >
+      <input
+        [id]="item.title"
+        type="text"
+        [formControlName]="item.title"
+        autocomplete="email"
+        data-testId="item.title"
+        class="form-control"
+      />
 
       @for (error of form()?.get(item.title)?.errors | keyvalue; track $index) {
         @if (form()?.get(item.title)?.touched) {

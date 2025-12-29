@@ -1,4 +1,4 @@
-import { NgClass, NgStyle } from '@angular/common';
+import { NgClass } from '@angular/common';
 import { ChangeDetectionStrategy, Component, input, output } from '@angular/core';
 
 import { MenuItems } from '../../models/menuItems.model';
@@ -6,7 +6,7 @@ import { Link } from '../link/link';
 
 @Component({
   selector: 'app-menu',
-  imports: [NgClass, Link, NgStyle],
+  imports: [NgClass, Link],
   templateUrl: './menu.html',
   styleUrl: './menu.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -14,17 +14,9 @@ import { Link } from '../link/link';
 export class Menu {
   readonly items = input<MenuItems[]>([]);
   readonly isRow = input<boolean>(true);
-  readonly gap = input<string>('16');
   readonly customClass = input('');
   readonly routeActive = input(false);
   readonly clicked = output<MenuItems>();
-
-  classes = (): Record<string, boolean> => {
-    return {
-      column: !this.isRow(),
-      menuList: true,
-    };
-  };
 
   handleClick = (item: MenuItems): void => {
     this.clicked.emit(item);

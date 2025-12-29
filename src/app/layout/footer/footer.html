@@ -1,4 +1,4 @@
-<div class="about">
+<div class="d-flex flex-column justify-content-md-between gap-3">
   <app-logo logo="logo_footer.png"></app-logo>
   <div class="about_description">
     <p>Copyright © 2020 Landify UI Kit.</p>
@@ -6,20 +6,23 @@
   </div>
   <app-menu [customClass]="menuSocialsClass" [items]="menuSocials"></app-menu>
 </div>
-<nav class="footer_menu">
-  <div class="footer_menu-company">
-    <h3>Company</h3>
-    <app-menu [items]="menuCompany" [isRow]="false" gap="8"></app-menu>
+<nav class="footer_menu d-flex flex-column gap-2 flex-sm-row flex-sm-wrap gap-sm-5 flex-lg-nowrap">
+  <div class="d-flex justify-content-between gap-4" style="width: 100%">
+    <div class="footer_menu-company d-flex flex-column gap-2">
+      <h3>Company</h3>
+      <app-menu [items]="menuCompany" [isRow]="false" gap="8"></app-menu>
+    </div>
+    <div class="footer_menu-support d-flex flex-column gap-2">
+      <h3>Support</h3>
+      <app-menu [items]="menuSupport" [isRow]="false" gap="8"></app-menu>
+    </div>
   </div>
-  <div class="footer_menu-support">
-    <h3>Support</h3>
-    <app-menu [items]="menuSupport" [isRow]="false" gap="8"></app-menu>
-  </div>
-  <div class="subscribe">
+
+  <div class="subscribe d-flex flex-column gap-3">
     <h3>Stay up to date</h3>
-    <form class="subscribe-form">
+    <form class="subscribe-form d-flex position-relative align-items-center justify-content-end">
       <app-input placeholder="Your email address" type="email"></app-input>
-      <button aria-label="subscribe button" class="subscribe-button"></button>
+      <button aria-label="subscribe button" class="subscribe-button position-absolute"></button>
     </form>
   </div>
 </nav>
