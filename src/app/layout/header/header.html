@@ -19,11 +19,11 @@
       <div class="offcanvas-body justify-content-end gap-3">
         <app-menu [items]="menuItems" [isRow]="true" [routeActive]="true"></app-menu>
         @if (currentUrl() === '/login') {
-          <app-button [hasArrow]="true" [handler]="buttonHandler">Register Now</app-button>
+          <app-button [hasArrow]="'right'" [handler]="buttonHandler">Register Now</app-button>
         } @else if (userName()) {
-          <app-button [hasArrow]="true" [handler]="logOutHandler">LogOut</app-button>
+          <app-button [hasArrow]="'right'" [handler]="logOutHandler">LogOut</app-button>
         } @else {
-          <app-button [hasArrow]="true" [handler]="buttonHandler">Login</app-button>
+          <app-button [hasArrow]="'right'" [handler]="buttonHandler">Login</app-button>
         }
       </div>
     </div>

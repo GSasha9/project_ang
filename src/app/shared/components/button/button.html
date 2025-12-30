@@ -1,6 +1,12 @@
 <button
-  class="btn btn-primary my-btn"
-  [ngClass]="hasArrow() ? 'with-arrow' : null"
+  class="btn btn-success my-btn"
+  [ngClass]="
+    hasArrow() === 'right'
+      ? 'with-arrow with-arrow-right'
+      : hasArrow() === 'down'
+        ? 'with-arrow with-arrow-down'
+        : null
+  "
   (click)="handler()?.()"
   [disabled]="isDisabled() ? true : false"
   type="submit"
