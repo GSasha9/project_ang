@@ -2,16 +2,15 @@ import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/cor
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
+import { Form } from '@shared/components/form/form';
+import { Notification } from '@shared/components/notification/notification';
+import { ERROR_MESSAGES } from '@shared/constants/error-messages';
+import { REGISTER_FORM_DATA } from '@shared/constants/register-form-data';
+import { FormData } from '@shared/models/form-data.model';
+import { NotificationService } from '@shared/services/notification.service';
+import { UsersActions } from '@state/users.actions';
+import { selectUsersByEmail } from '@state/users.selectors';
 import { take } from 'rxjs';
-
-import { Form } from '../../shared/components/form/form';
-import { Notification } from '../../shared/components/notification/notification';
-import { ERROR_MESSAGES } from '../../shared/constants/error-messages';
-import { REGISTER_FORM_DATA } from '../../shared/constants/register-form-data';
-import { FormData } from '../../shared/models/form-data.model';
-import { NotificationService } from '../../shared/services/notification.service';
-import { UsersActions } from '../../state/users.actions';
-import { selectUsersByEmail } from '../../state/users.selectors';
 
 @Component({
   selector: 'app-register',

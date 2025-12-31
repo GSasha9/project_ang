@@ -1,14 +1,13 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-
-import { Input } from '../../shared/components/input/input';
-import { Logo } from '../../shared/components/logo/logo';
-import { Menu } from '../../shared/components/menu/menu';
+import { Input } from '@shared/components/input/input';
+import { Logo } from '@shared/components/logo/logo';
+import { Menu } from '@shared/components/menu/menu';
 import {
   MENU_FOOTER_COMPANY,
   MENU_FOOTER_SOCIALS,
   MENU_FOOTER_SUPPORT,
-} from '../../shared/constants/menu-footer';
-import { MenuItems } from '../../shared/models/menuItems.model';
+} from '@shared/constants/menu-footer';
+import { MenuItems } from '@shared/models/menuItems.model';
 
 @Component({
   selector: 'app-footer',

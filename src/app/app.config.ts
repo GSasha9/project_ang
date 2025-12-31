@@ -9,7 +9,7 @@ import { routes } from './app.routes';
 import { cacheInterceptor } from './shared/interceptors/cache-interceptor/cache-interceptor';
 import { errorHandlingInterceptor } from './shared/interceptors/error-handling-interceptor/error-handling-interceptor';
 import { loadingInterceptor } from './shared/interceptors/loading-interceptor/loading-interceptor';
-import { usersLoginReducer } from './state/users-login.reducer';
+import { userLoginReducer } from './state/users-login.reducer';
 import { usersRegisterReducer } from './state/users-register.reducer';
 
 export const appConfig: ApplicationConfig = {
@@ -23,7 +23,7 @@ export const appConfig: ApplicationConfig = {
     ),
     provideStore({
       usersRegister: usersRegisterReducer,
-      usersLogIn: usersLoginReducer,
+      usersLogIn: userLoginReducer,
     }),
     provideStoreDevtools({
       maxAge: 25,

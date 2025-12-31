@@ -8,15 +8,14 @@ import {
   viewChild,
 } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Button } from '@shared/components/button/button';
+import { Card } from '@shared/components/card/card';
+import { APP_ROUTES } from '@shared/constants/app-routs';
+import { BooksResponse } from '@shared/models/books-response';
+import { BooksService } from '@shared/services/books.service';
+import { LoaderService } from '@shared/services/loader.service';
+import { getVisiblePages } from '@shared/utils/get-visible-pages';
 import { map, Observable, shareReplay, switchMap } from 'rxjs';
-
-import { Button } from '../../shared/components/button/button';
-import { Card } from '../../shared/components/card/card';
-import { APP_ROUTES } from '../../shared/constants/app-routs';
-import { BooksResponse } from '../../shared/models/books-response';
-import { BooksService } from '../../shared/services/books.service';
-import { LoaderService } from '../../shared/services/loader.service';
-import { getVisiblePages } from '../../shared/utils/get-visible-pages';
 
 @Component({
   selector: 'app-pricing',

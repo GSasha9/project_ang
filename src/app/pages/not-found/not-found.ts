@@ -1,6 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-
-import { Link } from '../../shared/components/link/link';
+import { Link } from '@shared/components/link/link';
 
 @Component({
   selector: 'app-not-found',

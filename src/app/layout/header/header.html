@@ -1,9 +1,6 @@
 <nav class="navbar navbar-expand-md" style="width: 100%">
   <div class="d-flex align-items-center justify-content-between" style="width: 100%">
     <app-logo [logo]="logoImage" class="navbar-brand"></app-logo>
-    @if (userName()) {
-      <p>{{ `Hello ${userName()}` }}</p>
-    }
 
     <div class="offcanvas offcanvas-start" tabindex="-1" id="nav">
       <div class="offcanvas-header">
@@ -17,10 +14,13 @@
       </div>
 
       <div class="offcanvas-body justify-content-end gap-3">
-        <app-menu [items]="menuItems" [isRow]="true" [routeActive]="true"></app-menu>
+        @if (user()?.name) {
+          <p class="align-self-center">{{ `Hello, ${user()?.name}  |` }}</p>
+        }
+        <app-menu [items]="menuItems" [isRow]="true" [routeActive]="true"> </app-menu>
         @if (currentUrl() === '/login') {
           <app-button [hasArrow]="'right'" [handler]="buttonHandler">Register Now</app-button>
-        } @else if (userName()) {
+        } @else if (user()?.name) {
           <app-button [hasArrow]="'right'" [handler]="logOutHandler">LogOut</app-button>
         } @else {
           <app-button [hasArrow]="'right'" [handler]="buttonHandler">Login</app-button>

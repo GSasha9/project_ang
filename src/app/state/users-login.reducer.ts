@@ -1,21 +1,22 @@
 import { createReducer, on } from '@ngrx/store';
+import { LoginData } from '@shared/models/login-data.model';
 
 import { UsersActions } from './users.actions';
 
-export const initialState: string[] = [];
+export const initialState: LoginData[] = [];
 
-export const usersLoginReducer = createReducer(
+export const userLoginReducer = createReducer(
   initialState,
-  on(UsersActions.logIn, (state, { email }) => {
-    const exist = state.some((el) => el === email);
+  on(UsersActions.logIn, (state, { data }) => {
+    const exist = state.some((el) => el.email === data.email);
 
     if (exist) {
       return state;
     }
 
-    return [...state, email];
+    return [...state, data];
   }),
-  on(UsersActions.logOut, (state, { email }) => {
-    return state.filter((el) => el !== email);
+  on(UsersActions.logOut, (state, { data }) => {
+    return state.filter((el) => el.email !== data.email);
   }),
 );

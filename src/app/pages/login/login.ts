@@ -1,15 +1,18 @@
 import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
-
-import { Form } from '../../shared/components/form/form';
-import { Notification } from '../../shared/components/notification/notification';
-import { ERROR_MESSAGES } from '../../shared/constants/error-messages';
-import { LOGIN_FORM_DATA } from '../../shared/constants/login-form-data';
-import { FormData } from '../../shared/models/form-data.model';
-import { UserData } from '../../shared/models/user-data.model';
-import { AuthService } from '../../shared/services/auth.service';
-import { NotificationService } from '../../shared/services/notification.service';
+import { Store } from '@ngrx/store';
+import { Form } from '@shared/components/form/form';
+import { Notification } from '@shared/components/notification/notification';
+import { ERROR_MESSAGES } from '@shared/constants/error-messages';
+import { LOGIN_FORM_DATA } from '@shared/constants/login-form-data';
+import { FormData } from '@shared/models/form-data.model';
+import { LoginData } from '@shared/models/login-data.model';
+import { UserData } from '@shared/models/user-data.model';
+import { NotificationService } from '@shared/services/notification.service';
+import { UsersActions } from '@state/users.actions';
+import { selectUsersByEmail } from '@state/users.selectors';
+import { take } from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -20,7 +23,7 @@ import { NotificationService } from '../../shared/services/notification.service'
 export class Login {
   private notification = inject(NotificationService);
   private router = inject(Router);
-  private auth = inject(AuthService);
+  private store = inject(Store);
   readonly form = signal<FormGroup<any> | undefined>(undefined);
   formFields: FormData[] = [];
   user: UserData | null = null;
@@ -30,22 +33,37 @@ export class Login {
   }
 
   handleSubmit = (): void => {
-    const user = localStorage.getItem(this.form()?.value.email);
-    if (!user) {
-      this.notification.show(ERROR_MESSAGES['userNotFound'] as string, 'alert-danger');
-      return;
+    const userData = this.form()?.value;
+    let name = '';
+
+    if (!userData) {
+      throw new Error('No form data');
     }
 
-    const userData: UserData = JSON.parse(user);
+    this.store
+      .select(selectUsersByEmail(userData.email))
+      .pipe(take(1))
+      .subscribe((data) => {
+        if (!data) {
+          this.notification.show(ERROR_MESSAGES['userNotFound'] as string, 'alert-danger');
+          return;
+        } else if (data && data.password !== userData.password) {
+          this.notification.show(ERROR_MESSAGES['incorrectPassword'] as string, 'alert-danger');
+          return;
+        } else {
+          name = data.name;
+        }
 
-    if (this.form()?.value.password === userData.password) {
-      this.auth.userName.set(userData.name);
+        const loginData: LoginData = {
+          email: userData.email,
+          name: name,
+        };
 
-      this.notification.show(ERROR_MESSAGES['loginSuccess'] as string, 'alert-success');
+        this.store.dispatch(UsersActions.logIn({ data: loginData }));
 
-      setTimeout(() => this.router.navigate(['/home']), 2000);
-    } else {
-      this.notification.show(ERROR_MESSAGES['incorrectPassword'] as string, 'alert-danger');
-    }
+        this.notification.show(ERROR_MESSAGES['loginSuccess'] as string, 'alert-success');
+
+        setTimeout(() => this.router.navigate(['/home']), 2000);
+      });
   };
 }

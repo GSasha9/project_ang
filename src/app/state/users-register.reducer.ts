@@ -1,6 +1,6 @@
 import { createReducer, on } from '@ngrx/store';
+import { UserData } from '@shared/models/user-data.model';
 
-import { UserData } from '../shared/models/user-data.model';
 import { UsersActions } from './users.actions';
 
 export const initialState: UserData[] = [];
