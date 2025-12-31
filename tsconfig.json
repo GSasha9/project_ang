@@ -10,7 +10,12 @@
     "isolatedModules": true,
     "experimentalDecorators": true,
     "importHelpers": true,
-    "module": "preserve"
+    "module": "preserve",
+    "baseUrl": "src",
+    "paths": {
+      "@shared/*": ["app/shared/*"],
+      "@state/*": ["app/state/*"]
+    }
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
