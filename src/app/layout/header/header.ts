@@ -1,15 +1,16 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { NavigationEnd, Router } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { Button } from '@shared/components/button/button';
+import { Logo } from '@shared/components/logo/logo';
+import { Menu } from '@shared/components/menu/menu';
+import { APP_ROUTES } from '@shared/constants/app-routs';
+import { MENU_HEADER } from '@shared/constants/menu-header';
+import { MenuItems } from '@shared/models/menuItems.model';
+import { UsersActions } from '@state/users.actions';
+import { selectLoggedUser } from '@state/users.selectors';
 import { filter, map, startWith } from 'rxjs';
-
-import { Button } from '../../shared/components/button/button';
-import { Logo } from '../../shared/components/logo/logo';
-import { Menu } from '../../shared/components/menu/menu';
-import { APP_ROUTES } from '../../shared/constants/app-routs';
-import { MENU_HEADER } from '../../shared/constants/menu-header';
-import { MenuItems } from '../../shared/models/menuItems.model';
-import { AuthService } from '../../shared/services/auth.service';
 
 @Component({
   selector: 'app-header',
@@ -20,11 +21,11 @@ import { AuthService } from '../../shared/services/auth.service';
 })
 export class Header {
   private router = inject(Router);
+  private readonly store = inject(Store);
   logoImage: string;
   menuItems: MenuItems[];
 
-  auth = inject(AuthService);
-  userName = this.auth.userName;
+  readonly user = toSignal(this.store.select(selectLoggedUser).pipe(map((user) => user)));
 
   readonly currentUrl = toSignal(
     this.router.events.pipe(
@@ -48,6 +49,11 @@ export class Header {
   };
 
   logOutHandler = (): void => {
-    this.auth.userName.set(null);
+    const user = this.user();
+    if (!user) {
+      return;
+    }
+
+    this.store.dispatch(UsersActions.logOut({ data: user }));
   };
 }

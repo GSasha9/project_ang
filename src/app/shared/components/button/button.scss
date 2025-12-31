@@ -6,17 +6,21 @@
     display: inline-block;
     width: 15px;
     height: 15px;
-    background-image: url('/project_ang/right.svg');
-    background-size: cover;
-    margin-left: 10px;
+
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
   }
 }
 
-.my-btn {
-  background-color: $main-button-color;
-  border: none;
+.with-arrow-right {
+  &::after {
+    background-image: url('/project_ang/right.svg');
+  }
+}
 
-  &:active {
-    background-color: $main-button-color_active;
+.with-arrow-down {
+  &::after {
+    background-image: url('/project_ang/down.svg');
   }
 }

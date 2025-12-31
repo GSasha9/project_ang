@@ -16,7 +16,7 @@
           >
         } @else {
           <app-link [linkRoute]="item.route" [isRouteActive]="routeActive()" class="nav-link">
-            <img [src]="item.img" [alt]="item.title" />
+            <img [src]="item.img" [alt]="item.title" style="min-width: 30px" />
           </app-link>
         }
       </li>

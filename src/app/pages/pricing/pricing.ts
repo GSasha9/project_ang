@@ -1,15 +1,21 @@
 import { AsyncPipe, CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, inject, OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  ElementRef,
+  inject,
+  OnInit,
+  viewChild,
+} from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Button } from '@shared/components/button/button';
+import { Card } from '@shared/components/card/card';
+import { APP_ROUTES } from '@shared/constants/app-routs';
+import { BooksResponse } from '@shared/models/books-response';
+import { BooksService } from '@shared/services/books.service';
+import { LoaderService } from '@shared/services/loader.service';
+import { getVisiblePages } from '@shared/utils/get-visible-pages';
 import { map, Observable, shareReplay, switchMap } from 'rxjs';
-
-import { Button } from '../../shared/components/button/button';
-import { Card } from '../../shared/components/card/card';
-import { APP_ROUTES } from '../../shared/constants/app-routs';
-import { BooksResponse } from '../../shared/models/books-response';
-import { BooksService } from '../../shared/services/books.service';
-import { LoaderService } from '../../shared/services/loader.service';
-import { getVisiblePages } from '../../shared/utils/get-visible-pages';
 
 @Component({
   selector: 'app-pricing',
@@ -31,6 +37,8 @@ export class Pricing implements OnInit {
   currentPageData$!: Observable<BooksResponse>;
 
   visiblePages$!: Observable<(number | '...')[]>;
+
+  readonly section = viewChild<ElementRef>('cardContainer');
 
   ngOnInit(): void {
     this.currentPageData$ = this.route.queryParams.pipe(
@@ -78,5 +86,14 @@ export class Pricing implements OnInit {
     this.router.navigate([`${APP_ROUTES.pricing}/${id}`], {
       queryParams: { page: this.getCurrentPage() },
     });
+  };
+
+  handleDownload = (event: MouseEvent): void => {
+    event.preventDefault();
+    event.stopPropagation();
+  };
+
+  handleButtonDown = (): void => {
+    window.scrollTo(0, this.section()!.nativeElement.scrollHeight);
   };
 }

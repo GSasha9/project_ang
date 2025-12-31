@@ -74,6 +74,20 @@ h2 {
   }
 }
 
+.my-btn {
+  background-color: $main-button-color;
+  border: none;
+  gap: 5px;
+
+  &:active {
+    background-color: $main-button-color_active;
+  }
+
+  &:hover {
+    background-color: $main-button-color_hover;
+  }
+}
+
 .footer {
   background-color: $background-color-footer;
 }

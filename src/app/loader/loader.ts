@@ -1,6 +1,5 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-
-import { LoaderService } from '../shared/services/loader.service';
+import { LoaderService } from '@shared/services/loader.service';
 
 @Component({
   selector: 'app-loader',
