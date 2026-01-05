@@ -8,10 +8,10 @@ import { LoaderService } from '@shared/services/loader.service';
 import { BehaviorSubject } from 'rxjs';
 
 import { clickHelper } from '../../../test/click-helper';
-import { BookCard } from '../../shared/components/book-card/book-card';
 import { Button } from '../../shared/components/button/button';
 import { BOOKS_API_BASE_URL } from '../../shared/constants/books-api-base-url';
 import { BooksService } from '../../shared/services/books.service';
+import { BookCard } from './book-card/book-card';
 import { Pricing } from './pricing';
 
 describe('Pricing', () => {

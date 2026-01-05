@@ -1,6 +1,5 @@
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
-
-import { Book } from '../../models/book.model';
+import { Book } from '@shared/models/book.model';
 
 @Component({
   selector: 'app-book-card',
