@@ -1,5 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
+import { provideStore } from '@ngrx/store';
 
 import { Login } from './login';
 
@@ -10,6 +11,7 @@ describe('Login', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [Login],
+      providers: [provideStore()],
     }).compileComponents();
 
     fixture = TestBed.createComponent(Login);
