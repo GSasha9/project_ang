@@ -15,7 +15,7 @@
         type="text"
         [formControlName]="item.title"
         autocomplete="email"
-        data-testId="item.title"
+        [attr.data-testId]="item.title"
         class="form-control"
       />
 
