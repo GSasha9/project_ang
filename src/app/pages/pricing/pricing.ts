@@ -8,8 +8,8 @@ import {
   viewChild,
 } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { BookCard } from '@shared/components/book-card/book-card';
 import { Button } from '@shared/components/button/button';
-import { Card } from '@shared/components/card/card';
 import { APP_ROUTES } from '@shared/constants/app-routs';
 import { BooksResponse } from '@shared/models/books-response';
 import { BooksService } from '@shared/services/books.service';
@@ -19,7 +19,7 @@ import { map, Observable, shareReplay, switchMap } from 'rxjs';
 
 @Component({
   selector: 'app-pricing',
-  imports: [Card, AsyncPipe, CommonModule, Button],
+  imports: [BookCard, AsyncPipe, CommonModule, Button],
   templateUrl: './pricing.html',
   styleUrl: './pricing.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

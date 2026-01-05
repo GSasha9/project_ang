@@ -10,11 +10,11 @@
       <ul #cardContainer class="d-flex flex-wrap justify-content-center gap-5 position-relative">
         @for (book of response.results; track book.id) {
           <li>
-            <app-card
+            <app-book-card
               [bookData]="book"
               [handler]="handleCardClick"
               [buttonHandler]="handleDownload"
-            ></app-card>
+            ></app-book-card>
           </li>
         }
       </ul>
