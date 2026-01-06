@@ -17,7 +17,7 @@ import { Button } from '../button/button';
 export class Form implements OnInit {
   readonly formItems = input<FormData[]>([]);
   readonly buttonHandler = input<() => void>();
-  readonly form = model<FormGroup<any>>();
+  readonly form = model<FormGroup<Record<string, FormControl<string>>>>();
   errorMessages = ERROR_MESSAGES;
 
   ngOnInit(): void {

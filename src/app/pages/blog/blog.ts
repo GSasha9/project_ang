@@ -1,12 +1,22 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { DRAFT_BLOG_POSTS } from '@shared/constants/draft-blog-posts';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
+import { Store } from '@ngrx/store';
+import { postsFeature } from '@state/posts/posts.feature';
+import { map } from 'rxjs';
+
+import { BlogPost } from './blog-post/blog-post';
 
 @Component({
   selector: 'app-blog',
-  imports: [],
+  imports: [BlogPost],
   templateUrl: './blog.html',
+  styleUrl: './blog.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Blog {
-  draftPosts = DRAFT_BLOG_POSTS;
+  private store = inject(Store);
+
+  readonly posts = toSignal(
+    this.store.select(postsFeature.selectPostsState).pipe(map((data) => data)),
+  );
 }

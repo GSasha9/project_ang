@@ -8,8 +8,8 @@ import { Menu } from '@shared/components/menu/menu';
 import { APP_ROUTES } from '@shared/constants/app-routs';
 import { MENU_HEADER } from '@shared/constants/menu-header';
 import { MenuItems } from '@shared/models/menuItems.model';
-import { UsersActions } from '@state/users.actions';
-import { selectLoggedUser } from '@state/users.selectors';
+import { UsersActions } from '@state/users/users.actions';
+import { selectLoggedUser } from '@state/users/users.selectors';
 import { filter, map, startWith } from 'rxjs';
 
 @Component({

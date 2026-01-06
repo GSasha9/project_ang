@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
-import { FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Form } from '@shared/components/form/form';
@@ -8,8 +8,9 @@ import { ERROR_MESSAGES } from '@shared/constants/error-messages';
 import { REGISTER_FORM_DATA } from '@shared/constants/register-form-data';
 import { FormData } from '@shared/models/form-data.model';
 import { NotificationService } from '@shared/services/notification.service';
-import { UsersActions } from '@state/users.actions';
-import { selectUsersByEmail } from '@state/users.selectors';
+import { isUserData } from '@shared/utils/is-user-data';
+import { UsersActions } from '@state/users/users.actions';
+import { selectUsersByEmail } from '@state/users/users.selectors';
 import { take } from 'rxjs';
 
 @Component({
@@ -22,7 +23,7 @@ export class Register {
   private router = inject(Router);
   private notification = inject(NotificationService);
   private readonly store = inject(Store);
-  readonly form = signal<FormGroup<any> | undefined>(undefined);
+  readonly form = signal<FormGroup<Record<string, FormControl<string>>> | undefined>(undefined);
   formFields: FormData[] = [];
 
   constructor() {
@@ -32,17 +33,17 @@ export class Register {
   handleRegister = (): void => {
     const userData = this.form()?.value;
 
-    if (!userData) {
+    if (!userData || !isUserData(userData)) {
       throw new Error('No form data');
     }
 
-    if (userData.password !== userData['repeat password']) {
+    if (userData['password']! !== userData['repeat password']) {
       this.notification.show(ERROR_MESSAGES['passwordsNotMatch'] as string, 'alert-warning');
       return;
     }
 
     this.store
-      .select(selectUsersByEmail(userData.email))
+      .select(selectUsersByEmail(userData['email']!))
       .pipe(take(1))
       .subscribe((data) => {
         if (data) {

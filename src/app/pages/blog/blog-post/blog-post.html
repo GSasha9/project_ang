@@ -1,6 +1,6 @@
 <div class="card" style="width: 18rem">
   <img [src]="postData()?.img" class="card-img-top" [alt]="postData()?.title" />
-  <div class="card-header">
+  <div class="card-header d-flex justify-content-between">
     <p>{{ postData()?.meta?.date }}</p>
     <p>{{ postData()?.meta?.time }}</p>
   </div>
@@ -8,9 +8,8 @@
     <h5 class="card-title">{{ postData()?.title }}</h5>
     <p class="card-text">{{ postData()?.text }}</p>
   </div>
-  <div class="card-footer">
+  <div class="card-footer d-flex gap-1 flex-wrap align-items-center">
     <img [src]="postData()?.author?.pic" [alt]="postData()?.author?.name" />
     <p>{{ postData()?.author?.name }}</p>
-    <p>{{ postData()?.author?.email }}</p>
   </div>
 </div>
