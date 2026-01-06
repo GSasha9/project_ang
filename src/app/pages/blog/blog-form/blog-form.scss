@@ -1,0 +1,13 @@
+@use 'variables' as *;
+
+#text {
+  height: 200px !important;
+  overflow-y: scroll;
+  max-width: 320px;
+}
+
+.field-error {
+  height: 15px;
+  color: $error-color;
+  font-size: 12px;
+}

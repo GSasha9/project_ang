@@ -1,0 +1,53 @@
+<form #blogForm="ngForm" (submit)="onSubmit(blogForm)" class="form-group d-flex flex-column gap-2">
+  <div class="position-relative">
+    <label for="title">Title</label>
+    <input
+      #name="ngModel"
+      class="form-control"
+      id="title"
+      type="text"
+      [(ngModel)]="model.title"
+      name="title"
+      minlength="3"
+      required
+    />
+    <div class="field-error">
+      @if (name.invalid && (name.dirty || name.touched)) {
+        @if (name.hasError('minlength')) {
+          <p>Minimum length is 3 symbols</p>
+        }
+        @if (name.hasError('required')) {
+          <p>This field is required</p>
+        }
+      }
+    </div>
+  </div>
+
+  <div class="position-relative">
+    <label for="text">Text</label>
+    <textarea
+      #text="ngModel"
+      class="form-control"
+      id="text"
+      [(ngModel)]="model.text"
+      name="text"
+      minlength="10"
+      required
+    ></textarea>
+    <div class="field-error">
+      @if (text.invalid && (text.dirty || text.touched)) {
+        @if (text.hasError('minlength')) {
+          <p>Minimum length is 10 symbols</p>
+        }
+        @if (text.hasError('required')) {
+          <p>This field is required</p>
+        }
+      }
+    </div>
+  </div>
+
+  <label for="img">Image</label>
+  <input class="form-control" id="img" type="file" name="img" (change)="onFileChange($event)" />
+  <div class="field-error"></div>
+  <app-button [isDisabled]="!blogForm.form.valid" class="align-self-center">Submit</app-button>
+</form>

@@ -10,7 +10,7 @@ export const postsFeature = createFeature({
   name: 'Posts',
   reducer: createReducer(
     initialState,
-    on(PostsAction.add, (state, { post }) => ({ ...state, posts: [...state, post] })),
+    on(PostsAction.add, (state, { post }) => [...state, post]),
     on(PostsAction.remove, (state, { id }) => {
       state.filter((post) => post.id !== id);
       return state;

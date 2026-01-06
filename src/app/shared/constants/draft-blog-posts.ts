@@ -12,7 +12,6 @@ export const DRAFT_BLOG_POSTS: BlogPostData[] = [
     text: 'How do you create compelling presentations that wow your colleagues and impress your managers?',
     author: {
       name: 'Olivia Rhee',
-      email: 'Olivia@gmail.com',
       pic: '/project_ang/girl.png',
     },
   },
@@ -27,7 +26,6 @@ export const DRAFT_BLOG_POSTS: BlogPostData[] = [
     text: 'Linear helps streamline software projects, sprints, tasks, and bug tracking. Here’s how to get started.',
     author: {
       name: 'Drew Cana',
-      email: 'cana@gmail.com',
       pic: '/project_ang/boy.png',
     },
   },

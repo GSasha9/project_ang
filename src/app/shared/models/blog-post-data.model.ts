@@ -9,5 +9,5 @@ export type BlogPostData = {
   img: string;
   title: string;
   text: string;
-  author: Pick<UserData, 'name' | 'email'> & { pic: string };
+  author: Pick<UserData, 'name'> & { pic: string };
 };
