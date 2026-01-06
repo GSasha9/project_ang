@@ -9,9 +9,9 @@ import { BehaviorSubject } from 'rxjs';
 
 import { clickHelper } from '../../../test/click-helper';
 import { Button } from '../../shared/components/button/button';
-import { Card } from '../../shared/components/card/card';
 import { BOOKS_API_BASE_URL } from '../../shared/constants/books-api-base-url';
 import { BooksService } from '../../shared/services/books.service';
+import { BookCard } from './book-card/book-card';
 import { Pricing } from './pricing';
 
 describe('Pricing', () => {
@@ -23,7 +23,7 @@ describe('Pricing', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [Pricing, Card, Button],
+      imports: [Pricing, BookCard, Button],
       providers: [
         provideHttpClient(),
         provideHttpClientTesting(),
@@ -75,7 +75,7 @@ describe('Pricing', () => {
     await fixture.whenStable().then(() => {
       fixture.detectChanges();
 
-      const cards = fixture.debugElement.queryAll(By.directive(Card));
+      const cards = fixture.debugElement.queryAll(By.directive(BookCard));
       expect(cards.length).toBe(1);
       expect(cards[0].nativeElement.textContent).toContain('Book 1');
     });
@@ -111,7 +111,7 @@ describe('Pricing', () => {
     await fixture.whenStable();
     fixture.detectChanges();
 
-    const cards = fixture.debugElement.queryAll(By.directive(Card));
+    const cards = fixture.debugElement.queryAll(By.directive(BookCard));
     expect(cards.length).toBe(1);
     expect(cards[0].nativeElement.textContent).toContain('Book 2');
   });
