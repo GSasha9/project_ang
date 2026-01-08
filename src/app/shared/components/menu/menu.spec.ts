@@ -22,7 +22,7 @@ describe('Menu', () => {
     expect(linkDEs.length).toBe(2);
   });
 
-  it('should call handleClick after clicking', () => {
+  it('should call handleClick on item click', () => {
     const mockItem: MenuItems = {
       id: 1,
       title: 'Home',
@@ -34,7 +34,9 @@ describe('Menu', () => {
 
     vi.spyOn(fixture.componentInstance.clicked, 'emit');
 
-    fixture.componentInstance.handleClick(mockItem);
+    const link = fixture.nativeElement.querySelector('[data-testid="menu-item"]');
+
+    link.click();
 
     expect(fixture.componentInstance.clicked.emit).toHaveBeenCalledWith(mockItem);
   });
