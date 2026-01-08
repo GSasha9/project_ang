@@ -1,11 +1,11 @@
 import { Routes } from '@angular/router';
+import { provideState } from '@ngrx/store';
+import { postsFeature } from '@state/posts/posts.feature';
 
-import { Blog } from './pages/blog/blog';
 import { Home } from './pages/home/home';
 import { Login } from './pages/login/login';
 import { NotFound } from './pages/not-found/not-found';
 import { DetailedPage } from './pages/pricing/detailed-page/detailed-page';
-import { Pricing } from './pages/pricing/pricing';
 import { Register } from './pages/register/register';
 import { APP_ROUTES } from './shared/constants/app-routs';
 import { BookResolver } from './shared/services/book-resolver.service';
@@ -24,12 +24,13 @@ export const routes: Routes = [
   },
   {
     path: APP_ROUTES.blog,
-    component: Blog,
+    loadComponent: () => import('./pages/blog/blog').then((m) => m.Blog),
+    providers: [provideState(postsFeature)],
     title: 'Blog',
   },
   {
     path: APP_ROUTES.pricing,
-    component: Pricing,
+    loadComponent: () => import('./pages/pricing/pricing').then((m) => m.Pricing),
     title: 'Pricing',
   },
   {
