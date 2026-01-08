@@ -29,6 +29,5 @@ export class Blog {
 
   onSubmitForm = (data: BlogPostData): void => {
     this.store.dispatch(PostsAction.add({ post: data }));
-    console.log('Hello from blog');
   };
 }

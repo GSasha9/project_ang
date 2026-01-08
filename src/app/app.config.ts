@@ -2,9 +2,8 @@ import { provideHttpClient, withFetch, withInterceptors } from '@angular/common/
 import { ApplicationConfig, provideBrowserGlobalErrorListeners } from '@angular/core';
 import { provideClientHydration, withEventReplay } from '@angular/platform-browser';
 import { provideRouter } from '@angular/router';
-import { provideState, provideStore } from '@ngrx/store';
+import { provideStore } from '@ngrx/store';
 import { provideStoreDevtools } from '@ngrx/store-devtools';
-import { postsFeature } from '@state/posts/posts.feature';
 
 import { routes } from './app.routes';
 import { cacheInterceptor } from './shared/interceptors/cache-interceptor/cache-interceptor';
@@ -26,7 +25,6 @@ export const appConfig: ApplicationConfig = {
       usersRegister: usersRegisterReducer,
       usersLogIn: userLoginReducer,
     }),
-    provideState(postsFeature),
     provideStoreDevtools({
       maxAge: 25,
       logOnly: undefined,

@@ -3,5 +3,5 @@ export const APP_ROUTES = {
   blog: 'blog',
   pricing: 'pricing',
   login: 'login',
-  registration: 'registration',
+  registration: 'register',
 };

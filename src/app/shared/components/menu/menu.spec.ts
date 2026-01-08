@@ -1,20 +1,43 @@
-import { TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { By } from '@angular/platform-browser';
+import { provideRouter } from '@angular/router';
+import { MenuItems } from '@shared/models/menuItems.model';
 import { describe, expect, it } from 'vitest';
 
 import { Menu } from './menu';
 
 describe('Menu', () => {
+  let fixture: ComponentFixture<Menu>;
+  beforeEach(() => {
+    TestBed.configureTestingModule({ imports: [Menu], providers: [provideRouter([])] });
+    fixture = TestBed.createComponent(Menu);
+  });
+
   it('should create the menu', () => {
-    TestBed.configureTestingModule({ imports: [Menu] });
-    const fixture = TestBed.createComponent(Menu);
-    const component = fixture.componentInstance;
+    fixture.componentRef.setInput('items', ['Home', 'Pricing']);
 
     fixture.detectChanges();
 
-    const links = fixture.nativeElement.querySelectorAll('app-link');
+    const linkDEs = fixture.debugElement.queryAll(By.css('app-link'));
+    expect(linkDEs.length).toBe(2);
+  });
 
-    expect(links.length).toBe(0);
+  it('should call handleClick on item click', () => {
+    const mockItem: MenuItems = {
+      id: 1,
+      title: 'Home',
+      route: 'home',
+    };
+    fixture.componentRef.setInput('items', [mockItem]);
 
-    expect(component).toBeDefined();
+    fixture.detectChanges();
+
+    vi.spyOn(fixture.componentInstance.clicked, 'emit');
+
+    const link = fixture.nativeElement.querySelector('[data-testid="menu-item"]');
+
+    link.click();
+
+    expect(fixture.componentInstance.clicked.emit).toHaveBeenCalledWith(mockItem);
   });
 });
