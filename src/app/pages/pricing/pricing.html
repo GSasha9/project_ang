@@ -6,7 +6,7 @@
       class="arrow-down position-absolute z-3"
     ></app-button>
     <h2 class="text-center">Books for download</h2>
-    @if (!isLoading()) {
+    @if (!isLoadingPage()) {
       <ul #cardContainer class="d-flex flex-wrap justify-content-center gap-5 position-relative">
         @for (book of response.results; track book.id) {
           <li>
@@ -21,7 +21,7 @@
     }
 
     <div class="pricing_pagination d-flex align-items-center flex-column flex-md-row">
-      <app-button [handler]="prevPage" [isDisabled]="isLoading() || getCurrentPage() === 1"
+      <app-button [handler]="prevPage" [isDisabled]="isLoadingPage() || getCurrentPage() === 1"
         >Prev</app-button
       >
       <div class="pagination-button-container d-flex gap-1 gap-md-3">
@@ -42,7 +42,7 @@
           }
         }
       </div>
-      <app-button [handler]="nextPage" [isDisabled]="isLoading() || !response.next"
+      <app-button [handler]="nextPage" [isDisabled]="isLoadingPage() || !response.next"
         >Next</app-button
       >
     </div>

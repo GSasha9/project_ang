@@ -8,13 +8,16 @@ import {
   viewChild,
 } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Store } from '@ngrx/store';
 import { Button } from '@shared/components/button/button';
 import { APP_ROUTES } from '@shared/constants/app-routs';
 import { BooksResponse } from '@shared/models/books-response';
 import { BooksService } from '@shared/services/books.service';
 import { LoaderService } from '@shared/services/loader.service';
 import { getVisiblePages } from '@shared/utils/get-visible-pages';
-import { map, Observable, shareReplay, switchMap } from 'rxjs';
+import { BooksAction } from '@state/books/books.action';
+import { selectBooksByPage } from '@state/books/books.feature';
+import { filter, map, Observable, switchMap, tap } from 'rxjs';
 
 import { BookCard } from './book-card/book-card';
 
@@ -30,8 +33,9 @@ export class Pricing implements OnInit {
   private router = inject(Router);
   private loaderService = inject(LoaderService);
   private route = inject(ActivatedRoute);
+  private store = inject(Store);
 
-  isLoading = this.loaderService.loading;
+  isLoadingPage = this.loaderService.loading;
 
   pages$!: Observable<number>;
 
@@ -42,17 +46,22 @@ export class Pricing implements OnInit {
   readonly section = viewChild<ElementRef>('cardContainer');
 
   ngOnInit(): void {
-    this.currentPageData$ = this.route.queryParams.pipe(
+    const page$: Observable<number> = this.route.queryParams.pipe(
       map((params) => params['page'] || 1),
-      switchMap((page) => this.booksService.getBooks(page)),
+    );
 
-      shareReplay({ bufferSize: 1, refCount: true }),
+    page$.subscribe((page) => {
+      this.store.dispatch(BooksAction.load({ page: page }));
+    });
+
+    this.currentPageData$ = page$.pipe(
+      tap((page) => this.store.dispatch(BooksAction.load({ page }))),
+      switchMap((page) => this.store.select(selectBooksByPage(page))),
+      filter(Boolean),
     );
 
     this.visiblePages$ = this.currentPageData$.pipe(
-      map((data) =>
-        getVisiblePages(this.getCurrentPage(), Math.floor(data.count / data.results.length)),
-      ),
+      map((data) => getVisiblePages(this.getCurrentPage(), data.count / data.results.length)),
     );
   }
 
