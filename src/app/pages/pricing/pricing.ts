@@ -10,32 +10,33 @@ import {
 import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Button } from '@shared/components/button/button';
+import { Spinner } from '@shared/components/spinner/spinner';
 import { APP_ROUTES } from '@shared/constants/app-routs';
 import { BooksResponse } from '@shared/models/books-response';
-import { BooksService } from '@shared/services/books.service';
 import { LoaderService } from '@shared/services/loader.service';
 import { getVisiblePages } from '@shared/utils/get-visible-pages';
 import { BooksAction } from '@state/books/books.action';
-import { selectBooksByPage } from '@state/books/books.feature';
+import { booksFeature, selectBooksByPage } from '@state/books/books.feature';
 import { filter, map, Observable, switchMap, tap } from 'rxjs';
 
 import { BookCard } from './book-card/book-card';
 
 @Component({
   selector: 'app-pricing',
-  imports: [BookCard, AsyncPipe, CommonModule, Button],
+  imports: [BookCard, AsyncPipe, CommonModule, Button, Spinner],
   templateUrl: './pricing.html',
   styleUrl: './pricing.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Pricing implements OnInit {
-  private booksService = inject(BooksService);
   private router = inject(Router);
   private loaderService = inject(LoaderService);
   private route = inject(ActivatedRoute);
   private store = inject(Store);
 
   isLoadingPage = this.loaderService.loading;
+
+  isLoadingBooks$ = this.store.select(booksFeature.selectLoadingBooks);
 
   pages$!: Observable<number>;
 

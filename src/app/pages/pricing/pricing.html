@@ -8,14 +8,18 @@
     <h2 class="text-center">Books for download</h2>
     @if (!isLoadingPage()) {
       <ul #cardContainer class="d-flex flex-wrap justify-content-center gap-5 position-relative">
-        @for (book of response.results; track book.id) {
-          <li>
-            <app-book-card
-              [bookData]="book"
-              [handler]="handleCardClick"
-              [buttonHandler]="handleDownload"
-            ></app-book-card>
-          </li>
+        @if ((isLoadingBooks$ | async) === false) {
+          @for (book of response.results; track book.id) {
+            <li>
+              <app-book-card
+                [bookData]="book"
+                [handler]="handleCardClick"
+                [buttonHandler]="handleDownload"
+              ></app-book-card>
+            </li>
+          }
+        } @else {
+          <app-spinner></app-spinner>
         }
       </ul>
     }

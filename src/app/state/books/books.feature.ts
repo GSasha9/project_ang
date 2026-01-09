@@ -3,22 +3,35 @@ import { BooksResponse } from '@shared/models/books-response';
 
 import { BooksAction } from './books.action';
 
-const initialState: Record<number, BooksResponse> = {};
+type BookState = {
+  entities: Record<number, BooksResponse>;
+  loadingBooks: boolean;
+};
+
+const initialState: BookState = {
+  entities: {},
+  loadingBooks: false,
+};
 
 export const booksFeature = createFeature({
   name: 'Books',
   reducer: createReducer(
     initialState,
-    on(BooksAction.load, (state) => ({ ...state })),
+    on(BooksAction.load, (state) => ({ ...state, loadingBooks: true })),
     on(BooksAction.addBooks, (state, { data }) => {
-      if (state[data.page]) {
+      if (state.entities[data.page]) {
         return {
           ...state,
+          loadingBooks: false,
         };
       }
       return {
         ...state,
-        [data.page]: data.result,
+        entities: {
+          ...state.entities,
+          [data.page]: data.result,
+        },
+        loadingBooks: false,
       };
     }),
   ),
@@ -27,4 +40,4 @@ export const booksFeature = createFeature({
 export const selectBooksByPage = (
   page: number,
 ): MemoizedSelector<Record<number, BooksResponse>, BooksResponse> =>
-  createSelector(booksFeature.selectBooksState, (state) => state[page]);
+  createSelector(booksFeature.selectBooksState, (state) => state.entities[page]);
