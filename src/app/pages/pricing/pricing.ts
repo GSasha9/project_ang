@@ -62,7 +62,9 @@ export class Pricing implements OnInit {
     );
 
     this.visiblePages$ = this.currentPageData$.pipe(
-      map((data) => getVisiblePages(this.getCurrentPage(), data.count / data.results.length)),
+      map((data) =>
+        getVisiblePages(this.getCurrentPage(), Math.floor(data.count / data.results.length)),
+      ),
     );
   }
 
