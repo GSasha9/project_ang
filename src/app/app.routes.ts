@@ -1,5 +1,6 @@
 import { Routes } from '@angular/router';
 import { provideState } from '@ngrx/store';
+import { booksFeature } from '@state/books/books.feature';
 import { postsFeature } from '@state/posts/posts.feature';
 
 import { Home } from './pages/home/home';
@@ -31,6 +32,7 @@ export const routes: Routes = [
   {
     path: APP_ROUTES.pricing,
     loadComponent: () => import('./pages/pricing/pricing').then((m) => m.Pricing),
+    providers: [provideState(booksFeature)],
     title: 'Pricing',
   },
   {

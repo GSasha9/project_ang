@@ -31,6 +31,5 @@ export const getVisiblePages = (currentPage: number, totalPages: number): (numbe
   if (totalPages > 1) {
     range.push(totalPages - 1);
   }
-
   return range;
 };
