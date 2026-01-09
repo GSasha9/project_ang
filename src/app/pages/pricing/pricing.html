@@ -1,11 +1,11 @@
-@if (currentPageData$ | async; as response) {
-  <section class="d-flex flex-column align-items-center justify-content-center gap-5">
-    <app-button
-      [handler]="handleButtonDown"
-      [hasArrow]="'down'"
-      class="arrow-down position-absolute z-3"
-    ></app-button>
-    <h2 class="text-center">Books for download</h2>
+<section class="d-flex flex-column align-items-center justify-content-center gap-5">
+  <app-button
+    [handler]="handleButtonDown"
+    [hasArrow]="'down'"
+    class="arrow-down position-absolute z-3"
+  ></app-button>
+  <h2 class="text-center">Books for download</h2>
+  @if (currentPageData$ | async; as response) {
     @if (!isLoadingPage()) {
       <ul #cardContainer class="d-flex flex-wrap justify-content-center gap-5 position-relative">
         @if ((isLoadingBooks$ | async) === false) {
@@ -50,5 +50,7 @@
         >Next</app-button
       >
     </div>
-  </section>
-}
+  } @else {
+    <app-spinner></app-spinner>
+  }
+</section>
