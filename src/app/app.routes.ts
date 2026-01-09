@@ -10,6 +10,8 @@ import { DetailedPage } from './pages/pricing/detailed-page/detailed-page';
 import { Register } from './pages/register/register';
 import { APP_ROUTES } from './shared/constants/app-routs';
 import { BookResolver } from './shared/services/book-resolver.service';
+import { provideEffects } from '@ngrx/effects';
+import { BooksEffect } from '@state/books/books.effect';
 
 export const routes: Routes = [
   {
@@ -32,7 +34,7 @@ export const routes: Routes = [
   {
     path: APP_ROUTES.pricing,
     loadComponent: () => import('./pages/pricing/pricing').then((m) => m.Pricing),
-    providers: [provideState(booksFeature)],
+    providers: [provideState(booksFeature), provideEffects([BooksEffect]),],
     title: 'Pricing',
   },
   {
