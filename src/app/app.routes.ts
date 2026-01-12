@@ -33,6 +33,7 @@ export const routes: Routes = [
   },
   {
     path: APP_ROUTES.pricing,
+
     loadComponent: () => import('./pages/pricing/pricing').then((m) => m.Pricing),
     providers: [provideState(booksFeature), provideEffects([BooksEffect])],
     title: 'Pricing',

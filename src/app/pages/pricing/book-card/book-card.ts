@@ -11,6 +11,7 @@ export class BookCard {
   readonly bookData = input<Book>();
   readonly handler = input<(id: number) => void>();
   readonly buttonHandler = input<(event: MouseEvent) => void>();
+  readonly isSelected = input<boolean | undefined>(undefined);
 
   cardHandler = (): void => {
     this.handler()?.(this.bookData()?.id || 1);
