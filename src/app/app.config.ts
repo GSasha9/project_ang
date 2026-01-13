@@ -2,10 +2,8 @@ import { provideHttpClient, withFetch, withInterceptors } from '@angular/common/
 import { ApplicationConfig, provideBrowserGlobalErrorListeners } from '@angular/core';
 import { provideClientHydration, withEventReplay } from '@angular/platform-browser';
 import { provideRouter } from '@angular/router';
-import { provideEffects } from '@ngrx/effects';
 import { provideStore } from '@ngrx/store';
 import { provideStoreDevtools } from '@ngrx/store-devtools';
-import { BooksEffect } from '@state/books/books.effect';
 
 import { routes } from './app.routes';
 import { cacheInterceptor } from './shared/interceptors/cache-interceptor/cache-interceptor';
@@ -27,7 +25,6 @@ export const appConfig: ApplicationConfig = {
       usersRegister: usersRegisterReducer,
       usersLogIn: userLoginReducer,
     }),
-    provideEffects([BooksEffect]),
     provideStoreDevtools({
       maxAge: 25,
       logOnly: undefined,

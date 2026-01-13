@@ -1,4 +1,10 @@
-<div class="card" (click)="cardHandler()" (keyup)="cardHandler()" tabindex="0">
+<div
+  class="card"
+  (click)="cardHandler()"
+  (keyup)="cardHandler()"
+  tabindex="0"
+  [attr.data-cardId]="bookData()?.id"
+>
   <div class="card-header">
     <h4 class="card-title">{{ bookData()?.title }}</h4>
     @for (author of bookData()?.authors; track $index) {
@@ -15,7 +21,14 @@
   </div>
 
   <div class="card-footer d-flex justify-content-between align-items-center">
-    <p>{{ bookData()?.download_count }}</p>
-    <button (click)="buttonHandler()?.($event)" class="btn btn-success my-btn">Download</button>
+    @if (!isSelected()) {
+      <button (click)="buttonHandler()?.($event)" class="btn btn-success my-btn">
+        Mark as read
+      </button>
+    } @else {
+      <button (click)="buttonHandler()?.($event)" class="btn btn-success my-btn">
+        Remove from read
+      </button>
+    }
   </div>
 </div>

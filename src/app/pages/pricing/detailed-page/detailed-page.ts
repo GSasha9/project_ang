@@ -18,8 +18,9 @@ export class DetailedPage {
   private router = inject(Router);
   private activatedRoute = inject(ActivatedRoute);
   private readonly data = toSignal(this.activatedRoute.data);
-  readonly books = computed(() => this.data()?.['book'] as Book | undefined);
-  readonly bookImage = computed(() => this.books()?.formats?.['image/jpeg'] ?? '');
+  readonly book = computed(() => this.data()?.['book'] as Book | undefined);
+  readonly showAllBooks = signal(this.activatedRoute.snapshot.queryParams['showAllBooks']);
+  readonly bookImage = computed(() => this.book()?.formats?.['image/jpeg'] ?? '');
   readonly imageLoad = signal(true);
   readonly currentPage = input<BehaviorSubject<number>>();
 
@@ -33,7 +34,7 @@ export class DetailedPage {
   handleBackButton = (): void => {
     const page = this.activatedRoute.snapshot.queryParams['page'];
     this.router.navigate([APP_ROUTES.pricing], {
-      queryParams: { page: page },
+      queryParams: { page: page, showAllBooks: this.showAllBooks() },
       queryParamsHandling: 'merge',
     });
     this.bookId = null;

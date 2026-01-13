@@ -1,13 +1,13 @@
 <section class="detailed-page d-flex flex-column align-items-center p-4" style="width: 100%">
-  @if (books()) {
-    <h2>{{ books()?.title }}</h2>
+  @if (book()) {
+    <h2>{{ book()?.title }}</h2>
     <div
       class="detailed-page-book d-flex flex-column align-items-center flex-lg-row justify-content-around gap-2"
       style="width: 100%"
     >
       <div class="book-description d-flex flex-column">
         <div class="book-author d-flex flex-column">
-          @for (item of books()?.authors; track $index) {
+          @for (item of book()?.authors; track $index) {
             <div
               class="d-flex flex-column flex-sm-row align-items-center align-items-sm-start gap-1 align-self-center align-self-lg-start"
             >
@@ -19,7 +19,7 @@
           }
         </div>
         <div class="book-summaries">
-          @for (item of books()?.summaries; track $index) {
+          @for (item of book()?.summaries; track $index) {
             <p>{{ item }}</p>
           }
         </div>
@@ -29,7 +29,7 @@
       <div class="book-img order-lg-5">
         <img
           [src]="bookImage()"
-          [alt]="books()?.title"
+          [alt]="book()?.title"
           (load)="onImageLoad()"
           class="img-fluid"
           style="width: 100%"

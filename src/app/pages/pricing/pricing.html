@@ -5,51 +5,59 @@
     class="arrow-down position-absolute z-3"
   ></app-button>
   <h2 class="text-center">Books for download</h2>
-  @if (currentPageData$ | async; as response) {
-    @if (!isLoadingPage()) {
+  @if (!isLoadingPage()) {
+    @let response = currentPageData$ | async;
+
+    @if (response && (isLoadingBooks$ | async) === false) {
+      @let books = showAllBooksValue() ? response.results : (selectedBooks$ | async);
+
+      <app-button [handler]="handleButtonRead">{{
+        showAllBooksValue() ? 'Show read books' : 'Show all books'
+      }}</app-button>
       <ul #cardContainer class="d-flex flex-wrap justify-content-center gap-5 position-relative">
-        @if ((isLoadingBooks$ | async) === false) {
-          @for (book of response.results; track book.id) {
-            <li>
-              <app-book-card
-                [bookData]="book"
-                [handler]="handleCardClick"
-                [buttonHandler]="handleDownload"
-              ></app-book-card>
-            </li>
-          }
-        } @else {
-          <app-spinner></app-spinner>
+        @for (book of books; track book.id) {
+          <li>
+            <app-book-card
+              [bookData]="book"
+              [handler]="handleCardClick"
+              [buttonHandler]="handleReadButton"
+              [isSelected]="
+                (selectedBooks$ | async)?.length !== 0 && (selectedBooks$ | async)?.includes(book)
+              "
+            ></app-book-card>
+          </li>
         }
       </ul>
-    }
+      @if (showAllBooksValue()) {
+        <div class="pricing_pagination d-flex align-items-center flex-column flex-md-row">
+          <app-button [handler]="prevPage" [isDisabled]="isLoadingPage() || getCurrentPage() === 1"
+            >Prev</app-button
+          >
 
-    <div class="pricing_pagination d-flex align-items-center flex-column flex-md-row">
-      <app-button [handler]="prevPage" [isDisabled]="isLoadingPage() || getCurrentPage() === 1"
-        >Prev</app-button
-      >
-      <div class="pagination-button-container d-flex gap-1 gap-md-3">
-        @for (page of visiblePages$ | async; track $index) {
-          @if (page !== '...') {
-            <button
-              (click)="navigateTo(page)"
-              [ngClass]="
-                page === getCurrentPage()
-                  ? 'active pricing_pagination-button'
-                  : 'pricing_pagination-button'
-              "
-            >
-              {{ page }}
-            </button>
-          } @else {
-            <span>{{ page }}</span>
-          }
-        }
-      </div>
-      <app-button [handler]="nextPage" [isDisabled]="isLoadingPage() || !response.next"
-        >Next</app-button
-      >
-    </div>
+          <div class="pagination-button-container d-flex gap-1 gap-md-3">
+            @for (page of visiblePages$ | async; track $index) {
+              @if (page !== '...') {
+                <button
+                  (click)="navigateTo(page)"
+                  [ngClass]="
+                    page === getCurrentPage()
+                      ? 'active pricing_pagination-button'
+                      : 'pricing_pagination-button'
+                  "
+                >
+                  {{ page }}
+                </button>
+              } @else {
+                <span>{{ page }}</span>
+              }
+            }
+          </div>
+          <app-button [handler]="nextPage" [isDisabled]="isLoadingPage() || !response.next"
+            >Next</app-button
+          >
+        </div>
+      }
+    }
   } @else {
     <app-spinner></app-spinner>
   }
