@@ -2,6 +2,7 @@ import { AsyncPipe, CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
+  computed,
   ElementRef,
   inject,
   OnInit,
@@ -60,7 +61,11 @@ export class Pricing implements OnInit {
 
   visiblePages$!: Observable<(number | '...')[]>;
 
-  selectedBooks$ = this.store.select(booksFeature.selectReadBooks);
+  selectedBooksSlice$ = this.store.select(booksFeature.selectReadBooks);
+
+  readonly selectedBooks = toSignal(this.selectedBooksSlice$);
+
+  readonly selectedBooksIds = computed(() => new Map(this.selectedBooks()?.map((b) => [b.id, b])));
 
   readonly section = viewChild<ElementRef>('cardContainer');
 
@@ -68,11 +73,6 @@ export class Pricing implements OnInit {
     const page$: Observable<number> = this.route.queryParams.pipe(
       map((params) => params['page'] || 1),
     );
-
-    page$.subscribe((page) => {
-      this.store.dispatch(BooksAction.load({ page: page }));
-      shareReplay(1);
-    });
 
     this.currentPageData$ = page$.pipe(
       tap((page) => this.store.dispatch(BooksAction.load({ page }))),

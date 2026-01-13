@@ -9,7 +9,7 @@
     @let response = currentPageData$ | async;
 
     @if (response && (isLoadingBooks$ | async) === false) {
-      @let books = showAllBooksValue() ? response.results : (selectedBooks$ | async);
+      @let books = showAllBooksValue() ? response.results : selectedBooks();
 
       <app-button [handler]="handleButtonRead">{{
         showAllBooksValue() ? 'Show read books' : 'Show all books'
@@ -21,9 +21,7 @@
               [bookData]="book"
               [handler]="handleCardClick"
               [buttonHandler]="handleReadButton"
-              [isSelected]="
-                (selectedBooks$ | async)?.length !== 0 && (selectedBooks$ | async)?.includes(book)
-              "
+              [isSelected]="selectedBooksIds().has(book.id)"
             ></app-book-card>
           </li>
         }
