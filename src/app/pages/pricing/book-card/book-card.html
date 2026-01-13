@@ -6,16 +6,29 @@
   [attr.data-cardId]="bookData()?.id"
 >
   <div class="card-header">
-    <h4 class="card-title">{{ bookData()?.title }}</h4>
+    <h4 class="card-title my-title">{{ bookData()?.title }}</h4>
     @for (author of bookData()?.authors; track $index) {
       <p class="card-subtitle">{{ author.name }}</p>
     }
   </div>
 
+  <div class="overflow-y-hidden d-flex justify-content-center p-3" style="height: 300px">
+    <img
+      [src]="bookData()?.formats?.['image/jpeg'] ?? ''"
+      [alt]="bookData()?.title"
+      class="card-img-top"
+      (load)="onImgLoad()"
+    />
+
+    @if (imageLoad()) {
+      <app-spinner></app-spinner>
+    }
+  </div>
+
   <div class="card-body">
-    <ul class="list-group list-group-flush">
+    <ul class="list-group-flush list-group-horizontal">
       @for (shelf of bookData()?.bookshelves; track $index) {
-        <li class="list-group-item">{{ shelf }}</li>
+        <li class="list-group-item">{{ shelf.split(':')[1] || shelf }}</li>
       }
     </ul>
   </div>

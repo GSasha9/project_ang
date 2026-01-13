@@ -10,3 +10,17 @@
   height: 100%;
   cursor: pointer;
 }
+
+.my-title {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-clamp: 2;
+}
+
+.card-img-top {
+  height: 100%;
+  width: fit-content;
+}
