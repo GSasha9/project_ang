@@ -6,19 +6,10 @@
   gap: 30px;
 }
 
-.slider_items {
-  height: fit-content;
+.carousel-indicators [data-bs-target] {
+  background-color: $main-button-color;
 }
 
-.dot {
-  background-image: url('/project_ang/dot.svg');
-  width: 7px;
-  height: 7px;
-  background-size: contain;
-  background-repeat: no-repeat;
-  cursor: pointer;
-}
-
-.dot_active {
-  background-image: url('/project_ang/dot_active.svg');
+.carousel-indicators {
+  margin-bottom: -2rem;
 }
