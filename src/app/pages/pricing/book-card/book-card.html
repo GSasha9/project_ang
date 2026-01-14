@@ -12,7 +12,10 @@
     }
   </div>
 
-  <div class="overflow-y-hidden d-flex justify-content-center p-3" style="height: 300px">
+  <div
+    class="overflow-y-hidden d-flex justify-content-center p-3 position-relative"
+    style="height: 300px"
+  >
     <img
       [src]="bookData()?.formats?.['image/jpeg'] ?? ''"
       [alt]="bookData()?.title"
@@ -21,7 +24,7 @@
     />
 
     @if (imageLoad()) {
-      <app-spinner></app-spinner>
+      <app-spinner class="position-absolute"></app-spinner>
     }
   </div>
 

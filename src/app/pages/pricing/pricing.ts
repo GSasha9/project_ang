@@ -13,10 +13,8 @@ import { toSignal } from '@angular/core/rxjs-interop';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Button } from '@shared/components/button/button';
-import { Spinner } from '@shared/components/spinner/spinner';
 import { APP_ROUTES } from '@shared/constants/app-routs';
 import { BooksResponse } from '@shared/models/books-response';
-import { LoaderService } from '@shared/services/loader.service';
 import { getVisiblePages } from '@shared/utils/get-visible-pages';
 import { BooksAction } from '@state/books/books.action';
 import { booksFeature, selectBooksByPage } from '@state/books/books.feature';
@@ -26,18 +24,15 @@ import { BookCard } from './book-card/book-card';
 
 @Component({
   selector: 'app-pricing',
-  imports: [BookCard, AsyncPipe, CommonModule, Button, Spinner],
+  imports: [BookCard, AsyncPipe, CommonModule, Button],
   templateUrl: './pricing.html',
   styleUrl: './pricing.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Pricing implements OnInit {
   private router = inject(Router);
-  private loaderService = inject(LoaderService);
   private route = inject(ActivatedRoute);
   private store = inject(Store);
-
-  isLoadingPage = this.loaderService.loading;
 
   isLoadingBooks$ = this.store
     .select(booksFeature.selectLoadingBooks)
