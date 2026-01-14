@@ -1,23 +1,9 @@
-@use '../../../../styles/variables' as *;
+@use 'variables' as *;
 
-.menuList {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  padding: 0px;
-  margin: 0px;
-
-  @include respond-m {
-    flex-direction: row;
-  }
-
+.navbar {
   .menu-item-img {
     width: 30px;
     height: 30px;
     background-size: cover;
   }
-}
-
-.column {
-  flex-direction: column;
 }

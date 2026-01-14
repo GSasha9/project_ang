@@ -1,0 +1,50 @@
+<div
+  class="card"
+  (click)="cardHandler()"
+  (keyup)="cardHandler()"
+  tabindex="0"
+  [attr.data-cardId]="bookData()?.id"
+>
+  <div class="card-header">
+    <h4 class="card-title my-title">{{ bookData()?.title }}</h4>
+    @for (author of bookData()?.authors; track $index) {
+      <p class="card-subtitle">{{ author.name }}</p>
+    }
+  </div>
+
+  <div
+    class="overflow-y-hidden d-flex justify-content-center p-3 position-relative"
+    style="height: 300px"
+  >
+    <img
+      [src]="bookData()?.formats?.['image/jpeg'] ?? ''"
+      [alt]="bookData()?.title"
+      class="card-img-top"
+      (load)="onImgLoad()"
+    />
+
+    @if (imageLoad()) {
+      <app-spinner class="position-absolute"></app-spinner>
+    }
+  </div>
+
+  <div class="card-body">
+    <ul class="list-group-flush list-group-horizontal">
+      @for (shelf of bookData()?.bookshelves; track $index) {
+        <li class="list-group-item">{{ shelf.split(':')[1] || shelf }}</li>
+      }
+    </ul>
+  </div>
+
+  <div class="card-footer d-flex justify-content-between align-items-center">
+    @if (!isSelected()) {
+      <button (click)="buttonHandler()?.($event)" class="btn btn-success my-btn">
+        Mark as read
+      </button>
+    } @else {
+      <button (click)="buttonHandler()?.($event)" class="btn btn-success my-btn">
+        Remove from read
+      </button>
+    }
+  </div>
+</div>

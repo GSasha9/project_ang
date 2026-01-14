@@ -9,8 +9,7 @@ import { ChangeDetectionStrategy, Component, input } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Button {
-  readonly hasArrow = input(false);
+  readonly hasArrow = input<'right' | 'down' | null>(null);
   readonly handler = input<() => void>();
-  // readonly isDisabled = input<boolean | null>(false);
   readonly isDisabled = input<boolean | undefined>(undefined);
 }

@@ -1,4 +1,4 @@
-@use '../../../../styles/variables' as *;
+@use 'variables' as *;
 
 .with-arrow {
   &::after {
@@ -6,32 +6,21 @@
     display: inline-block;
     width: 15px;
     height: 15px;
-    background-image: url('../../../../../public/right.svg');
-    background-size: cover;
-    margin-left: 10px;
+
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
   }
 }
 
-.app-button {
-  padding: 10px 20px;
-  border-radius: 3px;
-  background-color: $main-button-color;
-  border: none;
-  color: white;
-  display: flex;
-  align-items: center;
-  cursor: pointer;
-
-  &:hover {
-    background-color: $main-button-color_hover;
+.with-arrow-right {
+  &::after {
+    background-image: url('/project_ang/right.svg');
   }
+}
 
-  &:active {
-    background-color: $main-button-color_active;
-  }
-
-  &:disabled {
-    background-color: grey;
-    pointer-events: none;
+.with-arrow-down {
+  &::after {
+    background-image: url('/project_ang/down.svg');
   }
 }

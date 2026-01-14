@@ -1,0 +1,23 @@
+@use 'variables' as *;
+
+.detailed-page {
+  gap: 50px;
+
+  .book-description {
+    gap: 20px;
+    width: 100%;
+
+    @include respond-lg {
+      width: 50%;
+    }
+  }
+
+  .book-img {
+    order: -1;
+    max-width: 50%;
+
+    @include respond-lg {
+      width: 30%;
+    }
+  }
+}

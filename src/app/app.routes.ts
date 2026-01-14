@@ -1,11 +1,14 @@
 import { Routes } from '@angular/router';
+import { provideEffects } from '@ngrx/effects';
+import { provideState } from '@ngrx/store';
+import { BooksEffect } from '@state/books/books.effect';
+import { booksFeature } from '@state/books/books.feature';
+import { postsFeature } from '@state/posts/posts.feature';
 
-import { Blog } from './pages/blog/blog';
-import { DetailedPage } from './pages/detailed-page/detailed-page';
 import { Home } from './pages/home/home';
 import { Login } from './pages/login/login';
 import { NotFound } from './pages/not-found/not-found';
-import { Pricing } from './pages/pricing/pricing';
+import { DetailedPage } from './pages/pricing/detailed-page/detailed-page';
 import { Register } from './pages/register/register';
 import { APP_ROUTES } from './shared/constants/app-routs';
 import { BookResolver } from './shared/services/book-resolver.service';
@@ -24,12 +27,15 @@ export const routes: Routes = [
   },
   {
     path: APP_ROUTES.blog,
-    component: Blog,
+    loadComponent: () => import('./pages/blog/blog').then((m) => m.Blog),
+    providers: [provideState(postsFeature)],
     title: 'Blog',
   },
   {
     path: APP_ROUTES.pricing,
-    component: Pricing,
+
+    loadComponent: () => import('./pages/pricing/pricing').then((m) => m.Pricing),
+    providers: [provideState(booksFeature), provideEffects([BooksEffect])],
     title: 'Pricing',
   },
   {

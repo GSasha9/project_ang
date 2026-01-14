@@ -1,1 +1,30 @@
-<p>blog works!</p>
+<section
+  class="blog d-flex flex-column justify-content-center align-content-center flex-wrap gap-5"
+>
+  <div class="text-center d-flex flex-column gap-3">
+    <h2>Resources and insights</h2>
+    <p>The latest industry news, interviews, technologies, and resources.</p>
+  </div>
+  <div
+    class="d-flex w-100 justify-content-evenly flex-lg-row flex-column align-items-center align-items-lg-start gap-5"
+  >
+    <ul
+      class="posts-container align-self-center d-flex gap-3 flex-lg-row flex-column align-items-center align-items-lg-start flex-wrap"
+    >
+      @if (posts()) {
+        @for (post of posts(); track post.id) {
+          <li>
+            <app-blog-post [postData]="post"></app-blog-post>
+          </li>
+        }
+      } @else {
+        <li>There are no posts here yet</li>
+      }
+    </ul>
+    <app-blog-form
+      [author]="{ name: name(), pic: '' }"
+      class="order-first order-lg-last"
+      [onSubmitForm]="onSubmitForm"
+    ></app-blog-form>
+  </div>
+</section>

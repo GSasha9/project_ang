@@ -1,10 +1,18 @@
-<div class="slide_lesson">
-  <div class="slide_lesson-text">
+<div
+  class="d-flex justify-content-around flex-column align-items-center flex-md-row p-1 p-md-2 gap-3"
+  style="width: 100%"
+>
+  <div
+    class="slide_lesson-text d-flex flex-column align-items-center justify-content-center align-items-md-start"
+    style="width: 100%"
+  >
     <h2>Lessons and insights <span class="highlight">from 8 years</span></h2>
-    <p class="slide_lesson-description">
-      Where to grow your business as a photographer: site or social media?
-    </p>
-    <app-button [hasArrow]="false">Register</app-button>
+    <p>Where to grow your business as a photographer: site or social media?</p>
+    <app-link linkRoute="/register" class="btn my-btn">Register</app-link>
   </div>
-  <div class="slide_lesson-img"></div>
+  <img
+    src="/project_ang/illustration.svg"
+    alt="lesson image"
+    class="img-fluid slide_lesson-img order-md-5"
+  />
 </div>

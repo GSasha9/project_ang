@@ -8,15 +8,10 @@ const eslintPluginPrettierRecommended = require('eslint-plugin-prettier/recommen
 const simpleImportSort = require('eslint-plugin-simple-import-sort');
 
 module.exports = defineConfig([
-  {ignores: [
-    'coverage/**',
-    'node_modules/**',
-    'dist/**',
-    '.angular/**'
-  ]},
+  { ignores: ['coverage/**', 'node_modules/**', 'dist/**', '.angular/**'] },
   {
     files: ['**/*.ts'],
-   
+
     extends: [
       eslint.configs.recommended,
       tseslint.configs.recommended,
@@ -26,8 +21,8 @@ module.exports = defineConfig([
     ],
     processor: angular.processInlineTemplates,
     plugins: {
-  'simple-import-sort': simpleImportSort,
-},
+      'simple-import-sort': simpleImportSort,
+    },
     rules: {
       'simple-import-sort/imports': 'error',
       'simple-import-sort/exports': 'error',
@@ -101,11 +96,9 @@ module.exports = defineConfig([
       'one-var': ['error', 'never'],
       'prefer-arrow-callback': 'error',
       'prefer-const': 'error',
-      
 
       'no-eval': 'error',
       'no-implied-eval': 'error',
-
     },
   },
   {

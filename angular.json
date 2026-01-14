@@ -28,6 +28,9 @@
             "inlineStyleLanguage": "scss",
             "baseHref": "/project_ang/",
             "deployUrl": "/project_ang/",
+            "stylePreprocessorOptions": {
+              "includePaths": ["src/styles", "public"]
+            },
             "assets": [
               {
                 "glob": "**/*",

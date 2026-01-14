@@ -1,5 +1,5 @@
 @for (n of service.notifications(); track $index) {
-  <div class="notification">
-    <p [ngClass]="n.type">{{ n.text }}</p>
+  <div class="notification alert position-fixed d-flex align-items-center justify-content-center">
+    <p [ngClass]="n.type" class="position-fixed" class="alert">{{ n.text }}</p>
   </div>
 }

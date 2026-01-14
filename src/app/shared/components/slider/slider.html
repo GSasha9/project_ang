@@ -1,13 +1,21 @@
-<div class="slider">
-  <div class="slider_items"><ng-template #container></ng-template></div>
-
-  <div class="pagination">
+<div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
+  <div class="carousel-indicators">
     @for (slide of slides(); track $index) {
       <button
-        (click)="renderSlide($index)"
-        [ngClass]="currentIndex() === $index ? 'dot dot_active' : 'dot'"
-        aria-label="slider pagination"
+        type="button"
+        data-bs-target="#myCarousel"
+        [attr.data-bs-slide-to]="$index"
+        [class.active]="$index === 0"
+        [attr.aria-current]="$index === 0"
+        [attr.aria-label]="`Slide ${$index}`"
       ></button>
+    }
+  </div>
+  <div class="carousel-inner">
+    @for (slide of slides(); track $index) {
+      <div class="carousel-item" [class.active]="$index === 0">
+        <ng-container *ngComponentOutlet="slide"></ng-container>
+      </div>
     }
   </div>
 </div>

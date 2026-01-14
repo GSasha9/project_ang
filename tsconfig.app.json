@@ -3,7 +3,8 @@
   "compilerOptions": {
     "outDir": "./out-tsc/app",
     "types": ["node"],
-    "target": "es6"
+    "target": "es2022",
+    "useDefineForClassFields": false
   },
   "include": ["src/**/*.ts"],
   "exclude": ["src/**/*.spec.ts"]

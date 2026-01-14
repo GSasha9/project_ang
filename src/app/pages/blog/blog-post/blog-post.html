@@ -1,0 +1,19 @@
+<div class="card" style="width: 18rem">
+  <img
+    [src]="postData()?.img === '' ? '/project_ang/camera.jpg' : postData()?.img"
+    class="card-img-top"
+    [alt]="postData()?.title"
+  />
+  <div class="card-header d-flex justify-content-between">
+    <p>{{ postData()?.meta?.date }}</p>
+    <p>{{ postData()?.meta?.time }}</p>
+  </div>
+  <div class="card-body">
+    <h5 class="card-title text-capitalize">{{ postData()?.title }}</h5>
+    <p class="card-text">{{ postData()?.text }}</p>
+  </div>
+  <div class="card-footer d-flex gap-1 flex-wrap align-items-center">
+    <img [src]="postData()?.author?.pic" [alt]="postData()?.author?.name" />
+    <p>{{ postData()?.author?.name }}</p>
+  </div>
+</div>

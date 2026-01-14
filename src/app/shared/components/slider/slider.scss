@@ -1,33 +1,15 @@
-@use '../../../../styles/variables' as *;
+@use 'variables' as *;
 
-.slider {
-  width: 100%;
+:host {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 30px;
+}
 
-  .slider_items {
-    display: block;
-    width: auto;
-    height: 350px;
-  }
+.carousel-indicators [data-bs-target] {
+  background-color: $main-button-color;
+}
 
-  .pagination {
-    display: flex;
-    gap: 10px;
-    justify-content: center;
-    .dot {
-      background-image: url('../../../../../public/dot.svg');
-      width: 7px;
-      height: 7px;
-      background-size: contain;
-      background-repeat: no-repeat;
-      display: block;
-      cursor: pointer;
-    }
-
-    .dot_active {
-      background-image: url('../../../../../public/dot_active.svg');
-    }
-  }
+.carousel-indicators {
+  margin-bottom: -2rem;
 }

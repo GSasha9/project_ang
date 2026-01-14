@@ -1,5 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 import { provideRouter } from '@angular/router';
+import { provideStore } from '@ngrx/store';
 
 import { App } from './app';
 import { Home } from './pages/home/home';
@@ -15,6 +16,7 @@ describe('App', () => {
             component: Home,
           },
         ]),
+        provideStore(),
       ],
     }).compileComponents();
   });

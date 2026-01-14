@@ -1,8 +1,14 @@
 <button
-  class="app-button"
-  [ngClass]="hasArrow() ? 'with-arrow' : null"
+  class="btn btn-success my-btn d-flex justify-content-center align-items-center"
+  [ngClass]="
+    hasArrow() === 'right'
+      ? 'with-arrow with-arrow-right'
+      : hasArrow() === 'down'
+        ? 'with-arrow with-arrow-down'
+        : null
+  "
   (click)="handler()?.()"
-  [disabled]="isDisabled() ? true : false"
+  [disabled]="isDisabled()"
   type="submit"
 >
   <ng-content></ng-content>

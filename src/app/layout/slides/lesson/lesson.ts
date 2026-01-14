@@ -1,10 +1,9 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-
-import { Button } from '../../../shared/components/button/button';
+import { Link } from '@shared/components/link/link';
 
 @Component({
   selector: 'app-lesson',
-  imports: [Button],
+  imports: [Link],
   templateUrl: './lesson.html',
   styleUrl: './lesson.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

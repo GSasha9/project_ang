@@ -1,18 +1,26 @@
-<nav class="nav">
-  <ul [class]="customClass()" [ngClass]="classes()" [style.gap.px]="gap()">
+<nav>
+  <ul
+    [class]="customClass()"
+    [ngClass]="isRow() ? 'd-flex flex-column flex-md-row' : 'd-flex flex-column'"
+    class="navbar-nav gap-2"
+  >
     @for (item of items(); track item.id) {
-      @if (item.title) {
-        <app-link
-          [linkRoute]="item.route"
-          [isRouteActive]="routeActive()"
-          (click)="handleClick(item)"
-          >{{ item.title }}</app-link
-        >
-      } @else {
-        <app-link [linkRoute]="item.route" [isRouteActive]="routeActive()">
-          <div class="menu-item-img" [ngStyle]="{ 'background-image': `url(${item.img})` }"></div>
-        </app-link>
-      }
+      <li class="nav-item">
+        @if (item.title) {
+          <app-link
+            [linkRoute]="item.route"
+            [isRouteActive]="routeActive()"
+            (click)="handleClick(item)"
+            class="nav-link"
+            data-testid="menu-item"
+            >{{ item.title }}</app-link
+          >
+        } @else {
+          <app-link [linkRoute]="item.route" [isRouteActive]="routeActive()" class="nav-link">
+            <img [src]="item.img" [alt]="item.title" style="min-width: 30px" />
+          </app-link>
+        }
+      </li>
     }
   </ul>
 </nav>

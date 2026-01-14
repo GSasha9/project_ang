@@ -1,30 +1,54 @@
 import { AsyncPipe, CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, inject, OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  ElementRef,
+  inject,
+  OnInit,
+  signal,
+  viewChild,
+} from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
 import { ActivatedRoute, Router } from '@angular/router';
-import { map, Observable, shareReplay, switchMap } from 'rxjs';
+import { Store } from '@ngrx/store';
+import { Button } from '@shared/components/button/button';
+import { APP_ROUTES } from '@shared/constants/app-routs';
+import { BooksResponse } from '@shared/models/books-response';
+import { getVisiblePages } from '@shared/utils/get-visible-pages';
+import { BooksAction } from '@state/books/books.action';
+import { booksFeature, selectBooksByPage } from '@state/books/books.feature';
+import { filter, firstValueFrom, map, Observable, shareReplay, switchMap, tap } from 'rxjs';
 
-import { Button } from '../../shared/components/button/button';
-import { Card } from '../../shared/components/card/card';
-import { APP_ROUTES } from '../../shared/constants/app-routs';
-import { BooksResponse } from '../../shared/models/books-response';
-import { BooksService } from '../../shared/services/books.service';
-import { LoaderService } from '../../shared/services/loader.service';
-import { getVisiblePages } from '../../shared/utils/get-visible-pages';
+import { BookCard } from './book-card/book-card';
 
 @Component({
   selector: 'app-pricing',
-  imports: [Card, AsyncPipe, CommonModule, Button],
+  imports: [BookCard, AsyncPipe, CommonModule, Button],
   templateUrl: './pricing.html',
   styleUrl: './pricing.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Pricing implements OnInit {
-  private booksService = inject(BooksService);
   private router = inject(Router);
-  private loaderService = inject(LoaderService);
   private route = inject(ActivatedRoute);
+  private store = inject(Store);
 
-  isLoading = this.loaderService.loading;
+  isLoadingBooks$ = this.store
+    .select(booksFeature.selectLoadingBooks)
+    .pipe(shareReplay({ bufferSize: 1, refCount: true }));
+
+  readonly showAllBooks = toSignal(
+    this.route.queryParams.pipe(
+      map((params) => {
+        const value = params['showAllBooks'];
+        return value === undefined ? true : value === 'true';
+      }),
+    ),
+    { initialValue: true },
+  );
+
+  readonly showAllBooksValue = signal(this.showAllBooks());
 
   pages$!: Observable<number>;
 
@@ -32,11 +56,23 @@ export class Pricing implements OnInit {
 
   visiblePages$!: Observable<(number | '...')[]>;
 
-  ngOnInit(): void {
-    this.currentPageData$ = this.route.queryParams.pipe(
-      map((params) => params['page'] || 1),
-      switchMap((page) => this.booksService.getBooks(page)),
+  selectedBooksSlice$ = this.store.select(booksFeature.selectReadBooks);
 
+  readonly selectedBooks = toSignal(this.selectedBooksSlice$);
+
+  readonly selectedBooksIds = computed(() => new Map(this.selectedBooks()?.map((b) => [b.id, b])));
+
+  readonly section = viewChild<ElementRef>('cardContainer');
+
+  ngOnInit(): void {
+    const page$: Observable<number> = this.route.queryParams.pipe(
+      map((params) => params['page'] || 1),
+    );
+
+    this.currentPageData$ = page$.pipe(
+      tap((page) => this.store.dispatch(BooksAction.load({ page }))),
+      switchMap((page) => this.store.select(selectBooksByPage(page))),
+      filter(Boolean),
       shareReplay({ bufferSize: 1, refCount: true }),
     );
 
@@ -76,7 +112,37 @@ export class Pricing implements OnInit {
 
   handleCardClick = (id: number): void => {
     this.router.navigate([`${APP_ROUTES.pricing}/${id}`], {
-      queryParams: { page: this.getCurrentPage() },
+      queryParams: { page: this.getCurrentPage(), showAllBooks: this.showAllBooksValue() },
     });
+  };
+
+  handleReadButton = async (event: MouseEvent): Promise<void> => {
+    event.preventDefault();
+    event.stopPropagation();
+    const button = event.currentTarget as HTMLButtonElement;
+
+    if (!button) {
+      return;
+    }
+
+    const selectedBookId = Number(button.closest('.card')?.getAttribute('data-cardId'));
+
+    const pageData = await firstValueFrom(this.currentPageData$);
+
+    const book = pageData.results.find((el) => el.id === selectedBookId);
+
+    if (!book) {
+      this.store.dispatch(BooksAction.removeFromRead({ bookId: selectedBookId }));
+    } else {
+      this.store.dispatch(BooksAction.markAsRead({ book }));
+    }
+  };
+
+  handleButtonDown = (): void => {
+    window.scrollTo(0, this.section()!.nativeElement.scrollHeight);
+  };
+
+  handleButtonRead = (): void => {
+    this.showAllBooksValue.update((prev) => !prev);
   };
 }

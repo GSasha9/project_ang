@@ -1,4 +1,4 @@
-@use '../../../../styles/variables' as *;
+@use 'variables' as *;
 
 :host {
   width: 100%;
@@ -8,22 +8,14 @@
   justify-self: center;
 
   .form {
-    display: flex;
-    flex-direction: column;
     width: 70%;
-    gap: 30px;
-    align-items: center;
 
     @include respond-m {
       width: 35%;
     }
 
     .form-field {
-      display: flex;
-      flex-direction: column;
-      gap: 5px;
       width: 100%;
-      position: relative;
     }
 
     input {
