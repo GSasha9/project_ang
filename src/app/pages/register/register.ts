@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Form } from '@shared/components/form/form';
 import { Notification } from '@shared/components/notification/notification';
-import { ERROR_MESSAGES } from '@shared/constants/error-messages';
+import { MESSAGES } from '@shared/constants/messages';
 import { REGISTER_FORM_DATA } from '@shared/constants/register-form-data';
 import { FormData } from '@shared/models/form-data.model';
 import { NotificationService } from '@shared/services/notification.service';
@@ -37,24 +37,24 @@ export class Register {
       throw new Error('No form data');
     }
 
-    if (userData['password']! !== userData['repeat password']) {
-      this.notification.show(ERROR_MESSAGES['passwordsNotMatch'] as string, 'alert-warning');
-      return;
-    }
+    // if (userData['password']! !== userData['repeat password']) {
+    //   this.notification.show(ERROR_MESSAGES['passwordsNotMatch'] as string, 'alert-warning');
+    //   return;
+    // }
 
     this.store
       .select(selectUsersByEmail(userData['email']!))
       .pipe(take(1))
       .subscribe((data) => {
         if (data) {
-          this.notification.show(ERROR_MESSAGES['userExists'] as string, 'alert-danger');
+          this.notification.show(MESSAGES['userExists'] as string, 'alert-danger');
           return;
         }
 
         this.store.dispatch(UsersActions.register({ data: userData }));
 
         this.notification.show(
-          `${ERROR_MESSAGES['loginSuccess'] as string} ${ERROR_MESSAGES['pleaseLogin'] as string}`,
+          `${MESSAGES['loginSuccess'] as string}. ${MESSAGES['pleaseLogin'] as string}`,
           'alert-success',
         );
 

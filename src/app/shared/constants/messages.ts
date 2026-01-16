@@ -1,6 +1,6 @@
 import { ValidationErrors } from '@angular/forms';
 
-export const ERROR_MESSAGES: Record<
+export const MESSAGES: Record<
   string,
   string | ((error: ValidationErrors[keyof ValidationErrors]) => string)
 > = {
@@ -10,6 +10,7 @@ export const ERROR_MESSAGES: Record<
   email: 'Invalid email address',
   userNotFound: 'User not found',
   loginSuccess: 'Successfully logged in',
+  loginFailure: 'Login failed. Please check your email or password',
   incorrectPassword: 'Incorrect password',
   userExists: 'User already exists',
   passwordsNotMatch: 'Passwords do not match',
