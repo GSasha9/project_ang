@@ -5,15 +5,14 @@
     [alt]="postData()?.title"
   />
   <div class="card-header d-flex justify-content-between">
-    <p>{{ postData()?.meta?.date }}</p>
-    <p>{{ postData()?.meta?.time }}</p>
+    <p>{{ postData()?.postDate?.substring(0, 10) }}</p>
+    <p>{{ postData()?.postTime }}</p>
   </div>
   <div class="card-body">
     <h5 class="card-title text-capitalize">{{ postData()?.title }}</h5>
     <p class="card-text">{{ postData()?.text }}</p>
   </div>
   <div class="card-footer d-flex gap-1 flex-wrap align-items-center">
-    <img [src]="postData()?.author?.pic" [alt]="postData()?.author?.name" />
-    <p>{{ postData()?.author?.name }}</p>
+    <p>{{ postData()?.author?.name ?? 'Unknown Author' }}</p>
   </div>
 </div>

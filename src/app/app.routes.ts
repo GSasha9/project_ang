@@ -3,6 +3,7 @@ import { provideEffects } from '@ngrx/effects';
 import { provideState } from '@ngrx/store';
 import { BooksEffect } from '@state/books/books.effect';
 import { booksFeature } from '@state/books/books.feature';
+import { PostsEffect } from '@state/posts/posts.effect';
 import { postsFeature } from '@state/posts/posts.feature';
 import { UserLoginEffect } from '@state/users/user-login.effect';
 import { UserRegisterEffect } from '@state/users/user-register.effect';
@@ -30,7 +31,7 @@ export const routes: Routes = [
   {
     path: APP_ROUTES.blog,
     loadComponent: () => import('./pages/blog/blog').then((m) => m.Blog),
-    providers: [provideState(postsFeature)],
+    providers: [provideState(postsFeature), provideEffects([PostsEffect])],
     title: 'Blog',
   },
   {

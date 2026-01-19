@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, OnInit } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { Store } from '@ngrx/store';
 import { BlogPostData } from '@shared/models/blog-post-data.model';
@@ -17,7 +17,7 @@ import { BlogPost } from './blog-post/blog-post';
   styleUrl: './blog.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class Blog {
+export class Blog implements OnInit {
   private store = inject(Store);
   readonly name = toSignal(
     this.store.select(selectLoggedUser).pipe(map((data) => data?.name ?? '')),
@@ -26,6 +26,10 @@ export class Blog {
   readonly posts = toSignal(
     this.store.select(postsFeature.selectPostsState).pipe(map((data) => data ?? '')),
   );
+
+  ngOnInit(): void {
+    this.store.dispatch(PostsAction.load());
+  }
 
   onSubmitForm = (data: BlogPostData): void => {
     this.store.dispatch(PostsAction.add({ post: data }));

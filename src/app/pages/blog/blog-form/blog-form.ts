@@ -20,10 +20,9 @@ export class BlogForm {
 
   model: BlogPostData = {
     id: 0,
-    meta: {
-      time: '',
-      date: '',
-    },
+
+    postDate: '',
+    postTime: '',
     title: '',
     text: '',
     img: '',
@@ -50,12 +49,11 @@ export class BlogForm {
     const date = new Date();
     this.model.id = Date.now();
 
-    this.model.meta = {
-      date: date.toLocaleDateString(),
-      time: date.toLocaleTimeString(),
-    };
+    this.model.postDate = date.toLocaleDateString();
 
-    this.model.author.name = this.author().name || 'Anonymous';
+    this.model.postTime = date.toLocaleTimeString();
+
+    this.model.author.name = this.author().name || 'Unknown Author';
 
     this.model.author.pic = this.author().pic || '/project_ang/user.png';
 
