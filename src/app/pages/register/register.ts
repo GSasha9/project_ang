@@ -1,17 +1,16 @@
-import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, OnInit, signal } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { Form } from '@shared/components/form/form';
 import { Notification } from '@shared/components/notification/notification';
-import { ERROR_MESSAGES } from '@shared/constants/error-messages';
+import { MESSAGES } from '@shared/constants/messages';
 import { REGISTER_FORM_DATA } from '@shared/constants/register-form-data';
 import { FormData } from '@shared/models/form-data.model';
 import { NotificationService } from '@shared/services/notification.service';
 import { isUserData } from '@shared/utils/is-user-data';
 import { UsersActions } from '@state/users/users.actions';
-import { selectUsersByEmail } from '@state/users/users.selectors';
-import { take } from 'rxjs';
 
 @Component({
   selector: 'app-register',
@@ -19,15 +18,34 @@ import { take } from 'rxjs';
   templateUrl: './register.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class Register {
+export class Register implements OnInit {
   private router = inject(Router);
   private notification = inject(NotificationService);
   private readonly store = inject(Store);
+  private actions$ = inject(Actions);
   readonly form = signal<FormGroup<Record<string, FormControl<string>>> | undefined>(undefined);
   formFields: FormData[] = [];
 
   constructor() {
     this.formFields = REGISTER_FORM_DATA;
+  }
+
+  ngOnInit(): void {
+    this.actions$
+      .pipe(ofType(UsersActions.registerSuccess, UsersActions.registerFailure))
+      .subscribe((action) => {
+        if ('err' in action) {
+          this.notification.show(action.err.statusText, 'alert-danger');
+          return;
+        } else {
+          this.notification.show(
+            `${MESSAGES['registerSuccess'] as string}. ${MESSAGES['pleaseLogin'] as string}`,
+            'alert-success',
+          );
+
+          setTimeout(() => this.router.navigate(['/login']), 3000);
+        }
+      });
   }
 
   handleRegister = (): void => {
@@ -37,28 +55,11 @@ export class Register {
       throw new Error('No form data');
     }
 
-    if (userData['password']! !== userData['repeat password']) {
-      this.notification.show(ERROR_MESSAGES['passwordsNotMatch'] as string, 'alert-warning');
+    if (userData.password !== userData['repeat password']) {
+      this.notification.show(MESSAGES['passwordsNotMatch'] as string, 'alert-warning');
       return;
     }
 
-    this.store
-      .select(selectUsersByEmail(userData['email']!))
-      .pipe(take(1))
-      .subscribe((data) => {
-        if (data) {
-          this.notification.show(ERROR_MESSAGES['userExists'] as string, 'alert-danger');
-          return;
-        }
-
-        this.store.dispatch(UsersActions.register({ data: userData }));
-
-        this.notification.show(
-          `${ERROR_MESSAGES['loginSuccess'] as string} ${ERROR_MESSAGES['pleaseLogin'] as string}`,
-          'alert-success',
-        );
-
-        setTimeout(() => this.router.navigate(['/login']), 3000);
-      });
+    this.store.dispatch(UsersActions.register({ data: userData }));
   };
 }

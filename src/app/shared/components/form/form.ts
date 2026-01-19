@@ -2,7 +2,7 @@ import { KeyValuePipe, NgClass, TitleCasePipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, input, model, OnInit } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 
-import { ERROR_MESSAGES } from '../../constants/error-messages';
+import { MESSAGES } from '../../constants/messages';
 import { FormData } from '../../models/form-data.model';
 import { getValidators } from '../../utils/get-validators';
 import { Button } from '../button/button';
@@ -18,7 +18,7 @@ export class Form implements OnInit {
   readonly formItems = input<FormData[]>([]);
   readonly buttonHandler = input<() => void>();
   readonly form = model<FormGroup<Record<string, FormControl<string>>>>();
-  errorMessages = ERROR_MESSAGES;
+  errorMessages = MESSAGES;
 
   ngOnInit(): void {
     this.generateForm();
@@ -41,7 +41,7 @@ export class Form implements OnInit {
     const message = this.errorMessages[errorKey];
 
     if (!message) {
-      return ERROR_MESSAGES['Invalid field'] as string;
+      return MESSAGES['Invalid field'] as string;
     }
 
     if (typeof message === 'function') {

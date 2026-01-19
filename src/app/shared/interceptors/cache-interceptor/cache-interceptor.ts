@@ -5,6 +5,9 @@ import { of, tap } from 'rxjs';
 export const appCache = new Map<string, unknown>();
 
 export const cacheInterceptor: HttpInterceptorFn = (req, next) => {
+  if (req.method !== 'GET') {
+    return next(req);
+  }
   const cacheKey = req.urlWithParams;
 
   if (appCache.has(cacheKey)) {

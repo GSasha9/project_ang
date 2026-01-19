@@ -1,9 +1,8 @@
 import { createFeatureSelector, createSelector, MemoizedSelector } from '@ngrx/store';
-import { LoginData } from '@shared/models/login-data.model';
 import { UserData } from '@shared/models/user-data.model';
 
 export const selectRegisteredUsersState = createFeatureSelector<UserData[]>('usersRegister');
-export const selectLoggedInUsersState = createFeatureSelector<LoginData[]>('usersLogIn');
+export const selectLoggedInUsersState = createFeatureSelector<UserData[]>('usersLogIn');
 
 export const selectUsersByEmail = (
   email: string,

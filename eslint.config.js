@@ -8,7 +8,7 @@ const eslintPluginPrettierRecommended = require('eslint-plugin-prettier/recommen
 const simpleImportSort = require('eslint-plugin-simple-import-sort');
 
 module.exports = defineConfig([
-  { ignores: ['coverage/**', 'node_modules/**', 'dist/**', '.angular/**'] },
+  { ignores: ['coverage/**', 'node_modules/**', 'dist/**', '.angular/**', '**/*.spec.ts'] },
   {
     files: ['**/*.ts'],
 

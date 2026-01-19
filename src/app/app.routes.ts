@@ -4,6 +4,8 @@ import { provideState } from '@ngrx/store';
 import { BooksEffect } from '@state/books/books.effect';
 import { booksFeature } from '@state/books/books.feature';
 import { postsFeature } from '@state/posts/posts.feature';
+import { UserLoginEffect } from '@state/users/user-login.effect';
+import { UserRegisterEffect } from '@state/users/user-register.effect';
 
 import { Home } from './pages/home/home';
 import { Login } from './pages/login/login';
@@ -48,11 +50,13 @@ export const routes: Routes = [
   {
     path: APP_ROUTES.login,
     component: Login,
+    providers: [provideEffects([UserLoginEffect])],
     title: 'Login',
   },
   {
     path: APP_ROUTES.registration,
     component: Register,
+    providers: [provideEffects([UserRegisterEffect])],
     title: 'Registration',
   },
   {
