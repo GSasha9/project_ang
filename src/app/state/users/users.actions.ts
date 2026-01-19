@@ -6,6 +6,8 @@ export const UsersActions = createActionGroup({
   source: 'Users',
   events: {
     Register: props<{ data: UserData }>(),
+    'Register success': props<{ data: UserData }>(),
+    'Register failure': props<{ err: HttpErrorResponse }>(),
     'Log in': props<{ data: UserData }>(),
     'Log in success': props<{ user: UserData }>(),
     'Log in failure': props<{ err: HttpErrorResponse }>(),

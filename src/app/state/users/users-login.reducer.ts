@@ -8,12 +8,6 @@ export const initialState: UserData[] = [];
 export const userLoginReducer = createReducer(
   initialState,
   on(UsersActions.logInSuccess, (state, { user }) => {
-    const exist = state.some((el) => el.email === user.email);
-
-    if (exist) {
-      return state;
-    }
-
     return [...state, user];
   }),
   on(UsersActions.logOut, (state, { data }) => {

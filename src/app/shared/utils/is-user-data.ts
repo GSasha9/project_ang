@@ -1,6 +1,6 @@
-import { UserData } from '@shared/models/user-data.model';
+import { RegisterForm } from '@shared/models/register-form.model';
 
-export const isUserData = (data: unknown): data is UserData => {
+export const isUserData = (data: unknown): data is RegisterForm => {
   return (
     typeof data === 'object' &&
     data !== null &&

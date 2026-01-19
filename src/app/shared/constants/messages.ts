@@ -16,4 +16,5 @@ export const MESSAGES: Record<
   passwordsNotMatch: 'Passwords do not match',
   pleaseLogin: 'Please login',
   invalidField: 'Invalid field',
+  registerSuccess: 'Registered successfully',
 };

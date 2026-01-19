@@ -7,7 +7,7 @@ import { catchError, exhaustMap, map, of } from 'rxjs';
 import { UsersActions } from './users.actions';
 
 @Injectable()
-export class UsersEffect {
+export class UserLoginEffect {
   private actions$ = inject(Actions);
   private userService = inject(UsersService);
 
