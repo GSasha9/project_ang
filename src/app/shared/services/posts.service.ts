@@ -12,4 +12,8 @@ export class PostsService {
   getAllPosts(): Observable<BlogPostData[]> {
     return this.http.get<BlogPostData[]>(this.requestUrl);
   }
+
+  createPost(post: BlogPostData): Observable<BlogPostData> {
+    return this.http.post<BlogPostData>(this.requestUrl, post);
+  }
 }

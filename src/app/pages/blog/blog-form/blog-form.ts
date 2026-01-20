@@ -1,12 +1,14 @@
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { NgForm } from '@angular/forms';
+import { MatFormField, MatSelectModule } from '@angular/material/select';
 import { Button } from '@shared/components/button/button';
+import { TEMPLATE_POST_IMAGES } from '@shared/constants/template_post_images';
 import { BlogPostData } from '@shared/models/blog-post-data.model';
 
 @Component({
   selector: 'app-blog-form',
-  imports: [FormsModule, Button],
+  imports: [FormsModule, Button, MatSelectModule, MatFormField],
   templateUrl: './blog-form.html',
   styleUrl: './blog-form.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -18,11 +20,13 @@ export class BlogForm {
     pic: '',
   });
 
+  postImages = TEMPLATE_POST_IMAGES;
+
   model: BlogPostData = {
     id: 0,
 
-    postDate: '',
-    postTime: '',
+    postDate: '2026-01-01T00:00:00.000Z',
+    postTime: '11:30:00',
     title: '',
     text: '',
     img: '',
@@ -34,22 +38,12 @@ export class BlogForm {
 
   submitted = false;
 
-  onFileChange = (event: Event): void => {
-    const inputFile = event.target as HTMLInputElement;
-
-    if (!inputFile.files || !inputFile.files[0]) {
-      return;
-    }
-
-    const file = inputFile.files[0];
-    this.model.img = URL.createObjectURL(file);
-  };
-
   onSubmit = (form: NgForm): void => {
     const date = new Date();
+
     this.model.id = Date.now();
 
-    this.model.postDate = date.toLocaleDateString();
+    this.model.postDate = date.toISOString().split('T')[0];
 
     this.model.postTime = date.toLocaleTimeString();
 
