@@ -48,7 +48,7 @@
 
   <mat-form-field>
     <mat-select [(ngModel)]="model.img" id="img" name="img">
-      <mat-label>Images</mat-label>
+      <mat-label for="img">Images</mat-label>
       @for (post of postImages; track $index) {
         <mat-option [value]="post.link" class="d-flex">
           <img [src]="post.link" width="50" alt="template post image" />

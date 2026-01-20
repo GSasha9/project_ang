@@ -5,6 +5,7 @@ export const PostsAction = createActionGroup({
   source: 'Posts',
   events: {
     Load: emptyProps(),
+    PostAdded: emptyProps(),
     LoadSuccess: props<{ posts: BlogPostData[] }>(),
     Add: props<{ post: BlogPostData }>(),
     Remove: props<{ id: number }>(),

@@ -8,4 +8,5 @@ export type BlogPostData = {
   title: string;
   text: string;
   author: Pick<UserData, 'name'> & { pic: string };
+  authorId?: number | null;
 };

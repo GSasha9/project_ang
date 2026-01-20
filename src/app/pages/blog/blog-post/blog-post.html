@@ -1,6 +1,6 @@
 <div class="card" style="width: 18rem">
   <img
-    [src]="postData()?.img === '' ? '/project_ang/camera.jpg' : postData()?.img"
+    [src]="postData()?.img === null ? '/project_ang/camera.jpg' : postData()?.img"
     class="card-img-top"
     [alt]="postData()?.title"
   />
