@@ -2,12 +2,11 @@ import { UserData } from './user-data.model';
 
 export type BlogPostData = {
   id: number;
-  meta: {
-    time: string;
-    date: string;
-  };
-  img: string;
+  postTime: string;
+  postDate: string;
+  img: string | ArrayBuffer | null;
   title: string;
   text: string;
   author: Pick<UserData, 'name'> & { pic: string };
+  authorId?: number | null;
 };
