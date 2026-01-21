@@ -10,7 +10,6 @@ import { cacheInterceptor } from './shared/interceptors/cache-interceptor/cache-
 import { errorHandlingInterceptor } from './shared/interceptors/error-handling-interceptor/error-handling-interceptor';
 import { loadingInterceptor } from './shared/interceptors/loading-interceptor/loading-interceptor';
 import { userLoginReducer } from './state/users/users-login.reducer';
-import { usersRegisterReducer } from './state/users/users-register.reducer';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -22,7 +21,6 @@ export const appConfig: ApplicationConfig = {
       withInterceptors([cacheInterceptor, errorHandlingInterceptor, loadingInterceptor]),
     ),
     provideStore({
-      usersRegister: usersRegisterReducer,
       usersLogIn: userLoginReducer,
     }),
     provideStoreDevtools({

@@ -46,8 +46,18 @@
     </div>
   </div>
 
-  <label for="img">Image</label>
-  <input class="form-control" id="img" type="file" name="img" (change)="onFileChange($event)" />
+  <mat-form-field>
+    <mat-select [(ngModel)]="model.img" id="img" name="img">
+      <mat-label for="img">Images</mat-label>
+      @for (post of postImages; track $index) {
+        <mat-option [value]="post.link" class="d-flex">
+          <img [src]="post.link" width="50" alt="template post image" />
+          {{ post.name }}
+        </mat-option>
+      }
+    </mat-select>
+  </mat-form-field>
+
   <div class="field-error"></div>
   <app-button [isDisabled]="!blogForm.form.valid" class="align-self-center">Submit</app-button>
 </form>
