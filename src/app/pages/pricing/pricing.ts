@@ -15,9 +15,11 @@ import { Store } from '@ngrx/store';
 import { Button } from '@shared/components/button/button';
 import { APP_ROUTES } from '@shared/constants/app-routs';
 import { BooksResponse } from '@shared/models/books-response';
+import { BooksService } from '@shared/services/books.service';
 import { getVisiblePages } from '@shared/utils/get-visible-pages';
 import { BooksAction } from '@state/books/books.action';
 import { booksFeature, selectBooksByPage } from '@state/books/books.feature';
+import { selectLoggedInUsersState } from '@state/users/users.selectors';
 import { filter, firstValueFrom, map, Observable, shareReplay, switchMap, tap } from 'rxjs';
 
 import { BookCard } from './book-card/book-card';
@@ -33,6 +35,7 @@ export class Pricing implements OnInit {
   private router = inject(Router);
   private route = inject(ActivatedRoute);
   private store = inject(Store);
+  private service = inject(BooksService);
 
   isLoadingBooks$ = this.store
     .select(booksFeature.selectLoadingBooks)
@@ -47,6 +50,10 @@ export class Pricing implements OnInit {
     ),
     { initialValue: true },
   );
+
+  loggedUserSlice$ = this.store.select(selectLoggedInUsersState);
+
+  readonly currentUser = toSignal(this.loggedUserSlice$);
 
   readonly showAllBooksValue = signal(this.showAllBooks());
 
@@ -116,8 +123,7 @@ export class Pricing implements OnInit {
     });
   };
 
-  handleReadButton = async (event: MouseEvent): Promise<void> => {
-    event.preventDefault();
+  handleAddToReadButton = async (event: MouseEvent): Promise<void> => {
     event.stopPropagation();
     const button = event.currentTarget as HTMLButtonElement;
 
@@ -131,9 +137,19 @@ export class Pricing implements OnInit {
 
     const book = pageData.results.find((el) => el.id === selectedBookId);
 
+    const currentUserArray = this.currentUser();
+
     if (!book) {
       this.store.dispatch(BooksAction.removeFromRead({ bookId: selectedBookId }));
     } else {
+      if (currentUserArray && currentUserArray.length > 0 && currentUserArray[0]) {
+        console.log('get book');
+        const readBook = {
+          userId: currentUserArray[0].id!,
+          bookId: book.id,
+        };
+        this.service.addReadBook(readBook).subscribe();
+      }
       this.store.dispatch(BooksAction.markAsRead({ book }));
     }
   };
