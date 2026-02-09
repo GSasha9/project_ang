@@ -20,7 +20,7 @@
             [bookData]="book"
             [handler]="handleCardClick"
             [buttonHandler]="handleAddToReadButton"
-            [isSelected]="selectedBooksIds().has(book.id)"
+            [isSelected]="selectedBooksIds()?.has(book.id)"
           ></app-book-card>
         </li>
       }

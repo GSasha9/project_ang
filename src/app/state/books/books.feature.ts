@@ -39,20 +39,29 @@ export const booksFeature = createFeature({
         loadingBooks: false,
       };
     }),
-    on(BooksAction.markAsRead, (state, { book }) => {
-      const existBook = state.readBooks.find((el) => el.id === book.id);
-
+    on(BooksAction.markAsReadOne, (state, { book }) => {
+      console.log('state from read One', state);
+      const existBook =
+        state.readBooks.length > 0 ? state.readBooks.find((el) => el.id === book.id) : null;
       if (existBook) {
-        return {
-          ...state,
-          readBooks: [...state.readBooks.filter((el) => el.id !== book.id)],
-        };
+        return state;
       } else {
         return {
           ...state,
           readBooks: [...state.readBooks, book],
         };
       }
+    }),
+    on(BooksAction.markAsReadMany, (state, { books }) => {
+      const merged = [
+        ...state.readBooks,
+        ...books.filter((b) => !state.readBooks.some((rb) => rb.id === b.id)),
+      ];
+
+      return {
+        ...state,
+        readBooks: merged,
+      };
     }),
     on(BooksAction.removeFromRead, (state, { bookId }) => {
       return {

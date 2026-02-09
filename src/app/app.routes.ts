@@ -3,6 +3,8 @@ import { provideEffects } from '@ngrx/effects';
 import { provideState } from '@ngrx/store';
 import { BooksEffect } from '@state/books/books.effect';
 import { booksFeature } from '@state/books/books.feature';
+import { LoadReadBooksEffect } from '@state/books/loadReadBooks.effect';
+import { markAsReadOneSuccessEffect } from '@state/books/markAsReadOneSuccess.effect';
 import { PostsAddEffect } from '@state/posts/posts.add.effect';
 import { postsFeature } from '@state/posts/posts.feature';
 import { PostsLoadEffect } from '@state/posts/posts.load.effect';
@@ -39,7 +41,10 @@ export const routes: Routes = [
     path: APP_ROUTES.pricing,
 
     loadComponent: () => import('./pages/pricing/pricing').then((m) => m.Pricing),
-    providers: [provideState(booksFeature), provideEffects([BooksEffect])],
+    providers: [
+      provideState(booksFeature),
+      provideEffects([BooksEffect, LoadReadBooksEffect, markAsReadOneSuccessEffect]),
+    ],
     title: 'Pricing',
   },
   {

@@ -23,9 +23,9 @@ export class BooksEffect {
               },
             }),
           ),
-          catchError(() => EMPTY),
         ),
       ),
+      catchError(() => EMPTY),
     );
   });
 }

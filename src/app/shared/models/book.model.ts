@@ -6,10 +6,8 @@ export type Book = {
   subjects: string[];
   authors: Person[];
   summaries: string[];
-  translators: Person[];
   bookshelves: string[];
-  languages: string[];
   copyright: boolean | null;
   download_count: number;
-  formats: Record<string, string>;
+  formats: string;
 };

@@ -20,7 +20,12 @@ export class DetailedPage {
   private readonly data = toSignal(this.activatedRoute.data);
   readonly book = computed(() => this.data()?.['book'] as Book | undefined);
   readonly showAllBooks = signal(this.activatedRoute.snapshot.queryParams['showAllBooks']);
-  readonly bookImage = computed(() => this.book()?.formats?.['image/jpeg'] ?? '');
+  readonly bookImage = computed(() => {
+    const formats = this.book()?.formats;
+    return typeof formats === 'object' && formats !== null
+      ? ((formats as Record<string, string>)['image/jpeg'] ?? '')
+      : '';
+  });
   readonly imageLoad = signal(true);
   readonly currentPage = input<BehaviorSubject<number>>();
 

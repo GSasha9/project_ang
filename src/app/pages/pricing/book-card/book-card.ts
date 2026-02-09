@@ -23,4 +23,18 @@ export class BookCard {
   onImgLoad = (): void => {
     this.imageLoad.set(false);
   };
+
+  getImgSrc = (): string => {
+    const imgSrc = this.bookData()?.formats;
+
+    if (typeof imgSrc === 'string') {
+      return imgSrc.replace(/"/g, '');
+    }
+
+    if (imgSrc && typeof imgSrc === 'object') {
+      return imgSrc['image/jpeg'] ?? '';
+    }
+
+    return '';
+  };
 }

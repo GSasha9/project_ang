@@ -67,7 +67,11 @@ export class Pricing implements OnInit {
 
   readonly selectedBooks = toSignal(this.selectedBooksSlice$);
 
-  readonly selectedBooksIds = computed(() => new Map(this.selectedBooks()?.map((b) => [b.id, b])));
+  readonly selectedBooksIds = computed(() => {
+    return this.selectedBooks() && this.selectedBooks()?.[0]
+      ? new Map(this.selectedBooks()?.map((b) => [b.id, b]))
+      : null;
+  });
 
   readonly section = viewChild<ElementRef>('cardContainer');
 
@@ -137,20 +141,10 @@ export class Pricing implements OnInit {
 
     const book = pageData.results.find((el) => el.id === selectedBookId);
 
-    const currentUserArray = this.currentUser();
-
     if (!book) {
-      this.store.dispatch(BooksAction.removeFromRead({ bookId: selectedBookId }));
+      throw new Error('Something went wrong. This book not found');
     } else {
-      if (currentUserArray && currentUserArray.length > 0 && currentUserArray[0]) {
-        console.log('get book');
-        const readBook = {
-          userId: currentUserArray[0].id!,
-          bookId: book.id,
-        };
-        this.service.addReadBook(readBook).subscribe();
-      }
-      this.store.dispatch(BooksAction.markAsRead({ book }));
+      this.store.dispatch(BooksAction.markAsReadOne({ book }));
     }
   };
 

@@ -22,9 +22,33 @@ export class BooksService {
     return this.http.get<Book>(`${BOOKS_API_BASE_URL}/${id}/`);
   };
 
-  addReadBook = (data: { userId: number; bookId: number }): Observable<ReadBookResponse> => {
-    console.log('addReadBook request', data);
+  addReadBook = (data: { userId: number; book: Book }): Observable<ReadBookResponse> => {
+    const editData = {
+      userId: data.userId,
+      bookId: data.book.id,
+      book: {
+        bookId: data.book.id,
+        title: data.book.title,
+        subjects: data.book.subjects,
+        authors_birth_year: data.book.authors[0].birth_year,
+        authors_death_year: data.book.authors[0].death_year,
+        authors_name: [data.book.authors[0].name],
+        summaries: data.book.summaries,
+        bookshelves: data.book.bookshelves,
+        copyright: data.book.copyright,
+        download_count: data.book.download_count,
+        formats: (typeof data.book.formats === 'object'
+          ? data.book.formats['image/jpeg'] || ' '
+          : ' '
+        ).replace(/"/g, ''),
+      },
+    };
     const requestUrl = 'http://localhost:8083/rest/pricing';
-    return this.http.post<ReadBookResponse>(requestUrl, data);
+    return this.http.post<ReadBookResponse>(requestUrl, editData);
+  };
+
+  getReadBooksByUserId = (id: number): Observable<ReadBookResponse[]> => {
+    const requestUrl = 'http://localhost:8083/rest/pricing';
+    return this.http.get<ReadBookResponse[]>(`${requestUrl}?userId=${id}`);
   };
 }
